@@ -1,4 +1,5 @@
-import { Box, Link, Stack } from "@mui/material";
+import { Box, Typography, Stack } from "@mui/material";
+import { Link as NavLink } from "react-router-dom";
 
 import { myTheme } from "../Assets/theme";
 
@@ -12,12 +13,12 @@ function Footer() {
         >
             <Box color="white">Strona morsujity 2022</Box>
             <Box>
-                <Link href="#" sx={{ color: "white" }}>
+                <Typography component={NavLink} to="/statut" sx={{ color: "white" }}>
                     Regulamin
-                </Link>
-                <Link mx={2} href="#" sx={{ color: "white" }}>
+                </Typography>
+                <Typography component={NavLink} mx={2} to="/contact" sx={{ color: "white" }}>
                     Kontakt
-                </Link>
+                </Typography>
             </Box>
         </Stack>
     );

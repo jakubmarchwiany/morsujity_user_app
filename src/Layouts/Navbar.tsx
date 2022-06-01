@@ -12,10 +12,14 @@ import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import AcUnitIcon from "@mui/icons-material/AcUnit";
 
+import { Link } from "react-router-dom";
 
 const pages = ["Blog"];
 const UserSettings = ["Profil", "Konto", "Wyloguj"];
-const settings = ["rejestracja", "logowanie"];
+const settings = [
+    { name: "Rejestracja", to: "register" },
+    { name: "Logowanie", to: "login" },
+];
 
 function Navbar() {
     const [isUserLogin] = useState<boolean>(false);
@@ -47,8 +51,8 @@ function Navbar() {
                 <Typography
                     variant="h6"
                     noWrap
-                    component="a"
-                    href="/"
+                    component={Link}
+                    to="/home"
                     sx={{
                         mr: 2,
                         flexGrow: 1,
@@ -99,8 +103,15 @@ function Navbar() {
                                   </MenuItem>
                               ))
                             : settings.map((page) => (
-                                  <MenuItem key={page} onClick={handleCloseNavMenu}>
-                                      <Typography textAlign="center">{page}</Typography>
+                                  <MenuItem key={page.name} onClick={handleCloseNavMenu}>
+                                      <Typography textAlign="center">
+                                          <Link
+                                              style={{ textDecoration: "none" }}
+                                              to={`/${page.to}`}
+                                          >
+                                              {page.name}
+                                          </Link>
+                                      </Typography>
                                   </MenuItem>
                               ))}
                     </Menu>
@@ -108,17 +119,17 @@ function Navbar() {
 
                 <AcUnitIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} />
                 <Typography
-                    variant="h5"
+                    variant="h6"
                     noWrap
-                    component="a"
-                    href=""
+                    component={Link}
+                    to="/home"
                     sx={{
                         mr: 2,
-                        display: { xs: "flex", md: "none" },
                         flexGrow: 1,
+                        display: { xs: "flex", md: "none" },
                         fontFamily: "monospace",
                         fontWeight: 700,
-                        letterSpacing: ".10rem",
+                        letterSpacing: ".15rem",
                         color: "inherit",
                         textDecoration: "none",
                     }}
@@ -174,11 +185,16 @@ function Navbar() {
                     <Box sx={{ display: { xs: "none", md: "flex" }, mr: 3 }}>
                         {settings.map((page) => (
                             <Button
-                                key={page}
+                                key={page.name}
                                 onClick={handleCloseNavMenu}
                                 sx={{ mt: 0.5, color: "white", display: "block" }}
                             >
-                                {page}
+                                <Link
+                                    style={{ textDecoration: "none", color: "white" }}
+                                    to={`/${page.to}`}
+                                >
+                                    {page.name}
+                                </Link>
                             </Button>
                         ))}
                     </Box>
