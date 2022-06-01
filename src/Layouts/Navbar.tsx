@@ -42,7 +42,7 @@ function Navbar() {
     };
 
     return (
-        <AppBar position="static">
+        <AppBar elevation={0} position="static">
             <Toolbar disableGutters>
                 <AcUnitIcon
                     fontSize="large"
@@ -103,15 +103,14 @@ function Navbar() {
                                   </MenuItem>
                               ))
                             : settings.map((page) => (
-                                  <MenuItem key={page.name} onClick={handleCloseNavMenu}>
-                                      <Typography textAlign="center">
-                                          <Link
-                                              style={{ textDecoration: "none" }}
-                                              to={`/${page.to}`}
-                                          >
-                                              {page.name}
-                                          </Link>
-                                      </Typography>
+                                  <MenuItem
+                                      style={{ margin: "0px" }}
+                                      key={page.name}
+                                      component={Link}
+                                      to={`/${page.to}`}
+                                      onClick={handleCloseNavMenu}
+                                  >
+                                      {page.name}
                                   </MenuItem>
                               ))}
                     </Menu>
@@ -185,16 +184,19 @@ function Navbar() {
                     <Box sx={{ display: { xs: "none", md: "flex" }, mr: 3 }}>
                         {settings.map((page) => (
                             <Button
+                                component={Link}
+                                to={`/${page.to}`}
                                 key={page.name}
                                 onClick={handleCloseNavMenu}
                                 sx={{ mt: 0.5, color: "white", display: "block" }}
                             >
-                                <Link
+                                {page.name}
+                                {/* <Link
                                     style={{ textDecoration: "none", color: "white" }}
                                     to={`/${page.to}`}
                                 >
                                     {page.name}
-                                </Link>
+                                </Link> */}
                             </Button>
                         ))}
                     </Box>

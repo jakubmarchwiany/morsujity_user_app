@@ -1,6 +1,6 @@
 import React from "react";
 import { Box, Stack, ThemeProvider } from "@mui/material";
-import { Routes, Route, useNavigate } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import { PageNotFound } from "Pages/index";
 
 import "Assets/App.css";
@@ -19,7 +19,7 @@ function App() {
                 <Navbar />
                 <Stack sx={{ flex: 1 }} direction="row" justifyContent="space-between">
                     <Navigator />
-                    <Box bgcolor="yellow" flex={9} p={2}>
+                    <Box flex={9}>
                         <Routes>
                             {MainRoute()}
                             {/* {UserRoute()} */}

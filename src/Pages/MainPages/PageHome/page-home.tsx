@@ -1,9 +1,18 @@
-import React from 'react'
+import { Grid } from "@mui/material";
+import Welcome from "Components/Main/Welcome";
 
 function PageHome() {
-  return (
-    <div>Page home</div>
-  )
+    return (
+        <Grid
+            height={"100%"}
+            container
+            direction="column"
+            justifyContent="center"
+            alignItems="center"
+        >
+            <Welcome />
+        </Grid>
+    );
 }
 
-export default PageHome
+export default PageHome;

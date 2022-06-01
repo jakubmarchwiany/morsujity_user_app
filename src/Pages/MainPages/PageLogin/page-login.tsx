@@ -1,9 +1,13 @@
-import React from 'react'
+import { Grid } from "@mui/material";
+import Login from "Components/Main/Login";
+import React from "react";
 
 function PageLogin() {
-  return (
-    <div>Page Login</div>
-  )
+    return (
+        <Grid height={"100%"} container direction="column" alignItems="center">
+            <Login />
+        </Grid>
+    );
 }
 
-export default PageLogin
+export default PageLogin;
