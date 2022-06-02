@@ -1,24 +1,56 @@
-import * as React from "react";
-import Avatar from "@mui/material/Avatar";
-import Button from "@mui/material/Button";
-import TextField from "@mui/material/TextField";
-import Link from "@mui/material/Link";
-import Grid from "@mui/material/Grid";
-import Box from "@mui/material/Box";
+import { Container, Typography, Box, Grid, Link, TextField, Button, Avatar } from "@mui/material";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
-import Typography from "@mui/material/Typography";
-import Container from "@mui/material/Container";
+
 import { Link as NavLink } from "react-router-dom";
 
+import { useFormik } from "formik";
+import * as Yup from "yup";
+
+const INITIAL_FORM_STATE = {
+    nickname: "",
+    pseudonym: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+};
+
+const FORM_VALIDATION = Yup.object().shape({
+    nickname: Yup.string()
+        .required("Wymagane")
+        .min(3, "Co najmniej 3 znaki")
+        .max(15, "Maksymalnie 15 znaków"),
+    pseudonym: Yup.string()
+        .required("Wymagane")
+        .min(3, "Ksywka za krótka - Co najmniej 3 znaki")
+        .max(15, "Ksywka za długa - Maksymalnie 15 znaków"),
+    email: Yup.string().required("Wymagane").email("Email niepoprawny"),
+    password: Yup.string()
+        .required("Wymagane")
+        .min(8, "Hasło za krótkie - co najmniej 8 znaków")
+        .max(20, "Hasło za długie - maksymalnie 20 znaków")
+        .matches(/(?=.*[a-z])/, "Musi zawierać mała literę")
+        .matches(/(?=.*[A-Z])/, "Musi zawierać dużą literę")
+        .matches(/(?=.*[0-9])/, "Musi zawierać cyfrę")
+        .matches(/(?=.*[!@#$%^&*])/, "Musi zawierać znak specjalny (! @ # $ % ^ & *)"),
+    confirmPassword: Yup.string()
+        .required("Wymagane")
+        .min(8, "Hasło za krótkie - co najmniej 8 znaków")
+        .max(20, "Hasło za długie - maksymalnie 20 znaków")
+        .matches(/(?=.*[a-z])/, "Musi zawierać mała literę")
+        .matches(/(?=.*[A-Z])/, "Musi zawierać dużą literę")
+        .matches(/(?=.*[0-9])/, "Musi zawierać cyfrę")
+        .matches(/(?=.*[!@#$%^&*])/, "Musi zawierać znak specjalny (! @ # $ % ^ & *)")
+        .oneOf([Yup.ref("password"), null], "Hasła muszą być takie same"),
+});
+
 function Register() {
-    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-        event.preventDefault();
-        const data = new FormData(event.currentTarget);
-        console.log({
-            email: data.get("email"),
-            password: data.get("password"),
-        });
-    };
+    const formik = useFormik({
+        initialValues: INITIAL_FORM_STATE,
+        validationSchema: FORM_VALIDATION,
+        onSubmit: (values) => {
+            console.log("submit");
+        },
+    });
 
     return (
         <Container component="main" maxWidth="xs">
@@ -30,13 +62,14 @@ function Register() {
                     alignItems: "center",
                 }}
             >
-                <Avatar sx={{ mb: 4, bgcolor: "secondary.main", width: "70px", height: "70px" }}>
+                <Avatar sx={{ mb: 4, bgcolor: "primary.600", width: "70px", height: "70px" }}>
                     <LockOutlinedIcon fontSize="large" />
                 </Avatar>
                 <Typography component="h1" variant="h4">
                     Stwórz konto
                 </Typography>
-                <Box component="form" onSubmit={handleSubmit} sx={{ mt: 3 }}>
+
+                <Box component={"form"} noValidate onSubmit={formik.handleSubmit} sx={{ mt: 3 }}>
                     <Grid container spacing={2}>
                         <Grid item xs={12}>
                             <TextField
@@ -45,17 +78,26 @@ function Register() {
                                 autoComplete="nickname"
                                 label="Nazwa użytkownika"
                                 fullWidth
-                                required
                                 autoFocus
+                                value={formik.values.nickname}
+                                onChange={formik.handleChange}
+                                onBlur={formik.handleBlur}
+                                error={formik.touched.nickname && Boolean(formik.errors.nickname)}
+                                helperText={formik.touched.nickname && formik.errors.nickname}
                             />
                         </Grid>
+
                         <Grid item xs={12}>
                             <TextField
                                 name="pseudonym"
                                 id="pseudonym"
                                 label="Ksywka (pseudonim, Imię i Nazwisko)"
                                 fullWidth
-                                required
+                                value={formik.values.pseudonym}
+                                onChange={formik.handleChange}
+                                onBlur={formik.handleBlur}
+                                error={formik.touched.pseudonym && Boolean(formik.errors.pseudonym)}
+                                helperText={formik.touched.pseudonym && formik.errors.pseudonym}
                             />
                         </Grid>
                         <Grid item xs={12}>
@@ -65,7 +107,11 @@ function Register() {
                                 autoComplete="email"
                                 label="Adres email"
                                 fullWidth
-                                required
+                                value={formik.values.email}
+                                onChange={formik.handleChange}
+                                onBlur={formik.handleBlur}
+                                error={formik.touched.email && Boolean(formik.errors.email)}
+                                helperText={formik.touched.email && formik.errors.email}
                             />
                         </Grid>
                         <Grid item xs={12}>
@@ -76,7 +122,11 @@ function Register() {
                                 autoComplete="new-password"
                                 label="Hasło"
                                 fullWidth
-                                required
+                                value={formik.values.password}
+                                onChange={formik.handleChange}
+                                onBlur={formik.handleBlur}
+                                error={formik.touched.password && Boolean(formik.errors.password)}
+                                helperText={formik.touched.password && formik.errors.password}
                             />
                         </Grid>
                         <Grid item xs={12}>
@@ -87,11 +137,26 @@ function Register() {
                                 autoComplete="new-password"
                                 label="Potwierdzenie Hasła"
                                 fullWidth
-                                required
+                                value={formik.values.confirmPassword}
+                                onChange={formik.handleChange}
+                                onBlur={formik.handleBlur}
+                                error={
+                                    formik.touched.confirmPassword &&
+                                    Boolean(formik.errors.confirmPassword)
+                                }
+                                helperText={
+                                    formik.touched.confirmPassword && formik.errors.confirmPassword
+                                }
                             />
                         </Grid>
                     </Grid>
-                    <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
+                    <Button
+                        type="submit"
+                        fullWidth
+                        variant="contained"
+                        sx={{ mt: 3, mb: 2 }}
+                        disabled={!(formik.isValid && formik.dirty)}
+                    >
                         Rejestruj
                     </Button>
                     <Grid container justifyContent="flex-start">
@@ -106,4 +171,5 @@ function Register() {
         </Container>
     );
 }
+
 export default Register;
