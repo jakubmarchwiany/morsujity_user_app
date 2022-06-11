@@ -34,12 +34,6 @@ const FORM_VALIDATION = Yup.object().shape({
         .matches(/(?=.*[!@#$%^&*])/, "Musi zawierać znak specjalny (! @ # $ % ^ & *)"),
     confirmPassword: Yup.string()
         .required("Wymagane")
-        .min(8, "Hasło za krótkie - co najmniej 8 znaków")
-        .max(20, "Hasło za długie - maksymalnie 20 znaków")
-        .matches(/(?=.*[a-z])/, "Musi zawierać mała literę")
-        .matches(/(?=.*[A-Z])/, "Musi zawierać dużą literę")
-        .matches(/(?=.*[0-9])/, "Musi zawierać cyfrę")
-        .matches(/(?=.*[!@#$%^&*])/, "Musi zawierać znak specjalny (! @ # $ % ^ & *)")
         .oneOf([Yup.ref("password"), null], "Hasła muszą być takie same"),
 });
 
