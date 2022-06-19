@@ -17,7 +17,6 @@ const initialState: UiState = {
 interface payLoad {
     message?: string;
     type?: "success" | "info" | "warning" | "error" | undefined;
-    open?: boolean;
 }
 
 const uiSlice = createSlice({
@@ -28,7 +27,12 @@ const uiSlice = createSlice({
             state.notification = {
                 message: action.payload.message,
                 type: action.payload.type,
-                open: action.payload.open,
+                open: true,
+            };
+        },
+        hideNotification(state) {
+            state.notification = {
+                open: false,
             };
         },
     },

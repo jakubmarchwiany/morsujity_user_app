@@ -11,7 +11,7 @@ export const registerUserThunk =
         lastName: string,
         email: string,
         password: string,
-        navigate: any,
+        navigate: any
     ): AppThunk =>
     async (AppDispatch) => {
         fetch(endPoint + "/auth/register", {
@@ -21,32 +21,30 @@ export const registerUserThunk =
             body: JSON.stringify({ firstName, lastName, email, password }),
         })
             .then(async (response) => {
+                const data = await response.json();
                 if (response.ok) {
-                    const data = await response.json();
-                    AppDispatch(
-                        userActions.login({
-                            token: data.token,
-                            account: data.user,
-                        })
-                    );
                     AppDispatch(
                         uiActions.showNotification({
-                            open: true,
                             type: "success",
-                            message: "Udało się utworzyć konto",
+                            message: data.message,
                         })
                     );
-                    // navigate("/user/home", { replace: true });
+                    navigate("/login", { replace: true });
                 } else {
-                    if (response.status === 400) {
-                        const data = await response.json();
-                        console.log(data)
-                    } else {
-                        
-                    }
+                    AppDispatch(
+                        uiActions.showNotification({
+                            type: "error",
+                            message: data.message,
+                        })
+                    );
                 }
             })
             .catch((error) => {
-              
+                AppDispatch(
+                    uiActions.showNotification({
+                        type: "error",
+                        message: error.message,
+                    })
+                );
             });
     };

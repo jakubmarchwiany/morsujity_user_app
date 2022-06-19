@@ -21,11 +21,7 @@ const Notification = ({ type, message }: NotificationProps) => {
         if (reason === "clickaway") {
             return;
         }
-        dispatch(
-            uiActions.showNotification({
-                open: false,
-            })
-        );
+        dispatch(uiActions.hideNotification());
     };
 
     return (
@@ -35,7 +31,7 @@ const Notification = ({ type, message }: NotificationProps) => {
                     vertical: "bottom",
                     horizontal: "left",
                 }}
-                sx={{mb: 5}}
+                sx={{ mb: 5 }}
                 open={true}
                 autoHideDuration={2000}
                 onClose={handleClose}
