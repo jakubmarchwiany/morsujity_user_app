@@ -4,10 +4,10 @@ import React from "react";
 function Ads() {
     return (
         <Box flex={2} p={2} sx={{ display: { xs: "none", md: "block" } }}>
-            <script
+            {/* <script
                 async
                 src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2882072498226605"
-                crossorigin="anonymous"
+                crossOrigin="anonymous"
             ></script>
 
             <ins
@@ -18,7 +18,7 @@ function Ads() {
                 data-ad-format="auto"
                 data-full-width-responsive="true"
             ></ins>
-            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script> */}
         </Box>
     );
 

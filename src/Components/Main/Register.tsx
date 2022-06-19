@@ -6,6 +6,8 @@ import { Link as NavLink } from "react-router-dom";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 
+const endPoint: string | undefined = process.env.REACT_APP_API_ENDPOINT;
+
 const INITIAL_FORM_STATE = {
     nickname: "",
     pseudonym: "",
@@ -43,8 +45,25 @@ function Register() {
         validationSchema: FORM_VALIDATION,
         onSubmit: (values) => {
             console.log("submit");
+            test();
         },
     });
+
+    const test = () => {
+        fetch(endPoint + `/register`, {
+            method: "GET",
+            credentials: "include",
+            headers: {
+                "Content-Type": "application/json",
+            },
+        }).then(async (response) => {
+            if (response.ok) {
+                const data = await response.json();
+                console.log(data);
+            } else {
+            }
+        });
+    };
 
     return (
         <Container component="main" maxWidth="xs">
@@ -152,6 +171,9 @@ function Register() {
                         disabled={!(formik.isValid && formik.dirty)}
                     >
                         Rejestruj
+                    </Button>
+                    <Button onClick={test} fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
+                        siema
                     </Button>
                     <Grid container justifyContent="flex-start">
                         <Grid item>
