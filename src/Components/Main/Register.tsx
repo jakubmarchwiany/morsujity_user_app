@@ -1,10 +1,12 @@
 import { Container, Typography, Box, Grid, Link, TextField, Button, Avatar } from "@mui/material";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 
-import { Link as NavLink } from "react-router-dom";
+import { Link as NavLink, useNavigate } from "react-router-dom";
 
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import { useAppDispatch } from "hooks";
+import { registerUserThunk } from "Store/user-actions";
 
 const endPoint: string | undefined = process.env.REACT_APP_API_ENDPOINT;
 
@@ -40,12 +42,14 @@ const FORM_VALIDATION = Yup.object().shape({
 });
 
 function Register() {
+    const dispatch = useAppDispatch();
+    const navigate = useNavigate();
+
     const formik = useFormik({
         initialValues: INITIAL_FORM_STATE,
         validationSchema: FORM_VALIDATION,
-        onSubmit: (values) => {
-            console.log("submit");
-            test();
+        onSubmit: ({ nickname, pseudonym, email, password }) => {
+            dispatch(registerUserThunk(nickname, pseudonym, email, password, navigate));
         },
     });
 
@@ -171,9 +175,6 @@ function Register() {
                         disabled={!(formik.isValid && formik.dirty)}
                     >
                         Rejestruj
-                    </Button>
-                    <Button onClick={test} fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
-                        siema
                     </Button>
                     <Grid container justifyContent="flex-start">
                         <Grid item>
