@@ -1,36 +1,40 @@
-import React from "react";
-import { Box, Stack, ThemeProvider } from "@mui/material";
-import { Routes, Route } from "react-router-dom";
+import { Box, Stack } from "@mui/material";
 import { PageNotFound } from "Pages/index";
+import { Route, Routes } from "react-router-dom";
 
 import "Assets/App.css";
-import Navbar from "Layouts/Navbar";
-import { myTheme } from "Assets/theme";
 import Footer from "Layouts/Footer";
+import Navbar from "Layouts/Navbar";
 import Navigator from "Layouts/Navigator";
+import Notification from "Layouts/Notification";
 
 import Ads from "Layouts/Ads";
 import { MainRoute } from "Routes/MainRoute";
 
+import { useAppSelector } from "hooks";
+
 function App() {
+    const notification = useAppSelector((state) => state.ui.notification);
+
     return (
-        <ThemeProvider theme={myTheme}>
-            <Stack sx={{ minHeight: "100vh" }}>
-                <Navbar />
-                <Stack sx={{ flex: 1 }} direction="row" justifyContent="space-between">
-                    <Navigator />
-                    <Box flex={9}>
-                        <Routes>
-                            {MainRoute()}
-                            {/* {UserRoute()} */}
-                            <Route path="*" element={<PageNotFound />} />
-                        </Routes>
-                    </Box>
-                    <Ads />
-                </Stack>
-                <Footer />
+        <Stack sx={{ minHeight: "100vh" }}>
+            <Navbar />
+            {notification.open && (
+                <Notification type={notification.type} message={notification.message} />
+            )}
+            <Stack sx={{ flex: 1 }} direction="row" justifyContent="space-between">
+                <Navigator />
+                <Box flex={9}>
+                    <Routes>
+                        {MainRoute()}
+                        {/* {UserRoute()} */}
+                        <Route path="*" element={<PageNotFound />} />
+                    </Routes>
+                </Box>
+                <Ads />
             </Stack>
-        </ThemeProvider>
+            <Footer />
+        </Stack>
     );
 }
 
