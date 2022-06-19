@@ -8,8 +8,6 @@ import * as Yup from "yup";
 import { useAppDispatch } from "hooks";
 import { registerUserThunk } from "Store/user-actions";
 
-const endPoint: string | undefined = process.env.REACT_APP_API_ENDPOINT;
-
 const INITIAL_FORM_STATE = {
     nickname: "",
     pseudonym: "",
@@ -52,22 +50,6 @@ function Register() {
             dispatch(registerUserThunk(nickname, pseudonym, email, password, navigate));
         },
     });
-
-    const test = () => {
-        fetch(endPoint + `/register`, {
-            method: "GET",
-            credentials: "include",
-            headers: {
-                "Content-Type": "application/json",
-            },
-        }).then(async (response) => {
-            if (response.ok) {
-                const data = await response.json();
-                console.log(data);
-            } else {
-            }
-        });
-    };
 
     return (
         <Container component="main" maxWidth="xs">

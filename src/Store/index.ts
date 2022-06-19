@@ -3,10 +3,12 @@ import { ThunkAction } from "redux-thunk";
 import { AnyAction } from "redux";
 
 import uiSlice from "./ui-slice";
+import userSlice from "./user-slice";
 
 const store = configureStore({
     reducer: {
         ui: uiSlice,
+        user: userSlice,
     },
 });
 

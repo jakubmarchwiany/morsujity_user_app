@@ -88,3 +88,41 @@ export const loginUserThunk =
                 );
             });
     };
+
+export const logoutUserThunk =
+    (token: string, navigate: any): AppThunk =>
+    async (AppDispatch) => {
+        fetch(endPoint + "/auth/logout", {
+            method: "POST",
+            credentials: "include",
+            headers: { "Content-Type": "application/json" },
+        })
+            .then(async (response) => {
+                const data = await response.json();
+                if (response.ok) {
+                    AppDispatch(userActions.logout());
+                    AppDispatch(
+                        uiActions.showNotification({
+                            type: "success",
+                            message: data.message,
+                        })
+                    );
+                    navigate("/home", { replace: true });
+                } else {
+                    AppDispatch(
+                        uiActions.showNotification({
+                            type: "error",
+                            message: data.message,
+                        })
+                    );
+                }
+            })
+            .catch((error) => {
+                AppDispatch(
+                    uiActions.showNotification({
+                        type: "error",
+                        message: error.message,
+                    })
+                );
+            });
+    };

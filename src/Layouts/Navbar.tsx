@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -12,19 +12,33 @@ import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import AcUnitIcon from "@mui/icons-material/AcUnit";
 
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { Stack } from "@mui/material";
+import { userActions } from "Store/user-slice";
+import { useAppDispatch, useAppSelector } from "hooks";
+import { replace } from "formik";
+import { logoutUserThunk } from "Store/user-actions";
 
 const pages = ["Blog"];
-const UserSettings = ["Profil", "Konto", "Wyloguj"];
+const UserSettings = [
+    { name: "Konto", id: "account" },
+    { name: "Wyloguj", id: "logout" },
+];
 const settings = [
     { name: "Rejestracja", to: "register" },
     { name: "Logowanie", to: "login" },
 ];
 
 function Navbar() {
-    const [isUserLogin] = useState<boolean>(false);
+    // const [isUserLogin, setIsUserLogin] = useState<boolean>(false);
     const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
     const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
+
+    const dispatch = useAppDispatch();
+    const navigate = useNavigate();
+
+    const token = useAppSelector((state) => state.user.token);
+    const isUserLogin = useAppSelector((state) => state.user.account);
 
     const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
         setAnchorElNav(event.currentTarget);
@@ -33,39 +47,70 @@ function Navbar() {
         setAnchorElUser(event.currentTarget);
     };
 
-    const handleCloseNavMenu = () => {
+    const handleCloseNavMenu = (event: React.MouseEvent<HTMLElement>) => {
         setAnchorElNav(null);
     };
 
-    const handleCloseUserMenu = () => {
+    const handleCloseUserMenu = (event: React.MouseEvent<HTMLElement>) => {
+        const id = event.currentTarget.id;
+        if (id === "logout") logoutHandler();
+
         setAnchorElUser(null);
     };
 
+    const logoutHandler = () => {
+        dispatch(logoutUserThunk(token!, navigate));
+    };
+
+    const syncLogout = useCallback(
+        (event: any) => {
+            if (event.key === "logout") {
+                // If using react-router-dom, you may call history.push("/")
+                navigate("/home", { replace: true });
+                window.location.reload();
+            }
+        },
+        [navigate]
+    );
+
+    useEffect(() => {
+        window.addEventListener("storage", syncLogout);
+        return () => {
+            window.removeEventListener("storage", syncLogout);
+        };
+    }, [syncLogout]);
+
     return (
-        <AppBar elevation={0} position="static">
-            <Toolbar disableGutters>
-                <AcUnitIcon
-                    fontSize="large"
-                    sx={{ display: { xs: "none", md: "flex" }, ml: 3, mr: 2 }}
-                />
-                <Typography
-                    variant="h6"
-                    noWrap
-                    component={Link}
-                    to="/home"
-                    sx={{
-                        mr: 2,
-                        flexGrow: 1,
-                        display: { xs: "none", md: "flex" },
-                        fontFamily: "monospace",
-                        fontWeight: 700,
-                        letterSpacing: ".15rem",
-                        color: "inherit",
-                        textDecoration: "none",
-                    }}
-                >
-                    Morsujity
-                </Typography>
+        <AppBar
+            elevation={0}
+            position="static"
+            sx={{ top: "auto", bottom: 0, textAlign: "center" }}
+        >
+            <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
+                <Stack direction="row">
+                    <AcUnitIcon
+                        fontSize="large"
+                        sx={{ display: { xs: "none", md: "flex" }, ml: 3, mr: 2 }}
+                    />
+                    <Typography
+                        variant="h6"
+                        noWrap
+                        component={Link}
+                        to="/home"
+                        sx={{
+                            mr: 2,
+                            pt: 0.3,
+                            display: { xs: "none", md: "flex" },
+                            fontFamily: "monospace",
+                            fontWeight: 700,
+                            letterSpacing: ".15rem",
+                            color: "inherit",
+                            textDecoration: "none",
+                        }}
+                    >
+                        Morsujity
+                    </Typography>
+                </Stack>
 
                 <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
                     <IconButton
@@ -172,9 +217,13 @@ function Navbar() {
                             onClose={handleCloseUserMenu}
                         >
                             {UserSettings.map((setting) => (
-                                <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                                <MenuItem
+                                    id={`${setting.id}`}
+                                    key={setting.name}
+                                    onClick={handleCloseUserMenu}
+                                >
                                     <Typography textAlign="center" minWidth="100px">
-                                        {setting}
+                                        {setting.name}
                                     </Typography>
                                 </MenuItem>
                             ))}
