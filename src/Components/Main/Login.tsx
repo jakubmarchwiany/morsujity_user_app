@@ -1,8 +1,11 @@
 import LockOpenOutlinedIcon from "@mui/icons-material/LockOpenOutlined";
 import { Avatar, Box, Button, Container, Grid, Link, TextField, Typography } from "@mui/material";
 import { useFormik } from "formik";
+import { useAppDispatch } from "hooks";
 import { useEffect } from "react";
-import { Link as NavLink } from "react-router-dom";
+import { Link as NavLink, useNavigate } from "react-router-dom";
+import { loginUserThunk } from "Store/user-actions";
+
 import * as Yup from "yup";
 
 const inputStyle = { WebkitBoxShadow: "0 0 0 1000px #e4f5fe inset" };
@@ -14,22 +17,18 @@ const INITIAL_FORM_STATE = {
 
 const FORM_VALIDATION = Yup.object().shape({
     email: Yup.string().required("Wymagane").email("Email niepoprawny"),
-    password: Yup.string()
-        .required("Wymagane")
-        .min(8, "Hasło za krótkie - co najmniej 8 znaków")
-        .max(20, "Hasło za długie - maksymalnie 20 znaków")
-        .matches(/(?=.*[a-z])/, "Musi zawierać mała literę")
-        .matches(/(?=.*[A-Z])/, "Musi zawierać dużą literę")
-        .matches(/(?=.*[0-9])/, "Musi zawierać cyfrę")
-        .matches(/(?=.*[!@#$%^&*])/, "Musi zawierać znak specjalny (! @ # $ % ^ & *)"),
+    password: Yup.string().required("Wymagane"),
 });
 
 function Login() {
+    const dispatch = useAppDispatch();
+    const navigate = useNavigate();
+
     const formik = useFormik({
         initialValues: INITIAL_FORM_STATE,
         validationSchema: FORM_VALIDATION,
-        onSubmit: (values) => {
-            console.log("submit");
+        onSubmit: ({ email, password }) => {
+            dispatch(loginUserThunk(email, password, navigate));
         },
     });
 

@@ -48,3 +48,43 @@ export const registerUserThunk =
                 );
             });
     };
+
+export const loginUserThunk =
+    (email: string, password: string, navigate: any): AppThunk =>
+    async (AppDispatch) => {
+        fetch(endPoint + "/auth/login", {
+            method: "POST",
+            credentials: "include",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ email, password }),
+        })
+            .then(async (response) => {
+                const data = await response.json();
+                if (response.ok) {
+                    AppDispatch(
+                        uiActions.showNotification({
+                            type: "success",
+                            message: data.message,
+                        })
+                    );
+                    AppDispatch(userActions.login({ token: data.token, account: data.user }));
+
+                    navigate("/user/home", { replace: true });
+                } else {
+                    AppDispatch(
+                        uiActions.showNotification({
+                            type: "error",
+                            message: data.message,
+                        })
+                    );
+                }
+            })
+            .catch((error) => {
+                AppDispatch(
+                    uiActions.showNotification({
+                        type: "error",
+                        message: error.message,
+                    })
+                );
+            });
+    };

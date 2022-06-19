@@ -1,18 +1,9 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface AccountType {
-    _id: string;
-    userType: string;
-    username: string;
-    firstName: string;
-    lastName: string;
-    image: {
-        url: string;
-        id: string;
-    };
-    activeEvents: [];
-    authStrategy: string;
-    __v: number;
+    userType: String;
+    email: String;
+    pseudonym: String;
 }
 
 interface UserState {
@@ -27,7 +18,7 @@ const initialState: UserState = {
 };
 
 interface LoginPayload {
-    token: string | null;
+    token: string;
     account: AccountType;
 }
 
