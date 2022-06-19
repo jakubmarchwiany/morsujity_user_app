@@ -94,6 +94,7 @@ function Register() {
                                 id="nickname"
                                 autoComplete="nickname"
                                 label="Nazwa użytkownika"
+                                variant="standard"
                                 fullWidth
                                 autoFocus
                                 value={formik.values.nickname}
@@ -109,6 +110,7 @@ function Register() {
                                 name="pseudonym"
                                 id="pseudonym"
                                 label="Ksywka (pseudonim, Imię i Nazwisko)"
+                                variant="standard"
                                 fullWidth
                                 value={formik.values.pseudonym}
                                 onChange={formik.handleChange}
@@ -123,6 +125,7 @@ function Register() {
                                 id="email"
                                 autoComplete="email"
                                 label="Adres email"
+                                variant="standard"
                                 fullWidth
                                 value={formik.values.email}
                                 onChange={formik.handleChange}
@@ -138,6 +141,7 @@ function Register() {
                                 id="password"
                                 autoComplete="new-password"
                                 label="Hasło"
+                                variant="standard"
                                 fullWidth
                                 value={formik.values.password}
                                 onChange={formik.handleChange}
@@ -153,6 +157,7 @@ function Register() {
                                 id="confirmPassword"
                                 autoComplete="new-password"
                                 label="Potwierdzenie Hasła"
+                                variant="standard"
                                 fullWidth
                                 value={formik.values.confirmPassword}
                                 onChange={formik.handleChange}
