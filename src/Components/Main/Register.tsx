@@ -17,10 +17,6 @@ const INITIAL_FORM_STATE = {
 };
 
 const FORM_VALIDATION = Yup.object().shape({
-    nickname: Yup.string()
-        .required("Wymagane")
-        .min(3, "Co najmniej 3 znaki")
-        .max(15, "Maksymalnie 15 znaków"),
     pseudonym: Yup.string()
         .required("Wymagane")
         .min(3, "Ksywka za krótka - Co najmniej 3 znaki")
@@ -46,8 +42,8 @@ function Register() {
     const formik = useFormik({
         initialValues: INITIAL_FORM_STATE,
         validationSchema: FORM_VALIDATION,
-        onSubmit: ({ nickname, pseudonym, email, password }) => {
-            dispatch(registerUserThunk(nickname, pseudonym, email, password, navigate));
+        onSubmit: ({ pseudonym, email, password }) => {
+            dispatch(registerUserThunk(pseudonym, email, password, navigate));
         },
     });
 
@@ -70,23 +66,6 @@ function Register() {
 
                 <Box component={"form"} noValidate onSubmit={formik.handleSubmit} sx={{ mt: 3 }}>
                     <Grid container spacing={2}>
-                        <Grid item xs={12}>
-                            <TextField
-                                name="nickname"
-                                id="nickname"
-                                autoComplete="nickname"
-                                label="Nazwa użytkownika"
-                                variant="standard"
-                                fullWidth
-                                autoFocus
-                                value={formik.values.nickname}
-                                onChange={formik.handleChange}
-                                onBlur={formik.handleBlur}
-                                error={formik.touched.nickname && Boolean(formik.errors.nickname)}
-                                helperText={formik.touched.nickname && formik.errors.nickname}
-                            />
-                        </Grid>
-
                         <Grid item xs={12}>
                             <TextField
                                 name="pseudonym"
