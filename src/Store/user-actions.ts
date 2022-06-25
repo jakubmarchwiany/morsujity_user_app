@@ -120,3 +120,40 @@ export const logoutUserThunk =
                 );
             });
     };
+
+    export const verifyEmailThunk =
+    (hash: string, navigate: any): AppThunk =>
+    async (AppDispatch) => {
+        fetch(endPoint + `/auth/activeAccount/${hash}`, {
+            method: "GET",
+            credentials: "include",
+            headers: { "Content-Type": "application/json" },
+        })
+            .then(async (response) => {
+                const data = await response.json();
+                if (response.ok) {
+                    AppDispatch(
+                        uiActions.showNotification({
+                            type: "success",
+                            message: data.message,
+                        })
+                    );
+                    navigate("/login", { replace: true });
+                } else {
+                    AppDispatch(
+                        uiActions.showNotification({
+                            type: "error",
+                            message: data.message,
+                        })
+                    );
+                }
+            })
+            .catch((error) => {
+                AppDispatch(
+                    uiActions.showNotification({
+                        type: "error",
+                        message: error.message,
+                    })
+                );
+            });
+    };
