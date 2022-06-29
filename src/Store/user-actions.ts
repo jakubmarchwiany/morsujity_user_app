@@ -121,10 +121,10 @@ export const logoutUserThunk =
             });
     };
 
-    export const verifyEmailThunk =
+export const verifyEmailThunk =
     (hash: string, navigate: any): AppThunk =>
     async (AppDispatch) => {
-        fetch(endPoint + `/auth/activeAccount/${hash}`, {
+        fetch(endPoint + `/auth/verifyEmail/${hash}`, {
             method: "GET",
             credentials: "include",
             headers: { "Content-Type": "application/json" },
@@ -146,6 +146,7 @@ export const logoutUserThunk =
                             message: data.message,
                         })
                     );
+                    navigate("/home", { replace: true });
                 }
             })
             .catch((error) => {
@@ -155,5 +156,6 @@ export const logoutUserThunk =
                         message: error.message,
                     })
                 );
+                navigate("/home", { replace: true });
             });
     };

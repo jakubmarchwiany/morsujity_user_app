@@ -9,7 +9,6 @@ export function MainRoute() {
         <Route key="/home" path="/home" element={<PageHome />} />,
         <Route key="/register" path="/register" element={<PageRegister />} />,
         <Route key="/login" path="/login" element={<PageLogin />} />,
-        <Route key="/auth/verifyEmail" path="/auth/verifyEmail/:hash" element={<VerifyEmail />}/>,
-        
+        <Route key="/verifyEmail" path="/verifyEmail/:hash" element={<VerifyEmail />} />,
     ];
 }
