@@ -1,14 +1,24 @@
-import { Route, Navigate, useParams } from "react-router-dom";
-
-import { PageRegister, PageLogin, PageHome } from "Pages/index";
+import { Navigate, Route } from "react-router-dom";
 import VerifyEmail from "Components/Main/VerifyEmail";
+import {
+    PageBlog,
+    PageContact,
+    PageLogin,
+    PageRegister,
+    PageStatut,
+    PageWelcome,
+} from "Pages/index";
+import NewPassword from "Components/Main/NewPassword";
 
 export function MainRoute() {
     return [
-        <Route key="/" path="/" element={<Navigate replace to="/home" />} />,
-        <Route key="/home" path="/home" element={<PageHome />} />,
-        <Route key="/register" path="/register" element={<PageRegister />} />,
+        <Route key="/" path="/" element={<PageWelcome />} />,
         <Route key="/login" path="/login" element={<PageLogin />} />,
-        <Route key="/verifyEmail" path="/verifyEmail/:hash" element={<VerifyEmail />} />,
+        <Route key="/register" path="/register" element={<PageRegister />} />,
+        <Route key="/contact" path="/contact" element={<PageContact />} />,
+        <Route key="/statut" path="/statut" element={<PageStatut />} />,
+        <Route key="/blog" path="/blog" element={<PageBlog />} />,
+        <Route key="/verifyEmail" path="/verifyEmail/:token" element={<VerifyEmail />} />,
+        <Route key="/resetPassword" path="/resetPassword/:token" element={<NewPassword />} />,
     ];
 }
