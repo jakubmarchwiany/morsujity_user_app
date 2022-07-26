@@ -6,3 +6,7 @@
 #root {
     min-height: 100vh;
 }
+
+.textFieldPassword>div>input {
+    -webkit-text-security: disc;
+}
