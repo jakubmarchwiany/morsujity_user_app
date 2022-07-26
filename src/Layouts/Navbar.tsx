@@ -66,7 +66,7 @@ function Navbar() {
         (event: any) => {
             if (event.key === "logout") {
                 // If using react-router-dom, you may call history.push("/")
-                navigate("/home", { replace: true });
+                navigate("/", { replace: true });
                 window.location.reload();
             }
         },
@@ -96,7 +96,7 @@ function Navbar() {
                         variant="h6"
                         noWrap
                         component={Link}
-                        to="/home"
+                        to="/"
                         sx={{
                             mr: 2,
                             pt: 0.3,
@@ -166,7 +166,7 @@ function Navbar() {
                     variant="h6"
                     noWrap
                     component={Link}
-                    to="/home"
+                    to="/"
                     sx={{
                         mr: 2,
                         flexGrow: 1,
