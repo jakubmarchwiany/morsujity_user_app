@@ -1,39 +1,52 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 // Define a type for the slice state
-interface UiState {
-    notification: {
-        message?: string;
-        type?: "success" | "info" | "warning" | "error" | undefined;
-        open?: boolean;
-    };
-}
+type UiState = {
+    open: boolean;
+    type: "success" | "info" | "warning" | "error";
+    message: string;
+    duration: number;
+};
 
 // Define the initial state using that type
 const initialState: UiState = {
-    notification: { open: false, message: "" },
+    open: false,
+    type: "success",
+    message: "",
+    duration: 2500,
 };
 
-interface payLoad {
-    message?: string;
-    type?: "success" | "info" | "warning" | "error" | undefined;
-}
+type payLoadNotify = {
+    type: "success" | "info" | "warning" | "error";
+    message: string;
+    duration?: number;
+};
 
 const uiSlice = createSlice({
     name: "ui",
     initialState,
     reducers: {
-        showNotification(state, action: PayloadAction<payLoad>) {
-            state.notification = {
-                message: action.payload.message,
-                type: action.payload.type,
-                open: true,
-            };
+        showNotification(state, action: PayloadAction<payLoadNotify>) {
+            state.open = true;
+            state.type = action.payload.type;
+            state.message = action.payload.message;
+            state.duration = 2500;
+            if (action.payload.duration) state.duration = action.payload.duration;
+        },
+        showErrorNotification(state, action: PayloadAction<string>) {
+            state.open = true;
+            state.type = "error";
+            state.message = action.payload;
+            state.duration = 5000;
+        },
+        showErrorDefNotify(state) {
+            state.open = true;
+            state.type = "error";
+            state.message = "Coś poszło nie tak :(";
+            state.duration = 5000;
         },
         hideNotification(state) {
-            state.notification = {
-                open: false,
-            };
+            state.open = false;
         },
     },
 });

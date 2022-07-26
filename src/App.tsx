@@ -11,17 +11,11 @@ import Notification from "Layouts/Notification";
 import Ads from "Layouts/Ads";
 import { MainRoute } from "Routes/MainRoute";
 
-import { useAppSelector } from "hooks";
-
 function App() {
-    const notification = useAppSelector((state) => state.ui.notification);
-
     return (
         <Stack sx={{ minHeight: "100vh" }}>
             <Navbar />
-            {notification.open && (
-                <Notification type={notification.type} message={notification.message} />
-            )}
+            <Notification />
             <Stack sx={{ flex: 1 }} direction="row" justifyContent="space-between">
                 <Navigator />
                 <Box flex={9}>
