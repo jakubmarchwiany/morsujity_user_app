@@ -7,6 +7,7 @@ import { Link as NavLink, useNavigate } from "react-router-dom";
 import { loginUserThunk } from "Store/user-actions";
 
 import * as Yup from "yup";
+import ResetPassword from "./ResetPassword";
 
 const inputStyle = { WebkitBoxShadow: "0 0 0 1000px #e4f5fe inset" };
 
@@ -85,6 +86,8 @@ function Login() {
                         helperText={formik.touched.password && formik.errors.password}
                     />
 
+                    <ResetPassword />
+
                     {/* <FormControlLabel
                         control={<Checkbox value="remember" color="primary" />}
                         label="Pamiętaj mnie"
@@ -100,7 +103,12 @@ function Login() {
                     </Button>
                     <Grid container justifyContent="flex-start">
                         <Grid item>
-                            <Link component={NavLink} to="/register" variant="body2">
+                            <Link
+                                component={NavLink}
+                                to="/register"
+                                variant="body2"
+                                underline="hover"
+                            >
                                 Nie masz konta?
                             </Link>
                         </Grid>
