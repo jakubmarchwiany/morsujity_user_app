@@ -1,5 +1,4 @@
 import { Grid } from "@mui/material";
-import Welcome from "Components/Main/Welcome";
 import Post1 from "Components/Posts/Post1";
 import { Helmet } from "react-helmet-async";
 

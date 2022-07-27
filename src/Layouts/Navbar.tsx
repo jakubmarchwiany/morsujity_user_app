@@ -1,22 +1,20 @@
-import { useCallback, useEffect, useState } from "react";
-import AppBar from "@mui/material/AppBar";
-import Box from "@mui/material/Box";
-import Toolbar from "@mui/material/Toolbar";
-import IconButton from "@mui/material/IconButton";
-import Typography from "@mui/material/Typography";
-import Menu from "@mui/material/Menu";
-import MenuIcon from "@mui/icons-material/Menu";
-import Avatar from "@mui/material/Avatar";
-import Button from "@mui/material/Button";
-import Tooltip from "@mui/material/Tooltip";
-import MenuItem from "@mui/material/MenuItem";
 import AcUnitIcon from "@mui/icons-material/AcUnit";
+import MenuIcon from "@mui/icons-material/Menu";
+import AppBar from "@mui/material/AppBar";
+import Avatar from "@mui/material/Avatar";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import IconButton from "@mui/material/IconButton";
+import Menu from "@mui/material/Menu";
+import MenuItem from "@mui/material/MenuItem";
+import Toolbar from "@mui/material/Toolbar";
+import Tooltip from "@mui/material/Tooltip";
+import Typography from "@mui/material/Typography";
+import { useCallback, useEffect, useState } from "react";
 
-import { Link, useNavigate } from "react-router-dom";
 import { Stack } from "@mui/material";
-import { userActions } from "Store/user-slice";
 import { useAppDispatch, useAppSelector } from "hooks";
-import { replace } from "formik";
+import { Link, useNavigate } from "react-router-dom";
 import { logoutUserThunk } from "Store/user-actions";
 
 const pages = ["Blog"];

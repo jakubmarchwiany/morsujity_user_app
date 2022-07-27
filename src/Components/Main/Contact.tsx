@@ -1,6 +1,5 @@
-import { Box, Button, ListItem, Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 
-import { Link } from "react-router-dom";
 
 function Contact() {
     return (

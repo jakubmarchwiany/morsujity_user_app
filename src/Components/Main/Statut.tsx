@@ -1,11 +1,11 @@
-import { Box, Button, ListItem, Typography } from "@mui/material";
-
-import { Link } from "react-router-dom";
+import { Box, Typography } from "@mui/material";
 
 function Statut() {
     return (
         <Box mb={30}>
-            <Typography variant="h1" mt={5} textAlign={"center"}>Regulamin</Typography>
+            <Typography variant="h1" mt={5} textAlign={"center"}>
+                Regulamin
+            </Typography>
             <Typography mt={10} mx={10} mb={5}>
                 <p>
                     <strong>REGULAMIN SKLEPU INTERNETOWEGO [nazwa]</strong>
@@ -49,7 +49,9 @@ function Statut() {
                 </p>
                 <p>
                     7.&nbsp;
-                    <strong>Ustawa o szczeg&oacute;lnych warunkach sprzedaży konsumenckiej</strong>{" "}
+                    <strong>
+                        Ustawa o szczeg&oacute;lnych warunkach sprzedaży konsumenckiej
+                    </strong>{" "}
                     &ndash; ustawa z dnia 27 lipca 2002 r. o szczeg&oacute;lnych warunkach sprzedaży
                     konsumenckiej oraz o zmianie Kodeksu Cywilnego (Dz. U. Nr 141, poz. 1176 ze
                     zm.);

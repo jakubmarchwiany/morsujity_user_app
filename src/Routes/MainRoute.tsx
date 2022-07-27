@@ -1,4 +1,4 @@
-import { Navigate, Route } from "react-router-dom";
+import NewPassword from "Components/Main/NewPassword";
 import VerifyEmail from "Components/Main/VerifyEmail";
 import {
     PageBlog,
@@ -8,7 +8,7 @@ import {
     PageStatut,
     PageWelcome,
 } from "Pages/index";
-import NewPassword from "Components/Main/NewPassword";
+import { Route } from "react-router-dom";
 
 export function MainRoute() {
     return [

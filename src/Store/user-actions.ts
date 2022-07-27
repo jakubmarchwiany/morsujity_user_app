@@ -3,9 +3,10 @@ import { uiActions } from "./ui-slice";
 import { AppThunk } from "./index";
 
 let endPoint: string | undefined;
-if (process.env.REACT_APP_ENV == "development")
+if (process.env.REACT_APP_ENV === "development")
     endPoint = process.env.REACT_APP_DEV_SERVER_ENDPOINT;
-if (process.env.REACT_APP_ENV == "production") endPoint = process.env.REACT_APP_PRO_SERVER_ENDPOINT;
+if (process.env.REACT_APP_ENV === "production")
+    endPoint = process.env.REACT_APP_PRO_SERVER_ENDPOINT;
 
 export const registerUserThunk =
     (pseudonym: string, email: string, password: string, navigate: any): AppThunk =>
