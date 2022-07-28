@@ -58,6 +58,7 @@ function Navbar() {
 
     const logoutHandler = () => {
         dispatch(logoutUserThunk(token!, navigate));
+        window.localStorage.setItem("logout", Date.now().toString());
     };
 
     const syncLogout = useCallback(
