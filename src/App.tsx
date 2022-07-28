@@ -10,6 +10,7 @@ import Notification from "Layouts/Notification";
 
 import Ads from "Layouts/Ads";
 import { MainRoute } from "Routes/MainRoute";
+import { UserRoute } from "Routes/UserRoute";
 import { useCallback, useEffect } from "react";
 import { getUserDataThunk } from "Store/user-actions";
 import { useAppDispatch } from "hooks";
@@ -45,7 +46,8 @@ function App() {
                 <Box flex={9}>
                     <Routes>
                         {MainRoute()}
-                        {/* {UserRoute()} */}
+                        {UserRoute()}
+
                         <Route path="*" element={<PageNotFound />} />
                     </Routes>
                 </Box>
