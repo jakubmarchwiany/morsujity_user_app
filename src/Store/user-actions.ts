@@ -1,6 +1,7 @@
 import { userActions } from "./user-slice";
 import { uiActions } from "./ui-slice";
 import { AppThunk } from "./index";
+import Cookies from "js-cookie";
 
 let endPoint: string | undefined;
 if (process.env.REACT_APP_ENV === "development")
@@ -181,4 +182,34 @@ export const resetPasswordThunk =
                 AppDispatch(uiActions.showErrorDefNotify());
                 navigate("/login", { replace: true });
             });
+    };
+
+export const getUserDataThunk =
+    (navigate: any): AppThunk =>
+    async (AppDispatch) => {
+        if (Cookies.get("Authorization"))
+            fetch(endPoint + `/user/getData`, {
+                method: "POST",
+                credentials: "include",
+                headers: { "Content-Type": "application/json" },
+            })
+                .then(async (response) => {
+                    const data = await response.json();
+                    if (response.ok) {
+                        AppDispatch(
+                            userActions.login({
+                                token: Cookies.get("Authorization")!,
+                                data: data.user,
+                            })
+                        );
+                        navigate("user/home", { replace: true });
+                    } else {
+                        AppDispatch(uiActions.showErrorNotification(data.message));
+                        navigate("/login", { replace: true });
+                    }
+                })
+                .catch(() => {
+                    AppDispatch(uiActions.showErrorDefNotify());
+                    navigate("/login", { replace: true });
+                });
     };
