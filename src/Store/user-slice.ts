@@ -1,25 +1,25 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-interface AccountType {
-    userType: String;
+interface DataType {
+    type: String;
     email: String;
     pseudonym: String;
 }
 
 interface UserState {
     token: null | string;
-    account: null | AccountType;
+    data: null | DataType;
 }
 
 // Define the initial state using that type
 const initialState: UserState = {
     token: null,
-    account: null,
+    data: null,
 };
 
 interface LoginPayload {
     token: string;
-    account: AccountType;
+    data: DataType;
 }
 
 const userSlice = createSlice({
@@ -28,11 +28,11 @@ const userSlice = createSlice({
     reducers: {
         login(state, action: PayloadAction<LoginPayload>) {
             state.token = action.payload.token;
-            state.account = action.payload.account;
+            state.data = action.payload.data;
         },
         logout(state) {
             state.token = null;
-            state.account = null;
+            state.data = null;
         },
     },
 });

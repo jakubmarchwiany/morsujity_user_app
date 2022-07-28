@@ -36,7 +36,7 @@ function Navbar() {
     const navigate = useNavigate();
 
     const token = useAppSelector((state) => state.user.token);
-    const isUserLogin = useAppSelector((state) => state.user.account);
+    const isUserLogin = useAppSelector((state) => state.user.data);
 
     const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
         setAnchorElNav(event.currentTarget);

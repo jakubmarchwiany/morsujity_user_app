@@ -55,7 +55,7 @@ export const loginUserThunk =
                             message: data.message,
                         })
                     );
-                    AppDispatch(userActions.login({ token: data.token, account: data.user }));
+                    AppDispatch(userActions.login({ token: data.token, data: data.user }));
 
                     navigate("/user/home", { replace: true });
                 } else {
