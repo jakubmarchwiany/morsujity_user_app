@@ -1,7 +1,7 @@
-import { userActions } from "./user-slice";
-import { uiActions } from "./ui-slice";
-import { AppThunk } from "./index";
 import Cookies from "js-cookie";
+import { AppThunk } from "./index";
+import { uiActions } from "./ui-slice";
+import { userActions } from "./user-slice";
 
 let endPoint: string | undefined;
 if (process.env.REACT_APP_ENV === "development")

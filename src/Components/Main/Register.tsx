@@ -1,12 +1,12 @@
-import { Container, Typography, Box, Grid, Link, TextField, Button, Avatar } from "@mui/material";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
+import { Avatar, Box, Button, Container, Grid, Link, TextField, Typography } from "@mui/material";
 
 import { Link as NavLink, useNavigate } from "react-router-dom";
 
 import { useFormik } from "formik";
-import * as Yup from "yup";
 import { useAppDispatch } from "hooks";
 import { registerUserThunk } from "Store/user-actions";
+import * as Yup from "yup";
 
 const INITIAL_FORM_STATE = {
     nickname: "",

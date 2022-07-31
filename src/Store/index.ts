@@ -1,6 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { ThunkAction } from "redux-thunk";
 import { AnyAction } from "redux";
+import { ThunkAction } from "redux-thunk";
 
 import uiSlice from "./ui-slice";
 import userSlice from "./user-slice";

@@ -1,6 +1,5 @@
 import { Box, Typography } from "@mui/material";
 
-
 function Contact() {
     return (
         <Box mb={30} textAlign="center">

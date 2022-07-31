@@ -1,4 +1,4 @@
-export {};
+export { };
 
 declare module "*.jpg" {
     export default "" as string;

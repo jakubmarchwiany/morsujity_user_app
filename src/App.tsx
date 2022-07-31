@@ -8,12 +8,12 @@ import Navbar from "Layouts/Navbar";
 import Navigator from "Layouts/Navigator";
 import Notification from "Layouts/Notification";
 
+import { useAppDispatch } from "hooks";
 import Ads from "Layouts/Ads";
+import { useCallback, useEffect } from "react";
 import { MainRoute } from "Routes/MainRoute";
 import { UserRoute } from "Routes/UserRoute";
-import { useCallback, useEffect } from "react";
 import { getUserDataThunk } from "Store/user-actions";
-import { useAppDispatch } from "hooks";
 
 function App() {
     const dispatch = useAppDispatch();
