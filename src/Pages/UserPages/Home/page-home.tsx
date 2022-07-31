@@ -1,14 +1,14 @@
-import React from "react";
-import NotFound from "Layouts/PageNotFound";
 import { Grid } from "@mui/material";
+import Home from "Components/User/Home";
 import { Helmet } from "react-helmet-async";
 
-function PageNotFound() {
+function PageHome() {
     return (
         <>
             <Helmet>
-                <title>Strona nie znaleziona</title>
-                <meta name="description" content="Strona nie znaleziona." />
+                <title>Morsujity</title>
+                <meta name="description" content="Strona główna Morsujity." />
+                <link rel="canonical" href="/user/home" />
             </Helmet>
             <Grid
                 height={"100%"}
@@ -17,10 +17,10 @@ function PageNotFound() {
                 justifyContent="center"
                 alignItems="center"
             >
-                <NotFound />
+                <Home />
             </Grid>
         </>
     );
 }
 
-export default PageNotFound;
+export default PageHome;

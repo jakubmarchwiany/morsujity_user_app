@@ -1,12 +1,12 @@
 import { Container, Typography, Box, Grid, Link, TextField, Button, Avatar } from "@mui/material";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 
-import { Link as NavLink } from "react-router-dom";
+import { Link as NavLink, useNavigate } from "react-router-dom";
 
 import { useFormik } from "formik";
 import * as Yup from "yup";
-
-const endPoint: string | undefined = process.env.REACT_APP_API_ENDPOINT;
+import { useAppDispatch } from "hooks";
+import { registerUserThunk } from "Store/user-actions";
 
 const INITIAL_FORM_STATE = {
     nickname: "",
@@ -17,10 +17,6 @@ const INITIAL_FORM_STATE = {
 };
 
 const FORM_VALIDATION = Yup.object().shape({
-    nickname: Yup.string()
-        .required("Wymagane")
-        .min(3, "Co najmniej 3 znaki")
-        .max(15, "Maksymalnie 15 znaków"),
     pseudonym: Yup.string()
         .required("Wymagane")
         .min(3, "Ksywka za krótka - Co najmniej 3 znaki")
@@ -40,30 +36,16 @@ const FORM_VALIDATION = Yup.object().shape({
 });
 
 function Register() {
+    const dispatch = useAppDispatch();
+    const navigate = useNavigate();
+
     const formik = useFormik({
         initialValues: INITIAL_FORM_STATE,
         validationSchema: FORM_VALIDATION,
-        onSubmit: (values) => {
-            console.log("submit");
-            test();
+        onSubmit: ({ pseudonym, email, password }) => {
+            dispatch(registerUserThunk(pseudonym, email, password, navigate));
         },
     });
-
-    const test = () => {
-        fetch(endPoint + `/register`, {
-            method: "GET",
-            credentials: "include",
-            headers: {
-                "Content-Type": "application/json",
-            },
-        }).then(async (response) => {
-            if (response.ok) {
-                const data = await response.json();
-                console.log(data);
-            } else {
-            }
-        });
-    };
 
     return (
         <Container component="main" maxWidth="xs">
@@ -86,25 +68,10 @@ function Register() {
                     <Grid container spacing={2}>
                         <Grid item xs={12}>
                             <TextField
-                                name="nickname"
-                                id="nickname"
-                                autoComplete="nickname"
-                                label="Nazwa użytkownika"
-                                fullWidth
-                                autoFocus
-                                value={formik.values.nickname}
-                                onChange={formik.handleChange}
-                                onBlur={formik.handleBlur}
-                                error={formik.touched.nickname && Boolean(formik.errors.nickname)}
-                                helperText={formik.touched.nickname && formik.errors.nickname}
-                            />
-                        </Grid>
-
-                        <Grid item xs={12}>
-                            <TextField
                                 name="pseudonym"
                                 id="pseudonym"
                                 label="Ksywka (pseudonim, Imię i Nazwisko)"
+                                variant="standard"
                                 fullWidth
                                 value={formik.values.pseudonym}
                                 onChange={formik.handleChange}
@@ -119,6 +86,7 @@ function Register() {
                                 id="email"
                                 autoComplete="email"
                                 label="Adres email"
+                                variant="standard"
                                 fullWidth
                                 value={formik.values.email}
                                 onChange={formik.handleChange}
@@ -134,6 +102,7 @@ function Register() {
                                 id="password"
                                 autoComplete="new-password"
                                 label="Hasło"
+                                variant="standard"
                                 fullWidth
                                 value={formik.values.password}
                                 onChange={formik.handleChange}
@@ -149,6 +118,7 @@ function Register() {
                                 id="confirmPassword"
                                 autoComplete="new-password"
                                 label="Potwierdzenie Hasła"
+                                variant="standard"
                                 fullWidth
                                 value={formik.values.confirmPassword}
                                 onChange={formik.handleChange}
@@ -171,9 +141,6 @@ function Register() {
                         disabled={!(formik.isValid && formik.dirty)}
                     >
                         Rejestruj
-                    </Button>
-                    <Button onClick={test} fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
-                        siema
                     </Button>
                     <Grid container justifyContent="flex-start">
                         <Grid item>

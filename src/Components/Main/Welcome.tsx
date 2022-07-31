@@ -1,4 +1,4 @@
-import { Box, Button, Typography } from "@mui/material";
+import { Box, Button, Stack, Typography } from "@mui/material";
 
 import { Link } from "react-router-dom";
 
@@ -11,9 +11,15 @@ function Welcome() {
                 Morsuj dołączaj do grup. <br />
                 Zdobywaj kolejne rangi!
             </Typography>
-            <Button component={Link} variant="contained" to={"/search"}>
-                Szukaj grup
-            </Button>
+            <Stack spacing={2}>
+                <Button component={Link} variant="contained" to={"/blog"}>
+                    Blog
+                </Button>
+
+                <Button component={Link} variant="contained" to={"/search"}>
+                    Szukaj grup
+                </Button>
+            </Stack>
         </Box>
     );
 }

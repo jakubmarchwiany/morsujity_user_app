@@ -1,14 +1,14 @@
-import React from "react";
-import NotFound from "Layouts/PageNotFound";
 import { Grid } from "@mui/material";
+import Statut from "Components/Main/Statut";
 import { Helmet } from "react-helmet-async";
 
-function PageNotFound() {
+function PageStatut() {
     return (
         <>
             <Helmet>
-                <title>Strona nie znaleziona</title>
-                <meta name="description" content="Strona nie znaleziona." />
+                <title>Morsujity</title>
+                <meta name="description" content="Regulamin korzystania z serwisu. Zasady" />
+                <link rel="canonical" href="/statut" />
             </Helmet>
             <Grid
                 height={"100%"}
@@ -17,10 +17,10 @@ function PageNotFound() {
                 justifyContent="center"
                 alignItems="center"
             >
-                <NotFound />
+                <Statut />
             </Grid>
         </>
     );
 }
 
-export default PageNotFound;
+export default PageStatut;
