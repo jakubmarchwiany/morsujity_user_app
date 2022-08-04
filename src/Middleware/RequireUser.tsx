@@ -5,7 +5,7 @@ import { useAppSelector } from "hooks";
 function RequireUser() {
     const user = useAppSelector((state) => state.user);
     if (user) {
-        if (user.token && user.data?.type === "user") {
+        if (user.token && user.type === "user") {
             return <Outlet />;
         }
     }

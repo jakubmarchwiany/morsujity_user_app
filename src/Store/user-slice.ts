@@ -8,14 +8,22 @@ interface DataType {
 }
 
 interface UserState {
+    logIn: boolean;
     token: null | string;
-    data: null | DataType;
+    type: null | string;
+    email: null | string;
+    pseudonym: null | string;
+    image: null | string;
 }
 
 // Define the initial state using that type
 const initialState: UserState = {
+    logIn: false,
     token: null,
-    data: null,
+    type: null,
+    email: null,
+    pseudonym: null,
+    image: null,
 };
 
 interface LoginPayload {
@@ -28,12 +36,20 @@ const userSlice = createSlice({
     initialState,
     reducers: {
         login(state, action: PayloadAction<LoginPayload>) {
+            state.logIn = true;
             state.token = action.payload.token;
-            state.data = action.payload.data;
+            state.type = action.payload.data.type;
+            state.email = action.payload.data.email;
+            state.pseudonym = action.payload.data.pseudonym;
+            state.image = action.payload.data.image;
         },
         logout(state) {
+            state.logIn = false;
             state.token = null;
-            state.data = null;
+            state.type = null;
+            state.email = null;
+            state.pseudonym = null;
+            state.image = null;
         },
     },
 });
