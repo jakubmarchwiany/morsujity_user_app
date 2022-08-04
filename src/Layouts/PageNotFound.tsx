@@ -4,9 +4,9 @@ import { Link } from "react-router-dom";
 
 function NotFound() {
     return (
-        <Box mb={30} textAlign="center">
+        <Box mt={15} textAlign="center">
             <Typography variant="h4">Ta strona jest niedostępna</Typography>
-            <Typography mt={10} mb={5} mx={30} variant="h5">
+            <Typography mt={10} mb={5} variant="h5">
                 Link może być uszkodzony lub strona mogła zostać usunięta.
                 <br /> Sprawdź, czy link, który próbujesz otworzyć, jest poprawny.
             </Typography>

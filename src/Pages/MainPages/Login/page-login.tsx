@@ -10,9 +10,8 @@ function PageLogin() {
                 <meta name="description" content="Zaloguj się do swojego konta." />
                 <link rel="canonical" href="/login" />
             </Helmet>
-            <Grid height={"100%"} container direction="column" alignItems="center">
-                <Login />
-            </Grid>
+
+            <Login />
         </>
     );
 }

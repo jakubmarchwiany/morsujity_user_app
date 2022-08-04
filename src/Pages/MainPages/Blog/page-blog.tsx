@@ -13,15 +13,8 @@ function PageBlog() {
                 />
                 <link rel="canonical" href="/blog" />
             </Helmet>
-            <Grid
-                height={"100%"}
-                container
-                direction="column"
-                justifyContent="center"
-                alignItems="center"
-            >
-                <Post1 />
-            </Grid>
+
+            <Post1 />
         </>
     );
 }

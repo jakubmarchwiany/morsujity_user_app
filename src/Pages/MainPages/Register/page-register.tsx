@@ -13,9 +13,8 @@ function PageRegister() {
                 />
                 <link rel="canonical" href="/register" />
             </Helmet>
-            <Grid height={"100%"} container direction="column" alignItems="center">
-                <Register />
-            </Grid>
+
+            <Register />
         </>
     );
 }

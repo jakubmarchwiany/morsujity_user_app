@@ -13,15 +13,8 @@ function PageContact() {
                 />
                 <link rel="canonical" href="/contact" />
             </Helmet>
-            <Grid
-                height={"100%"}
-                container
-                direction="column"
-                justifyContent="center"
-                alignItems="center"
-            >
-                <Contact />
-            </Grid>
+
+            <Contact />
         </>
     );
 }

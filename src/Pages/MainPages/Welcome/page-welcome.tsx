@@ -15,15 +15,8 @@ function PageWelcome() {
                 />
                 <link rel="canonical" href="/" />
             </Helmet>
-            <Grid
-                height={"100%"}
-                container
-                direction="column"
-                justifyContent="center"
-                alignItems="center"
-            >
-                <Welcome />
-            </Grid>
+
+            <Welcome />
         </>
     );
 }

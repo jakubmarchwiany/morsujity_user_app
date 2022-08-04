@@ -10,15 +10,8 @@ function PageStatut() {
                 <meta name="description" content="Regulamin korzystania z serwisu. Zasady" />
                 <link rel="canonical" href="/statut" />
             </Helmet>
-            <Grid
-                height={"100%"}
-                container
-                direction="column"
-                justifyContent="center"
-                alignItems="center"
-            >
-                <Statut />
-            </Grid>
+
+            <Statut />
         </>
     );
 }

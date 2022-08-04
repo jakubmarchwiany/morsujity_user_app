@@ -9,15 +9,8 @@ function PageNotFound() {
                 <title>Strona nie znaleziona</title>
                 <meta name="description" content="Strona nie znaleziona." />
             </Helmet>
-            <Grid
-                height={"100%"}
-                container
-                direction="column"
-                justifyContent="center"
-                alignItems="center"
-            >
-                <NotFound />
-            </Grid>
+
+            <NotFound />
         </>
     );
 }
