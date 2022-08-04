@@ -57,9 +57,18 @@ function Register() {
                     alignItems: "center",
                 }}
             >
-                <Avatar sx={{ mb: 4, bgcolor: "primary.600", width: "70px", height: "70px" }}>
+                <Avatar
+                    sx={{
+                        mb: 4,
+                        bgcolor: "primary.main",
+                        width: "70px",
+                        height: "70px",
+                        color: "white",
+                    }}
+                >
                     <LockOutlinedIcon fontSize="large" />
                 </Avatar>
+
                 <Typography component="h1" variant="h4">
                     Stwórz konto
                 </Typography>
@@ -144,7 +153,12 @@ function Register() {
                     </Button>
                     <Grid container justifyContent="flex-start">
                         <Grid item>
-                            <Link component={NavLink} to="/login" variant="body2">
+                            <Link
+                                component={NavLink}
+                                to="/login"
+                                variant="body2"
+                                color="text.color"
+                            >
                                 Masz już konto?
                             </Link>
                         </Grid>

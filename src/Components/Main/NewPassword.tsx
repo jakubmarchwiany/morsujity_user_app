@@ -58,7 +58,7 @@ function NewPassword() {
                 component={"form"}
                 noValidate
                 onSubmit={formik.handleSubmit}
-                bgcolor={"white"}
+                bgcolor={"background.paper"}
                 color={"text.primary"}
                 px={5}
                 borderRadius={2}

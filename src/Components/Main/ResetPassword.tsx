@@ -6,8 +6,6 @@ import { useState } from "react";
 import { reqResetPasswordThunk } from "Store/user-actions";
 import * as Yup from "yup";
 
-const inputStyle = { WebkitBoxShadow: "0 0 0 1000px #e4f5fe inset" };
-
 const StyledModal = styled(Modal)({
     display: "flex",
     alignItems: "center",
@@ -43,6 +41,7 @@ function ResetPassword() {
                 variant="body2"
                 underline="hover"
                 type="button"
+                color="text.color"
                 onClick={() => setOpen(true)}
             >
                 Zapomniałeś hasło?
@@ -57,12 +56,12 @@ function ResetPassword() {
                     component={"form"}
                     noValidate
                     onSubmit={formik.handleSubmit}
-                    bgcolor={"white"}
+                    bgcolor={"background.paper"}
                     color={"text.primary"}
                     px={5}
                     borderRadius={2}
                 >
-                    <Typography variant="h5" textAlign="center" mt={3}>
+                    <Typography variant="h5" textAlign="center" mt={3} color="text.primary">
                         Resetowanie Hasła
                     </Typography>
                     <Typography mt={3}>
@@ -76,7 +75,6 @@ function ResetPassword() {
                         label="Email"
                         fullWidth
                         sx={{ mt: 3 }}
-                        inputProps={{ style: inputStyle }}
                         value={formik.values.email}
                         onChange={formik.handleChange}
                         onBlur={formik.handleBlur}
