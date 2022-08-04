@@ -1,12 +1,12 @@
-import { Container, Typography, Box, Grid, Link, TextField, Button, Avatar } from "@mui/material";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
+import { Avatar, Box, Button, Container, Grid, Link, TextField, Typography } from "@mui/material";
 
 import { Link as NavLink, useNavigate } from "react-router-dom";
 
 import { useFormik } from "formik";
-import * as Yup from "yup";
 import { useAppDispatch } from "hooks";
 import { registerUserThunk } from "Store/user-actions";
+import * as Yup from "yup";
 
 const INITIAL_FORM_STATE = {
     nickname: "",
@@ -57,9 +57,18 @@ function Register() {
                     alignItems: "center",
                 }}
             >
-                <Avatar sx={{ mb: 4, bgcolor: "primary.600", width: "70px", height: "70px" }}>
+                <Avatar
+                    sx={{
+                        mb: 4,
+                        bgcolor: "primary.main",
+                        width: "70px",
+                        height: "70px",
+                        color: "white",
+                    }}
+                >
                     <LockOutlinedIcon fontSize="large" />
                 </Avatar>
+
                 <Typography component="h1" variant="h4">
                     Stwórz konto
                 </Typography>
@@ -144,7 +153,12 @@ function Register() {
                     </Button>
                     <Grid container justifyContent="flex-start">
                         <Grid item>
-                            <Link component={NavLink} to="/login" variant="body2">
+                            <Link
+                                component={NavLink}
+                                to="/login"
+                                variant="body2"
+                                color="text.color"
+                            >
                                 Masz już konto?
                             </Link>
                         </Grid>

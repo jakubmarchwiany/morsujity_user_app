@@ -1,105 +1,72 @@
 import AcUnitIcon from "@mui/icons-material/AcUnit";
 import MenuIcon from "@mui/icons-material/Menu";
 import AppBar from "@mui/material/AppBar";
-import Avatar from "@mui/material/Avatar";
 import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
 import Menu from "@mui/material/Menu";
-import MenuItem from "@mui/material/MenuItem";
 import Toolbar from "@mui/material/Toolbar";
 import Tooltip from "@mui/material/Tooltip";
 import Typography from "@mui/material/Typography";
-import { useCallback, useEffect, useState } from "react";
+import { useState } from "react";
 
-import { Stack } from "@mui/material";
+import { List, ListItem, ListItemButton, ListItemIcon, Stack, Switch } from "@mui/material";
+import GuestButtonList from "Components/Main/GuestButtonList";
+import UserButtonList from "Components/User/UserButtonList";
 import { useAppDispatch, useAppSelector } from "hooks";
 import { Link, useNavigate } from "react-router-dom";
 import { logoutUserThunk } from "Store/user-actions";
-
-const pages = ["Blog"];
-const UserSettings = [
-    { name: "Konto", id: "account" },
-    { name: "Wyloguj", id: "logout" },
-];
-const settings = [
-    { name: "Rejestracja", to: "register" },
-    { name: "Logowanie", to: "login" },
-];
+import { DarkMode, LightMode } from "@mui/icons-material";
+import { appActions } from "Store/app-slice";
 
 function Navbar() {
-    // const [isUserLogin, setIsUserLogin] = useState<boolean>(false);
-    const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
-    const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
+    const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
+    const open = Boolean(anchorEl);
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
 
-    const token = useAppSelector((state) => state.user.token);
-    const isUserLogin = useAppSelector((state) => state.user.data);
+    const user = useAppSelector((state) => state.user);
+    const mode = useAppSelector((state) => state.app.mode);
 
-    const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
-        setAnchorElNav(event.currentTarget);
+    const handleClick = (event: React.MouseEvent<HTMLElement>) => {
+        setAnchorEl(event.currentTarget);
     };
-    const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
-        setAnchorElUser(event.currentTarget);
-    };
-
-    const handleCloseNavMenu = (event: React.MouseEvent<HTMLElement>) => {
-        setAnchorElNav(null);
-    };
-
-    const handleCloseUserMenu = (event: React.MouseEvent<HTMLElement>) => {
-        const id = event.currentTarget.id;
-        if (id === "logout") logoutHandler();
-
-        setAnchorElUser(null);
+    const handleClose = () => {
+        setAnchorEl(null);
     };
 
     const logoutHandler = () => {
-        dispatch(logoutUserThunk(token!, navigate));
+        dispatch(logoutUserThunk(user.token!, navigate));
         window.localStorage.setItem("logout", Date.now().toString());
     };
 
-    const syncLogout = useCallback(
-        (event: any) => {
-            if (event.key === "logout") {
-                // If using react-router-dom, you may call history.push("/")
-                navigate("/", { replace: true });
-                window.location.reload();
-            }
-        },
-        [navigate]
-    );
-
-    useEffect(() => {
-        window.addEventListener("storage", syncLogout);
-        return () => {
-            window.removeEventListener("storage", syncLogout);
-        };
-    }, [syncLogout]);
+    // useEffect(() => {
+    //     if (window.innerWidth < 1200) {
+    //         console.log(window.innerWidth);
+    //     }
+    // }, []);
 
     return (
         <AppBar
             elevation={0}
             position="static"
-            sx={{ top: "auto", bottom: 0, textAlign: "center" }}
+            sx={{ top: "auto", bottom: 0, textAlign: "center", bgcolor: "primary.main" }}
         >
-            <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
+            <Toolbar sx={{ display: "flex", justifyContent: "space-between", minHeight: "64px" }}>
                 <Stack direction="row">
                     <AcUnitIcon
                         fontSize="large"
-                        sx={{ display: { xs: "none", md: "flex" }, ml: 3, mr: 2 }}
+                        sx={{ display: { xs: "none", lg: "flex" }, ml: 3, mr: 2 }}
                     />
                     <Typography
                         variant="h6"
                         noWrap
                         component={Link}
-                        to="/"
+                        to={user.logIn ? user.type + "/dashboard" : "/"}
                         sx={{
                             mr: 2,
-                            pt: 0.3,
-                            display: { xs: "none", md: "flex" },
+
+                            display: { xs: "none", lg: "flex" },
                             fontFamily: "monospace",
                             fontWeight: 700,
                             letterSpacing: ".15rem",
@@ -111,144 +78,85 @@ function Navbar() {
                     </Typography>
                 </Stack>
 
-                <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
-                    <IconButton
-                        size="large"
-                        aria-label="account of current user"
-                        aria-controls="menu-appbar"
-                        aria-haspopup="true"
-                        onClick={handleOpenNavMenu}
-                        color="inherit"
-                    >
-                        <MenuIcon />
-                    </IconButton>
+                <Box sx={{ flexGrow: 1, display: { xs: "flex", lg: "none" } }}>
+                    <Tooltip title="Nawigator">
+                        <IconButton
+                            id="demo-positioned-button"
+                            aria-expanded={open ? "true" : undefined}
+                            aria-controls={open ? "demo-positioned-menu" : undefined}
+                            aria-haspopup="true"
+                            onClick={handleClick}
+                            color="inherit"
+                        >
+                            <MenuIcon />
+                        </IconButton>
+                    </Tooltip>
                     <Menu
-                        id="menu-appbar"
-                        anchorEl={anchorElNav}
+                        id="demo-positioned-menu"
+                        aria-labelledby="demo-positioned-button"
+                        anchorEl={anchorEl}
+                        open={open}
+                        onClose={handleClose}
                         anchorOrigin={{
-                            vertical: "bottom",
+                            vertical: "top",
                             horizontal: "left",
                         }}
-                        keepMounted
                         transformOrigin={{
                             vertical: "top",
                             horizontal: "left",
                         }}
-                        open={Boolean(anchorElNav)}
-                        onClose={handleCloseNavMenu}
-                        sx={{
-                            display: { xs: "block", md: "none" },
-                        }}
                     >
-                        {isUserLogin
-                            ? pages.map((page) => (
-                                  <MenuItem key={page} onClick={handleCloseNavMenu}>
-                                      <Typography textAlign="center">{page}</Typography>
-                                  </MenuItem>
-                              ))
-                            : settings.map((page) => (
-                                  <MenuItem
-                                      style={{ margin: "0px" }}
-                                      key={page.name}
-                                      component={Link}
-                                      to={`/${page.to}`}
-                                      onClick={handleCloseNavMenu}
-                                  >
-                                      {page.name}
-                                  </MenuItem>
-                              ))}
+                        <List sx={{ minWidth: "300px" }}>
+                            {user.logIn ? (
+                                <UserButtonList
+                                    logIn={user.logIn}
+                                    type={user.type!}
+                                    userImage={user.image!}
+                                    close={handleClose}
+                                    logoutHandler={logoutHandler}
+                                />
+                            ) : (
+                                <GuestButtonList logIn={user.logIn} close={handleClose} />
+                            )}
+                            <ListItem disablePadding>
+                                <ListItemButton>
+                                    <ListItemIcon>
+                                        {mode === "dark" ? (
+                                            <DarkMode fontSize="large" />
+                                        ) : (
+                                            <LightMode fontSize="large" />
+                                        )}
+                                    </ListItemIcon>
+                                    <Switch onChange={() => dispatch(appActions.switchMode())} />
+                                </ListItemButton>
+                            </ListItem>
+                        </List>
                     </Menu>
                 </Box>
 
-                <AcUnitIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} />
-                <Typography
-                    variant="h6"
-                    noWrap
-                    component={Link}
-                    to="/"
-                    sx={{
-                        mr: 2,
-                        flexGrow: 1,
-                        display: { xs: "flex", md: "none" },
-                        fontFamily: "monospace",
-                        fontWeight: 700,
-                        letterSpacing: ".15rem",
-                        color: "inherit",
-                        textDecoration: "none",
-                    }}
-                >
-                    Morsujity
-                </Typography>
+                <Stack direction="row" p={0} m={0}>
+                    <AcUnitIcon
+                        sx={{ display: { xs: "flex", lg: "none" }, mr: 1, alignSelf: "center" }}
+                    />
+                    <Typography
+                        variant="h6"
+                        noWrap
+                        component={Link}
+                        to={user.logIn ? user.type + "/dashboard" : "/"}
+                        sx={{
+                            display: { xs: "flex", lg: "none" },
+                            fontFamily: "monospace",
+                            fontWeight: 700,
+                            letterSpacing: ".15rem",
+                            color: "inherit",
+                            textDecoration: "none",
+                        }}
+                    >
+                        Morsujity
+                    </Typography>
+                </Stack>
 
-                {/* <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-                    {pages.map((page) => (
-                        <Button
-                            key={page}
-                            onClick={handleCloseNavMenu}
-                            sx={{ mt: 0.5, color: "white", display: "block" }}
-                        >
-                            {page}
-                        </Button>
-                    ))}
-                </Box> */}
-
-                {isUserLogin ? (
-                    <Box sx={{ flexGrow: 0, mr: { xs: 1, md: 3 } }}>
-                        <Tooltip title="Otwórz ustawienia">
-                            <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
-                            </IconButton>
-                        </Tooltip>
-                        <Menu
-                            sx={{ mt: "45px" }}
-                            id="menu-appbar"
-                            anchorEl={anchorElUser}
-                            anchorOrigin={{
-                                vertical: "top",
-                                horizontal: "right",
-                            }}
-                            keepMounted
-                            transformOrigin={{
-                                vertical: "top",
-                                horizontal: "right",
-                            }}
-                            open={Boolean(anchorElUser)}
-                            onClose={handleCloseUserMenu}
-                        >
-                            {UserSettings.map((setting) => (
-                                <MenuItem
-                                    id={`${setting.id}`}
-                                    key={setting.name}
-                                    onClick={handleCloseUserMenu}
-                                >
-                                    <Typography textAlign="center" minWidth="100px">
-                                        {setting.name}
-                                    </Typography>
-                                </MenuItem>
-                            ))}
-                        </Menu>
-                    </Box>
-                ) : (
-                    <Box sx={{ display: { xs: "none", md: "flex" }, mr: 3 }}>
-                        {settings.map((page) => (
-                            <Button
-                                component={Link}
-                                to={`/${page.to}`}
-                                key={page.name}
-                                onClick={handleCloseNavMenu}
-                                sx={{ mt: 0.5, color: "white", display: "block" }}
-                            >
-                                {page.name}
-                                {/* <Link
-                                    style={{ textDecoration: "none", color: "white" }}
-                                    to={`/${page.to}`}
-                                >
-                                    {page.name}
-                                </Link> */}
-                            </Button>
-                        ))}
-                    </Box>
-                )}
+                <Box sx={{ flexGrow: 1, display: { xs: "flex", lg: "none" } }} />
             </Toolbar>
         </AppBar>
     );

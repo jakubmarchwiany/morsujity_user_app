@@ -1,6 +1,5 @@
-import React from "react";
-import NotFound from "Layouts/PageNotFound";
 import { Grid } from "@mui/material";
+import NotFound from "Layouts/PageNotFound";
 import { Helmet } from "react-helmet-async";
 
 function PageNotFound() {

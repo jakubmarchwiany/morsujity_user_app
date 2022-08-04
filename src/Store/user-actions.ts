@@ -1,7 +1,7 @@
-import { userActions } from "./user-slice";
-import { uiActions } from "./ui-slice";
-import { AppThunk } from "./index";
 import Cookies from "js-cookie";
+import { AppThunk } from "./index";
+import { uiActions } from "./ui-slice";
+import { userActions } from "./user-slice";
 
 let endPoint: string | undefined;
 if (process.env.REACT_APP_ENV === "development")
@@ -58,7 +58,7 @@ export const loginUserThunk =
                     );
                     AppDispatch(userActions.login({ token: data.token, data: data.user }));
 
-                    navigate("/user/home", { replace: true });
+                    navigate(`/${data.user.type}/dashboard`, { replace: true });
                 } else {
                     AppDispatch(uiActions.showErrorNotification(data.message));
                 }
@@ -86,7 +86,7 @@ export const logoutUserThunk =
                             message: data.message,
                         })
                     );
-                    navigate("/home", { replace: true });
+                    navigate("/", { replace: true });
                 } else {
                     AppDispatch(uiActions.showErrorNotification(data.message));
                 }
@@ -202,7 +202,14 @@ export const getUserDataThunk =
                                 data: data.user,
                             })
                         );
-                        navigate("user/home", { replace: true });
+                        AppDispatch(
+                            uiActions.showNotification({
+                                type: "success",
+                                message: "Udało się zalogować",
+                            })
+                        );
+
+                        navigate(`/${data.user.type}/dashboard`, { replace: true });
                     } else {
                         AppDispatch(uiActions.showErrorNotification(data.message));
                         navigate("/login", { replace: true });

@@ -1,4 +1,5 @@
 import LockOpenOutlinedIcon from "@mui/icons-material/LockOpenOutlined";
+
 import { Avatar, Box, Button, Container, Grid, Link, TextField, Typography } from "@mui/material";
 import { useFormik } from "formik";
 import { useAppDispatch } from "hooks";
@@ -8,8 +9,6 @@ import { loginUserThunk } from "Store/user-actions";
 
 import * as Yup from "yup";
 import ResetPassword from "./ResetPassword";
-
-const inputStyle = { WebkitBoxShadow: "0 0 0 1000px #e4f5fe inset" };
 
 const INITIAL_FORM_STATE = {
     email: "",
@@ -48,9 +47,18 @@ function Login() {
                     alignItems: "center",
                 }}
             >
-                <Avatar sx={{ mb: 4, bgcolor: "primary.600", width: "70px", height: "70px" }}>
+                <Avatar
+                    sx={{
+                        mb: 4,
+                        bgcolor: "primary.main",
+                        width: "70px",
+                        height: "70px",
+                        color: "white",
+                    }}
+                >
                     <LockOpenOutlinedIcon fontSize="large" />
                 </Avatar>
+
                 <Typography component="h1" variant="h4">
                     Zaloguj się
                 </Typography>
@@ -62,7 +70,6 @@ function Login() {
                         label="Adres email"
                         fullWidth
                         margin="normal"
-                        inputProps={{ style: inputStyle }}
                         value={formik.values.email}
                         onChange={formik.handleChange}
                         onBlur={formik.handleBlur}
@@ -78,7 +85,6 @@ function Login() {
                         label="Hasło"
                         fullWidth
                         margin="normal"
-                        inputProps={{ style: inputStyle }}
                         value={formik.values.password}
                         onChange={formik.handleChange}
                         onBlur={formik.handleBlur}
@@ -108,6 +114,7 @@ function Login() {
                                 to="/register"
                                 variant="body2"
                                 underline="hover"
+                                color="text.color"
                             >
                                 Nie masz konta?
                             </Link>
