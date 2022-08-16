@@ -1,9 +1,8 @@
 import { PaletteMode } from "@mui/material";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import Cookies from "js-cookie";
 
 interface AppState {
-    mode: PaletteMode;
+    mode: PaletteMode | null;
 }
 
 const initialState: AppState = {
@@ -18,17 +17,15 @@ const appSlice = createSlice({
             if (state.mode === "light") state.mode = "dark";
             else state.mode = "light";
 
-            Cookies.set("mode", state.mode);
+            localStorage.setItem("mode", JSON.stringify(state.mode));
         },
         setMode(state, action: PayloadAction<string>) {
             if (action.payload === "light" || action.payload === "dark")
                 state.mode = action.payload;
+
+            localStorage.setItem("mode", JSON.stringify(state.mode));
         },
     },
 });
-
 export const appActions = appSlice.actions;
-
-// export const selectToken = (state: RootState) => state.user.token
-
 export default appSlice.reducer;
