@@ -1,49 +1,45 @@
-import MuiAlert, { AlertProps } from "@mui/material/Alert";
 import Snackbar from "@mui/material/Snackbar";
-import React from "react";
+import React, { memo } from "react";
 
-import { useAppSelector } from "hooks";
+import Alert from "@mui/material/Alert";
+import Slide, { SlideProps } from "@mui/material/Slide";
+
+import { useAppSelector } from "hooks/redux";
 import { useDispatch } from "react-redux";
 import { uiActions } from "Store/ui-slice";
 
-const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(props, ref) {
-    return <MuiAlert elevation={15} ref={ref} variant="filled" {...props} />;
-});
+type TransitionProps = Omit<SlideProps, "direction">;
+function TransitionLeft(props: TransitionProps) {
+    return <Slide {...props} direction="right" mountOnEnter unmountOnExit />;
+}
 
 function Notification() {
     const dispatch = useDispatch();
-
     const notify = useAppSelector((state) => state.ui);
 
     const handleClose = (event?: React.SyntheticEvent | Event, reason?: string) => {
-        if (reason === "clickaway") {
-            return;
-        }
+        if (reason === "clickaway") return;
+
         dispatch(uiActions.hideNotification());
     };
 
     return (
-        <>
-            {notify.open ? (
-                <Snackbar
-                    anchorOrigin={{
-                        vertical: "bottom",
-                        horizontal: "left",
-                    }}
-                    sx={{ mb: 5 }}
-                    open={true}
-                    autoHideDuration={notify.duration}
-                    onClose={handleClose}
-                >
-                    <Alert onClose={handleClose} severity={notify.type} sx={{ width: "100%" }}>
-                        {notify.message}
-                    </Alert>
-                </Snackbar>
-            ) : (
-                ""
-            )}
-        </>
+        <Snackbar
+            anchorOrigin={{
+                vertical: "bottom",
+                horizontal: "left",
+            }}
+            sx={{ mb: 4 }}
+            open={notify.open}
+            autoHideDuration={notify.duration}
+            onClose={handleClose}
+            TransitionComponent={TransitionLeft}
+            transitionDuration={notify.open ? 600 : 300}
+        >
+            <Alert variant="outlined" onClose={handleClose} severity={notify.type}>
+                {notify.message}
+            </Alert>
+        </Snackbar>
     );
 }
-
-export default Notification;
+export default memo(Notification);
