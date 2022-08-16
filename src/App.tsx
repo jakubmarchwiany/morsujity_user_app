@@ -1,36 +1,28 @@
-import { Box, createTheme, Stack, ThemeProvider } from "@mui/material";
-import { PageNotFound } from "Pages/index";
-import { Route, Routes, useNavigate } from "react-router-dom";
-
+import { Box, createTheme, responsiveFontSizes, Stack, ThemeProvider } from "@mui/material";
 import "Assets/App.css";
+import { getDesignTokens } from "Assets/theme";
+import { useAppSelector } from "hooks/redux";
+import useSetMode from "hooks/use-set-mode";
+import Ads from "Layouts/Ads";
 import Footer from "Layouts/Footer";
 import Navbar from "Layouts/Navbar";
+
 import Navigator from "Layouts/Navigator";
 import Notification from "Layouts/Notification";
-
-import { getDesignTokens } from "Assets/theme";
-import { useAppDispatch, useAppSelector } from "hooks";
-import Cookies from "js-cookie";
-import Ads from "Layouts/Ads";
+import { PageNotFound } from "Pages/index";
 import { useCallback, useEffect, useMemo } from "react";
+import { Route, Routes } from "react-router-dom";
 import { MainRoute } from "Routes/MainRoute";
 import { UserRoute } from "Routes/UserRoute";
-import { appActions } from "Store/app-slice";
-import { getUserDataThunk } from "Store/user-actions";
 
 function App() {
-    const mode = useAppSelector((state) => state.app.mode);
-    const theme = useMemo(() => createTheme(getDesignTokens(mode)), [mode]);
+    useSetMode();
+    const appMode = useAppSelector((state) => state.app.mode);
 
-    const dispatch = useAppDispatch();
-    const navigate = useNavigate();
-
-    useEffect(() => {
-        dispatch(getUserDataThunk(navigate));
-        if (Cookies.get("mode")) dispatch(appActions.setMode(Cookies.get("mode")!));
-
-        // eslint-disable-next-line
-    }, []);
+    const theme = useMemo(
+        () => responsiveFontSizes(createTheme(getDesignTokens(appMode!))),
+        [appMode]
+    );
 
     const syncLogout = useCallback((event: any) => {
         if (event.key === "logout") {
@@ -45,27 +37,34 @@ function App() {
         };
     }, [syncLogout]);
 
+    console.log("app render");
+
     return (
         <ThemeProvider theme={theme}>
             <Stack sx={{ minHeight: "100vh" }}>
                 <Navbar />
-                <Notification />
                 <Stack sx={{ flex: 1 }} direction="row" justifyContent="space-between">
-                    <Navigator />
+                    <Box
+                        flex={2}
+                        sx={{ display: { xs: "none", lg: "block" } }}
+                        bgcolor={"background.default"}
+                        color={"text.primary"}
+                    >
+                        <Navigator navbar={false} />
+                    </Box>
                     <Box flex={9} bgcolor={"background.paper"} color={"text.primary"}>
                         <Routes>
                             {MainRoute()}
                             {UserRoute()}
-
                             <Route path="*" element={<PageNotFound />} />
                         </Routes>
                     </Box>
                     <Ads />
                 </Stack>
+                <Notification />
                 <Footer />
             </Stack>
         </ThemeProvider>
     );
 }
-
 export default App;
