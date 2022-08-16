@@ -1,10 +1,5 @@
 * {
-    font-family: "Roboto", sans-serif;
     margin: 0;
-}
-
-#root {
-    min-height: 100vh;
 }
 
 .textFieldPassword > div > input {
@@ -15,6 +10,6 @@ input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
 input:-webkit-autofill:active {
-   -webkit-transition-delay: 9999s;
-   transition-delay: 9999s;
+    -webkit-transition-delay: 9999s;
+    transition-delay: 9999s;
 }
