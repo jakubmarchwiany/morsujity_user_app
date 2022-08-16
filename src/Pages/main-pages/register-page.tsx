@@ -1,4 +1,4 @@
-import Register from "Components/auth/Register";
+import Register from "components/auth/Register";
 import { Helmet } from "react-helmet-async";
 
 function PageRegister() {

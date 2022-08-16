@@ -77,5 +77,4 @@ function Post1() {
         </Box>
     );
 }
-
 export default Post1;

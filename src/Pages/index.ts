@@ -1,14 +1,13 @@
-import PageBlog from "./MainPages/Blog/page-blog";
-import PageContact from "./MainPages/Contact/page-contact";
-import PageLogin from "./MainPages/Login/page-login";
-import PageNotFound from "./MainPages/PageNotFound/page-not-found";
-import PageRegister from "./MainPages/Register/page-register";
-import PageStatut from "./MainPages/Statut/page-statut";
-import PageWelcome from "./MainPages/Welcome/page-welcome";
+import PageBlog from "./main-pages/blog-page";
+import PageContact from "./main-pages/contact-page";
+import PageLogin from "./main-pages/login-page";
+import PageNotFound from "./main-pages/not-found-page";
+import PageRegister from "./main-pages/register-page";
+import PageStatut from "./main-pages/statut-page";
+import PageWelcome from "./main-pages/welcome-page";
 
-
-import PageDashboard from "./UserPages/Dashboard/page-dashboard";
-import PageSettings from "./UserPages/Settings/page-settings";
+import PageDashboard from "./user-pages/dashboard-page";
+import PageSettings from "./user-pages/settings-page";
 
 
 export {

@@ -1,16 +1,16 @@
-import NewPassword from "Components/auth/NewPassword";
-import VerifyEmail from "Components/auth/VerifyEmail";
+import NewPassword from "components/auth/NewPassword";
+import VerifyEmail from "components/auth/VerifyEmail";
 import {
     PageBlog,
     PageContact,
     PageLogin,
     PageRegister,
     PageStatut,
-    PageWelcome,
-} from "Pages/index";
+    PageWelcome
+} from "pages/index";
 import { Route } from "react-router-dom";
 
-export function MainRoute() {
+export function mainRoute() {
     return [
         <Route key="/" path="/" element={<PageWelcome />} />,
         <Route key="/login" path="/login" element={<PageLogin />} />,

@@ -12,5 +12,4 @@ function Welcome() {
         </Box>
     );
 }
-
 export default Welcome;

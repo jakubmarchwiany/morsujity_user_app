@@ -1,19 +1,19 @@
 import { Box, createTheme, responsiveFontSizes, Stack, ThemeProvider } from "@mui/material";
-import "Assets/App.css";
-import { getDesignTokens } from "Assets/theme";
+import "assets/app.css";
+import { getDesignTokens } from "assets/theme";
 import { useAppSelector } from "hooks/redux";
 import useSetMode from "hooks/use-set-mode";
-import Ads from "Layouts/Ads";
-import Footer from "Layouts/Footer";
-import Navbar from "Layouts/Navbar";
+import Ads from "layouts/Ads";
+import Footer from "layouts/Footer";
+import Navbar from "layouts/Navbar";
 
-import Navigator from "Layouts/Navigator";
-import Notification from "Layouts/Notification";
-import { PageNotFound } from "Pages/index";
+import Navigator from "layouts/Navigator";
+import Notification from "layouts/Notification";
+import { PageNotFound } from "pages/index";
 import { useCallback, useEffect, useMemo } from "react";
 import { Route, Routes } from "react-router-dom";
-import { MainRoute } from "Routes/MainRoute";
-import { UserRoute } from "Routes/UserRoute";
+import { mainRoute } from "routes/main-route";
+import { userRoute } from "routes/user-route";
 
 function App() {
     useSetMode();
@@ -54,8 +54,8 @@ function App() {
                     </Box>
                     <Box flex={9} bgcolor={"background.paper"} color={"text.primary"}>
                         <Routes>
-                            {MainRoute()}
-                            {UserRoute()}
+                            {mainRoute()}
+                            {userRoute()}
                             <Route path="*" element={<PageNotFound />} />
                         </Routes>
                     </Box>

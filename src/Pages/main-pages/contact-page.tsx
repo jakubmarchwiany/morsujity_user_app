@@ -1,4 +1,4 @@
-import Contact from "Components/Main/Contact";
+import Contact from "components/main/Contact";
 import { Helmet } from "react-helmet-async";
 
 function PageContact() {

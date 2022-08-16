@@ -1,4 +1,4 @@
-import Settings from "Components/User/Settings";
+import Settings from "components/user/Settings";
 import { Helmet } from "react-helmet-async";
 
 function PageSettings() {

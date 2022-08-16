@@ -1,4 +1,4 @@
-import NotFound from "Layouts/PageNotFound";
+import NotFound from "components/main/NotFound";
 import { Helmet } from "react-helmet-async";
 
 function PageNotFound() {

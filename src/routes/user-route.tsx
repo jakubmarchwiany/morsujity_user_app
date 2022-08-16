@@ -1,8 +1,8 @@
-import RequireUser from "Middleware/RequireUser";
-import { PageDashboard, PageSettings } from "Pages/index";
+import RequireUser from "middleware/RequireUser";
+import { PageDashboard, PageSettings } from "pages/index";
 import { Route } from "react-router-dom";
 
-export function UserRoute() {
+export function userRoute() {
     return [
         <Route key="/user" path="/user" element={<RequireUser />}>
             <Route key="dashboard" path="dashboard" element={<PageDashboard />} />

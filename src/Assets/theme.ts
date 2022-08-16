@@ -1,10 +1,9 @@
-import { PaletteMode } from "@mui/material";
-
 import "@fontsource/montserrat/300.css";
 import "@fontsource/montserrat/400.css";
 import "@fontsource/montserrat/500.css";
 import "@fontsource/montserrat/600.css";
 import "@fontsource/montserrat/700.css";
+import { PaletteMode } from "@mui/material";
 
 // declare module "@mui/material/styles" {
 //     interface Palette {

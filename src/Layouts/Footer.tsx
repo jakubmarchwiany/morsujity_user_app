@@ -21,5 +21,4 @@ function Footer() {
         </Stack>
     );
 }
-
 export default Footer;

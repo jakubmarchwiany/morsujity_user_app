@@ -3,7 +3,7 @@ import { Box } from "@mui/system";
 import { useFormik } from "formik";
 import { useAppDispatch } from "hooks/redux";
 import { useState } from "react";
-import { requestResetPassword } from "Store/auth-actions";
+import { requestResetPassword } from "store/auth-actions";
 import * as Yup from "yup";
 
 const StyledModal = styled(Modal)({
@@ -95,5 +95,4 @@ function ResetPassword() {
         </>
     );
 }
-
 export default ResetPassword;

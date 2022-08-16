@@ -1,7 +1,7 @@
 import { useAppDispatch } from "hooks/redux";
 import { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { verifyEmail } from "Store/auth-actions";
+import { verifyEmail } from "store/auth-actions";
 
 function VerifyEmail() {
     let { token } = useParams();
@@ -15,5 +15,4 @@ function VerifyEmail() {
 
     return <></>;
 }
-
 export default VerifyEmail;

@@ -7,17 +7,17 @@ import {
     Switch,
     Theme,
     useMediaQuery,
-    useTheme,
+    useTheme
 } from "@mui/material";
-import GuestButtonList from "Components/Main/GuestButtonList";
-import UserButtonList from "Components/User/UserButtonList";
+import GuestButtonList from "components/main/GuestButtonList";
+import UserButtonList from "components/user/UserButtonList";
 import { useAppDispatch, useAppSelector } from "hooks/redux";
 import Cookies from "js-cookie";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { appActions } from "Store/app-slice";
-import { logoutUser } from "Store/auth-actions";
-import { getUserData } from "Store/user-actions";
+import { appActions } from "store/app-slice";
+import { logoutUser } from "store/auth-actions";
+import { getUserData } from "store/user-actions";
 
 interface NavigatorProps {
     navbar: boolean;

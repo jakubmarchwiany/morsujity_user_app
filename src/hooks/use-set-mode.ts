@@ -1,7 +1,7 @@
-import { useEffect } from "react";
 import { useMediaQuery } from "@mui/material";
-import { appActions } from "Store/app-slice";
 import { useAppDispatch } from "hooks/redux";
+import { useEffect } from "react";
+import { appActions } from "store/app-slice";
 
 export default function useSetMode() {
     const dispatch = useAppDispatch();

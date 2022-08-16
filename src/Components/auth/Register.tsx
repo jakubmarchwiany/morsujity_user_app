@@ -1,11 +1,9 @@
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import { Avatar, Box, Button, Container, Grid, Link, TextField, Typography } from "@mui/material";
-
-import { Link as NavLink, useNavigate } from "react-router-dom";
-
 import { useFormik } from "formik";
 import { useAppDispatch } from "hooks/redux";
-import { registerUser } from "Store/auth-actions";
+import { Link as NavLink, useNavigate } from "react-router-dom";
+import { registerUser } from "store/auth-actions";
 import * as Yup from "yup";
 
 const INITIAL_FORM_STATE = {
@@ -172,5 +170,4 @@ function Register() {
         </Container>
     );
 }
-
 export default Register;

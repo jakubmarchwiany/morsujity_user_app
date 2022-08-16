@@ -16,5 +16,4 @@ function NotFound() {
         </Box>
     );
 }
-
 export default NotFound;

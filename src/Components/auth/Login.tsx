@@ -1,14 +1,12 @@
 import LockOpenOutlinedIcon from "@mui/icons-material/LockOpenOutlined";
-
 import { Avatar, Box, Button, Container, Grid, Link, TextField, Typography } from "@mui/material";
+import ResetPassword from "components/auth/ResetPassword";
 import { useFormik } from "formik";
 import { useAppDispatch } from "hooks/redux";
 import { useEffect } from "react";
 import { Link as NavLink, useNavigate } from "react-router-dom";
-import { loginUser } from "Store/auth-actions";
-
+import { loginUser } from "store/auth-actions";
 import * as Yup from "yup";
-import ResetPassword from "Components/auth/ResetPassword";
 
 const INITIAL_FORM_STATE = {
     email: "",
@@ -127,5 +125,4 @@ function Login() {
         </Container>
     );
 }
-
 export default Login;

@@ -17,5 +17,4 @@ function Contact() {
         </Box>
     );
 }
-
 export default Contact;

@@ -1,4 +1,4 @@
-import Welcome from "Components/Main/Welcome";
+import Welcome from "components/main/Welcome";
 import { Helmet } from "react-helmet-async";
 
 function PageWelcome() {

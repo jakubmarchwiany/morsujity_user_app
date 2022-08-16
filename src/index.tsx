@@ -3,7 +3,7 @@ import ReactDOM from "react-dom/client";
 import { HelmetProvider } from "react-helmet-async";
 import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
-import store from "Store/index";
+import store from "store/index";
 import App from "./App";
 import validateEnv from "./utils/validate-env";
 

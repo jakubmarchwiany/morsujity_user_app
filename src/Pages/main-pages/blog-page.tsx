@@ -1,4 +1,4 @@
-import Post1 from "Components/Posts/Post1";
+import Post1 from "components/posts/Post1";
 import { Helmet } from "react-helmet-async";
 
 function PageBlog() {

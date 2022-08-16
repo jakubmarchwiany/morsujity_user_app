@@ -1,12 +1,10 @@
-import Snackbar from "@mui/material/Snackbar";
-import React, { memo } from "react";
-
 import Alert from "@mui/material/Alert";
 import Slide, { SlideProps } from "@mui/material/Slide";
-
+import Snackbar from "@mui/material/Snackbar";
 import { useAppSelector } from "hooks/redux";
+import React, { memo } from "react";
 import { useDispatch } from "react-redux";
-import { uiActions } from "Store/ui-slice";
+import { uiActions } from "store/ui-slice";
 
 type TransitionProps = Omit<SlideProps, "direction">;
 function TransitionLeft(props: TransitionProps) {

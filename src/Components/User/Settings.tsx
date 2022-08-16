@@ -1,7 +1,7 @@
 import { Box, Button, Grid, TextField, Typography } from "@mui/material";
 import { useFormik } from "formik";
 import { useAppDispatch, useAppSelector } from "hooks/redux";
-import { changeUserPassword, changeUserPseudonym } from "Store/user-actions";
+import { changeUserPassword, changeUserPseudonym } from "store/user-actions";
 import * as Yup from "yup";
 
 const PSEUDONYM_FORM_STATE = {
@@ -217,5 +217,4 @@ function Settings() {
         </Box>
     );
 }
-
 export default Settings;

@@ -1,4 +1,4 @@
-import Home from "Components/User/Home";
+import Home from "components/user/Home";
 import { Helmet } from "react-helmet-async";
 
 function PageDashboard() {

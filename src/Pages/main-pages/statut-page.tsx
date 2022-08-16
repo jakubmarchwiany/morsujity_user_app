@@ -1,4 +1,4 @@
-import Statut from "Components/Main/Statut";
+import Statut from "components/main/Statut";
 import { Helmet } from "react-helmet-async";
 
 function PageStatut() {

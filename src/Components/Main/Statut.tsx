@@ -470,5 +470,4 @@ function Statut() {
         </Box>
     );
 }
-
 export default Statut;

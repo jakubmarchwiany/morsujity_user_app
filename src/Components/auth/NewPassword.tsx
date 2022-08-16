@@ -3,8 +3,7 @@ import { useFormik } from "formik";
 import { useAppDispatch } from "hooks/redux";
 import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { resetPassword } from "Store/auth-actions";
-
+import { resetPassword } from "store/auth-actions";
 import * as Yup from "yup";
 
 const StyledModal = styled(Modal)({
@@ -113,5 +112,4 @@ function NewPassword() {
         </StyledModal>
     );
 }
-
 export default NewPassword;
