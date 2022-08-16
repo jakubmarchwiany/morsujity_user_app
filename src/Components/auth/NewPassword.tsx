@@ -1,9 +1,9 @@
 import { Box, Button, Modal, styled, TextField, Typography } from "@mui/material";
 import { useFormik } from "formik";
-import { useAppDispatch } from "hooks";
+import { useAppDispatch } from "hooks/redux";
 import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { resetPasswordThunk } from "Store/user-actions";
+import { resetPassword } from "Store/auth-actions";
 
 import * as Yup from "yup";
 
@@ -43,7 +43,7 @@ function NewPassword() {
         initialValues: INITIAL_FORM_STATE,
         validationSchema: FORM_VALIDATION,
         onSubmit: ({ password }) => {
-            dispatch(resetPasswordThunk(password, token!, navigate));
+            dispatch(resetPassword(password, token!, navigate));
             setOpen(false);
         },
     });

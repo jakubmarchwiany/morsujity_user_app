@@ -4,8 +4,8 @@ import { Avatar, Box, Button, Container, Grid, Link, TextField, Typography } fro
 import { Link as NavLink, useNavigate } from "react-router-dom";
 
 import { useFormik } from "formik";
-import { useAppDispatch } from "hooks";
-import { registerUserThunk } from "Store/user-actions";
+import { useAppDispatch } from "hooks/redux";
+import { registerUser } from "Store/auth-actions";
 import * as Yup from "yup";
 
 const INITIAL_FORM_STATE = {
@@ -43,7 +43,7 @@ function Register() {
         initialValues: INITIAL_FORM_STATE,
         validationSchema: FORM_VALIDATION,
         onSubmit: ({ pseudonym, email, password }) => {
-            dispatch(registerUserThunk(pseudonym, email, password, navigate));
+            dispatch(registerUser(pseudonym, email, password, navigate));
         },
     });
 
@@ -80,7 +80,8 @@ function Register() {
                                 name="pseudonym"
                                 id="pseudonym"
                                 label="Ksywka (pseudonim, Imię i Nazwisko)"
-                                variant="standard"
+                                variant="outlined"
+                                color="secondary"
                                 fullWidth
                                 value={formik.values.pseudonym}
                                 onChange={formik.handleChange}
@@ -95,7 +96,8 @@ function Register() {
                                 id="email"
                                 autoComplete="email"
                                 label="Adres email"
-                                variant="standard"
+                                variant="outlined"
+                                color="secondary"
                                 fullWidth
                                 value={formik.values.email}
                                 onChange={formik.handleChange}
@@ -111,7 +113,8 @@ function Register() {
                                 id="password"
                                 autoComplete="new-password"
                                 label="Hasło"
-                                variant="standard"
+                                variant="outlined"
+                                color="secondary"
                                 fullWidth
                                 value={formik.values.password}
                                 onChange={formik.handleChange}
@@ -127,7 +130,8 @@ function Register() {
                                 id="confirmPassword"
                                 autoComplete="new-password"
                                 label="Potwierdzenie Hasła"
-                                variant="standard"
+                                variant="outlined"
+                                color="secondary"
                                 fullWidth
                                 value={formik.values.confirmPassword}
                                 onChange={formik.handleChange}

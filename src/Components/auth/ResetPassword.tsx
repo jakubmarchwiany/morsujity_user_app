@@ -1,9 +1,9 @@
 import { Button, Link, Modal, styled, TextField, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import { useFormik } from "formik";
-import { useAppDispatch } from "hooks";
+import { useAppDispatch } from "hooks/redux";
 import { useState } from "react";
-import { reqResetPasswordThunk } from "Store/user-actions";
+import { requestResetPassword } from "Store/auth-actions";
 import * as Yup from "yup";
 
 const StyledModal = styled(Modal)({
@@ -29,7 +29,7 @@ function ResetPassword() {
         initialValues: INITIAL_FORM_STATE,
         validationSchema: FORM_VALIDATION,
         onSubmit: ({ email }) => {
-            dispatch(reqResetPasswordThunk(email));
+            dispatch(requestResetPassword(email));
             setOpen(false);
         },
     });

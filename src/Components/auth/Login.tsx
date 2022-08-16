@@ -2,13 +2,13 @@ import LockOpenOutlinedIcon from "@mui/icons-material/LockOpenOutlined";
 
 import { Avatar, Box, Button, Container, Grid, Link, TextField, Typography } from "@mui/material";
 import { useFormik } from "formik";
-import { useAppDispatch } from "hooks";
+import { useAppDispatch } from "hooks/redux";
 import { useEffect } from "react";
 import { Link as NavLink, useNavigate } from "react-router-dom";
-import { loginUserThunk } from "Store/user-actions";
+import { loginUser } from "Store/auth-actions";
 
 import * as Yup from "yup";
-import ResetPassword from "./ResetPassword";
+import ResetPassword from "Components/auth/ResetPassword";
 
 const INITIAL_FORM_STATE = {
     email: "",
@@ -28,7 +28,7 @@ function Login() {
         initialValues: INITIAL_FORM_STATE,
         validationSchema: FORM_VALIDATION,
         onSubmit: ({ email, password }) => {
-            dispatch(loginUserThunk(email, password, navigate));
+            dispatch(loginUser(email, password, navigate));
         },
     });
 
@@ -68,8 +68,9 @@ function Login() {
                         id="email"
                         autoComplete="email"
                         label="Adres email"
-                        fullWidth
                         margin="normal"
+                        fullWidth
+                        color="secondary"
                         value={formik.values.email}
                         onChange={formik.handleChange}
                         onBlur={formik.handleBlur}
@@ -84,6 +85,7 @@ function Login() {
                         autoComplete="current-password"
                         label="Hasło"
                         fullWidth
+                        color="secondary"
                         margin="normal"
                         value={formik.values.password}
                         onChange={formik.handleChange}
