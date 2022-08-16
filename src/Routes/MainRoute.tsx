@@ -1,5 +1,5 @@
-import NewPassword from "Components/Main/NewPassword";
-import VerifyEmail from "Components/Main/VerifyEmail";
+import NewPassword from "Components/auth/NewPassword";
+import VerifyEmail from "Components/auth/VerifyEmail";
 import {
     PageBlog,
     PageContact,
