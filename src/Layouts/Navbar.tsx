@@ -1,5 +1,6 @@
 import AcUnitIcon from "@mui/icons-material/AcUnit";
 import MenuIcon from "@mui/icons-material/Menu";
+import { Stack } from "@mui/material";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import IconButton from "@mui/material/IconButton";
@@ -7,26 +8,17 @@ import Menu from "@mui/material/Menu";
 import Toolbar from "@mui/material/Toolbar";
 import Tooltip from "@mui/material/Tooltip";
 import Typography from "@mui/material/Typography";
-import { useState } from "react";
-
-import { List, ListItem, ListItemButton, ListItemIcon, Stack, Switch } from "@mui/material";
-import GuestButtonList from "Components/Main/GuestButtonList";
-import UserButtonList from "Components/User/UserButtonList";
-import { useAppDispatch, useAppSelector } from "hooks";
-import { Link, useNavigate } from "react-router-dom";
-import { logoutUserThunk } from "Store/user-actions";
-import { DarkMode, LightMode } from "@mui/icons-material";
-import { appActions } from "Store/app-slice";
+import { useAppSelector } from "hooks/redux";
+import { memo, useState } from "react";
+import { Link } from "react-router-dom";
+import Navigator from "./Navigator";
 
 function Navbar() {
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-
     const open = Boolean(anchorEl);
-    const dispatch = useAppDispatch();
-    const navigate = useNavigate();
 
-    const user = useAppSelector((state) => state.user);
-    const mode = useAppSelector((state) => state.app.mode);
+    const logIn = useAppSelector((state) => state.user.logIn);
+    const type = useAppSelector((state) => state.user.type);
 
     const handleClick = (event: React.MouseEvent<HTMLElement>) => {
         setAnchorEl(event.currentTarget);
@@ -34,17 +26,6 @@ function Navbar() {
     const handleClose = () => {
         setAnchorEl(null);
     };
-
-    const logoutHandler = () => {
-        dispatch(logoutUserThunk(user.token!, navigate));
-        window.localStorage.setItem("logout", Date.now().toString());
-    };
-
-    // useEffect(() => {
-    //     if (window.innerWidth < 1200) {
-    //         console.log(window.innerWidth);
-    //     }
-    // }, []);
 
     return (
         <AppBar
@@ -62,7 +43,7 @@ function Navbar() {
                         variant="h6"
                         noWrap
                         component={Link}
-                        to={user.logIn ? user.type + "/dashboard" : "/"}
+                        to={logIn ? type + "/dashboard" : "/"}
                         sx={{
                             mr: 2,
 
@@ -106,31 +87,7 @@ function Navbar() {
                             horizontal: "left",
                         }}
                     >
-                        <List sx={{ minWidth: "300px" }}>
-                            {user.logIn ? (
-                                <UserButtonList
-                                    logIn={user.logIn}
-                                    type={user.type!}
-                                    userImage={user.image!}
-                                    close={handleClose}
-                                    logoutHandler={logoutHandler}
-                                />
-                            ) : (
-                                <GuestButtonList logIn={user.logIn} close={handleClose} />
-                            )}
-                            <ListItem disablePadding>
-                                <ListItemButton>
-                                    <ListItemIcon>
-                                        {mode === "dark" ? (
-                                            <DarkMode fontSize="large" />
-                                        ) : (
-                                            <LightMode fontSize="large" />
-                                        )}
-                                    </ListItemIcon>
-                                    <Switch onChange={() => dispatch(appActions.switchMode())} />
-                                </ListItemButton>
-                            </ListItem>
-                        </List>
+                        <Navigator onClose={handleClose} navbar={true} />
                     </Menu>
                 </Box>
 
@@ -142,7 +99,7 @@ function Navbar() {
                         variant="h6"
                         noWrap
                         component={Link}
-                        to={user.logIn ? user.type + "/dashboard" : "/"}
+                        to={logIn ? type + "/dashboard" : "/"}
                         sx={{
                             display: { xs: "flex", lg: "none" },
                             fontFamily: "monospace",
@@ -161,4 +118,4 @@ function Navbar() {
         </AppBar>
     );
 }
-export default Navbar;
+export default memo(Navbar);
