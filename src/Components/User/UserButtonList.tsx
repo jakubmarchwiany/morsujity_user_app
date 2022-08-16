@@ -144,5 +144,4 @@ function UserButtonList({ type, userImage, logoutHandler, close }: Props) {
         </>
     );
 }
-
 export default UserButtonList;

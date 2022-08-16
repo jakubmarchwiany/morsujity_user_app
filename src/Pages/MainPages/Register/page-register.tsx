@@ -1,5 +1,4 @@
-import { Grid } from "@mui/material";
-import Register from "Components/Main/Register";
+import Register from "Components/auth/Register";
 import { Helmet } from "react-helmet-async";
 
 function PageRegister() {

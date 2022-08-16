@@ -1,6 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-// Define a type for the slice state
 type UiState = {
     open: boolean;
     type: "success" | "info" | "warning" | "error";
@@ -8,7 +7,6 @@ type UiState = {
     duration: number;
 };
 
-// Define the initial state using that type
 const initialState: UiState = {
     open: false,
     type: "success",
@@ -50,7 +48,5 @@ const uiSlice = createSlice({
         },
     },
 });
-
 export const uiActions = uiSlice.actions;
-
 export default uiSlice.reducer;

@@ -7,7 +7,7 @@ import {
     Info,
     Login,
     Storefront,
-    Web,
+    Web
 } from "@mui/icons-material";
 import {
     Collapse,
@@ -15,10 +15,10 @@ import {
     ListItem,
     ListItemButton,
     ListItemIcon,
-    ListItemText,
+    ListItemText
 } from "@mui/material";
-import { Link } from "react-router-dom";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 interface Props {
     logIn: boolean;
@@ -116,5 +116,4 @@ function GuestButtonList({ close }: Props) {
         </>
     );
 }
-
 export default GuestButtonList;

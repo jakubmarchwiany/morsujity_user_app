@@ -1,6 +1,6 @@
 import { Navigate, Outlet } from "react-router-dom";
 
-import { useAppSelector } from "hooks";
+import { useAppSelector } from "hooks/redux";
 
 function RequireUser() {
     const user = useAppSelector((state) => state.user);
