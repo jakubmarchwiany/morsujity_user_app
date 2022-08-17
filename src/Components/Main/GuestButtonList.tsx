@@ -17,7 +17,7 @@ import {
     ListItemIcon,
     ListItemText
 } from "@mui/material";
-import { useState } from "react";
+import { memo, useState } from "react";
 import { Link } from "react-router-dom";
 
 interface Props {
@@ -116,4 +116,4 @@ function GuestButtonList({ close }: Props) {
         </>
     );
 }
-export default GuestButtonList;
+export default memo(GuestButtonList);
