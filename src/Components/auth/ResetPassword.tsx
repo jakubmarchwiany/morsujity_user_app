@@ -1,5 +1,6 @@
-import { Button, Link, Modal, styled, TextField, Typography } from "@mui/material";
+import { Button, Link, Modal, styled, Typography } from "@mui/material";
 import { Box } from "@mui/system";
+import MyTextField from "components/my/MyTextField";
 import { useFormik } from "formik";
 import { useAppDispatch } from "hooks/redux";
 import { useState } from "react";
@@ -37,11 +38,12 @@ function ResetPassword() {
     return (
         <>
             <Link
+                sx={{ mt: 1 }}
                 component="button"
                 variant="body2"
                 underline="hover"
                 type="button"
-                color="text.color"
+                color="text.secondary"
                 onClick={() => setOpen(true)}
             >
                 Zapomniałeś hasło?
@@ -67,20 +69,8 @@ function ResetPassword() {
                     <Typography mt={3}>
                         Na twój adres mailowy zostanie wysłany link resetujący hasło
                     </Typography>
-                    <TextField
-                        type="email"
-                        name="email"
-                        id="email"
-                        autoComplete="email"
-                        label="Email"
-                        fullWidth
-                        sx={{ mt: 3 }}
-                        value={formik.values.email}
-                        onChange={formik.handleChange}
-                        onBlur={formik.handleBlur}
-                        error={formik.touched.email && Boolean(formik.errors.email)}
-                        helperText={formik.touched.email && formik.errors.email}
-                    />
+
+                    <MyTextField name="email" label="Email" formik={formik} />
                     <Button
                         type="submit"
                         fullWidth

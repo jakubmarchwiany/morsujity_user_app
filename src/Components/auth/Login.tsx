@@ -1,6 +1,7 @@
 import LockOpenOutlinedIcon from "@mui/icons-material/LockOpenOutlined";
-import { Avatar, Box, Button, Container, Grid, Link, TextField, Typography } from "@mui/material";
+import { Avatar, Box, Button, Container, Link, Typography } from "@mui/material";
 import ResetPassword from "components/auth/ResetPassword";
+import MyTextField from "components/my/MyTextField";
 import { useFormik } from "formik";
 import { useAppDispatch } from "hooks/redux";
 import { useEffect } from "react";
@@ -61,65 +62,42 @@ function Login() {
                     Zaloguj się
                 </Typography>
                 <Box component={"form"} noValidate onSubmit={formik.handleSubmit} sx={{ mt: 3 }}>
-                    <TextField
-                        name="email"
-                        id="email"
-                        autoComplete="email"
-                        label="Adres email"
-                        margin="normal"
-                        fullWidth
-                        color="secondary"
-                        value={formik.values.email}
-                        onChange={formik.handleChange}
-                        onBlur={formik.handleBlur}
-                        error={formik.touched.email && Boolean(formik.errors.email)}
-                        helperText={formik.touched.email && formik.errors.email}
-                    />
+                    <MyTextField name="email" label="Adres email" formik={formik} />
 
-                    <TextField
-                        type="password"
+                    <MyTextField
                         name="password"
-                        id="password"
-                        autoComplete="current-password"
+                        type="password"
                         label="Hasło"
-                        fullWidth
-                        color="secondary"
-                        margin="normal"
-                        value={formik.values.password}
-                        onChange={formik.handleChange}
-                        onBlur={formik.handleBlur}
-                        error={formik.touched.password && Boolean(formik.errors.password)}
-                        helperText={formik.touched.password && formik.errors.password}
+                        autoComplete="current-password"
+                        formik={formik}
                     />
 
                     <ResetPassword />
+
+                    <Button
+                        type="submit"
+                        fullWidth
+                        variant="contained"
+                        sx={{ mt: 2, mb: 2 }}
+                        disabled={!(formik.isValid && formik.dirty)}
+                    >
+                        Zaloguj
+                    </Button>
 
                     {/* <FormControlLabel
                         control={<Checkbox value="remember" color="primary" />}
                         label="Pamiętaj mnie"
                     /> */}
-                    <Button
-                        type="submit"
-                        fullWidth
-                        variant="contained"
-                        sx={{ mt: 1, mb: 2 }}
-                        disabled={!(formik.isValid && formik.dirty)}
+
+                    <Link
+                        component={NavLink}
+                        to="/register"
+                        variant="body2"
+                        underline="hover"
+                        color="text.secondary"
                     >
-                        Zaloguj
-                    </Button>
-                    <Grid container justifyContent="flex-start">
-                        <Grid item>
-                            <Link
-                                component={NavLink}
-                                to="/register"
-                                variant="body2"
-                                underline="hover"
-                                color="text.color"
-                            >
-                                Nie masz konta?
-                            </Link>
-                        </Grid>
-                    </Grid>
+                        Nie masz konta?
+                    </Link>
                 </Box>
             </Box>
         </Container>

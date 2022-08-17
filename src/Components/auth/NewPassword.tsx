@@ -1,4 +1,5 @@
-import { Box, Button, Modal, styled, TextField, Typography } from "@mui/material";
+import { Box, Button, Modal, styled, Typography } from "@mui/material";
+import MyTextField from "components/my/MyTextField";
 import { useFormik } from "formik";
 import { useAppDispatch } from "hooks/redux";
 import { useState } from "react";
@@ -66,37 +67,19 @@ function NewPassword() {
                     Nowe Hasło
                 </Typography>
 
-                <TextField
-                    className="textFieldPassword"
-                    type="text"
+                <MyTextField
                     name="password"
-                    id="password"
-                    autoComplete="off"
+                    type="password"
                     label="Hasło"
-                    variant="standard"
-                    fullWidth
-                    value={formik.values.password}
-                    onChange={formik.handleChange}
-                    onBlur={formik.handleBlur}
-                    error={formik.touched.password && Boolean(formik.errors.password)}
-                    helperText={formik.touched.password && formik.errors.password}
+                    autoComplete="new-password"
+                    formik={formik}
                 />
-
-                <TextField
-                    className="textFieldPassword"
-                    type="text"
+                <MyTextField
                     name="confirmPassword"
-                    id="confirmPassword"
-                    autoComplete="off"
+                    type="password"
                     label="Potwierdzenie Hasła"
-                    variant="standard"
-                    sx={{ mt: 1 }}
-                    fullWidth
-                    value={formik.values.confirmPassword}
-                    onChange={formik.handleChange}
-                    onBlur={formik.handleBlur}
-                    error={formik.touched.confirmPassword && Boolean(formik.errors.confirmPassword)}
-                    helperText={formik.touched.confirmPassword && formik.errors.confirmPassword}
+                    autoComplete="new-password"
+                    formik={formik}
                 />
 
                 <Button

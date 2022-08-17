@@ -1,4 +1,5 @@
 import { Box, Button, Grid, TextField, Typography } from "@mui/material";
+import MyTextField from "components/my/MyTextField";
 import { useFormik } from "formik";
 import { useAppDispatch, useAppSelector } from "hooks/redux";
 import { changeUserPassword, changeUserPseudonym } from "store/user-actions";
@@ -75,54 +76,43 @@ function Settings() {
 
     return (
         <Box sx={{ mx: { xs: 5, lg: 15 }, mt: 5 }}>
-            <Typography variant="h4" fontWeight={"bold"} mt={2}>
+            <Typography variant="h5" fontWeight={"bold"} mt={2}>
                 Konto
             </Typography>
-            <Typography variant="h5" fontWeight={"bold"}>
+            <Typography variant="h3" fontWeight={"bold"}>
                 Ustawienia
             </Typography>
             <Box component={"form"} noValidate onSubmit={formikPseudonym.handleSubmit}>
                 <Typography variant="h5" fontWeight={"bold"} mt={2}>
                     Zmiana Ksywki
                 </Typography>
-                <Grid container spacing={2}>
+                <Grid container>
                     <Grid item xs={12} md={5} lg={4}>
-                        <TextField
-                            sx={{ mt: 1 }}
+                        <MyTextField
                             name="pseudonym"
-                            id="pseudonym"
                             label="Ksywka"
-                            variant="outlined"
                             placeholder={pseudonym!}
-                            fullWidth
-                            value={formikPseudonym.values.pseudonym}
-                            onChange={formikPseudonym.handleChange}
-                            onBlur={formikPseudonym.handleBlur}
-                            error={
-                                formikPseudonym.touched.pseudonym &&
-                                Boolean(formikPseudonym.errors.pseudonym)
-                            }
-                            helperText={
-                                formikPseudonym.touched.pseudonym &&
-                                formikPseudonym.errors.pseudonym
-                            }
-                            InputProps={{
-                                endAdornment: (
-                                    <Button
-                                        color="primary"
-                                        type="submit"
-                                        variant="contained"
-                                        size="medium"
-                                        sx={{ px: 3 }}
-                                        disabled={
-                                            !(formikPseudonym.isValid && formikPseudonym.dirty)
-                                        }
-                                    >
-                                        Aktualizuj
-                                    </Button>
-                                ),
-                            }}
+                            formik={formikPseudonym}
                         />
+                    </Grid>
+                    <Grid
+                        item
+                        xs={12}
+                        md={7}
+                        lg={8}
+                        sx={{ display: { xs: "none", md: "flex" } }}
+                    ></Grid>
+                    <Grid item xs={12} md={5} lg={4}>
+                        <Button
+                            color="primary"
+                            type="submit"
+                            variant="contained"
+                            size="medium"
+                            fullWidth
+                            disabled={!(formikPseudonym.isValid && formikPseudonym.dirty)}
+                        >
+                            Aktualizuj
+                        </Button>
                     </Grid>
                 </Grid>
             </Box>
@@ -131,73 +121,35 @@ function Settings() {
                 <Typography variant="h5" fontWeight={"bold"} mt={2}>
                     Zmiana Hasła
                 </Typography>
-                <Grid container spacing={2}>
+                <Grid container>
                     <Grid item xs={12} md={5} lg={4}>
-                        <TextField
-                            sx={{ mt: 1 }}
+                        <MyTextField
                             type="password"
                             name="oldPassword"
-                            id="oldPassword"
-                            autoComplete="new-password"
                             label="Aktualne Hasło"
-                            variant="outlined"
-                            fullWidth
-                            value={formikNewPassword.values.oldPassword}
-                            onChange={formikNewPassword.handleChange}
-                            onBlur={formikNewPassword.handleBlur}
-                            error={
-                                formikNewPassword.touched.oldPassword &&
-                                Boolean(formikNewPassword.errors.oldPassword)
-                            }
-                            helperText={
-                                formikNewPassword.touched.oldPassword &&
-                                formikNewPassword.errors.oldPassword
-                            }
+                            autoComplete="new-password"
+                            formik={formikNewPassword}
                         />
                     </Grid>
+
                     <Grid item md={7} lg={8} sx={{ display: { xs: "none", md: "flex" } }}></Grid>
                     <Grid item xs={12} md={5} lg={4}>
-                        <TextField
+                        <MyTextField
                             type="password"
                             name="newPassword"
-                            id="newPassword"
-                            autoComplete="new-password"
                             label="Nowe Hasło"
-                            variant="outlined"
-                            fullWidth
-                            value={formikNewPassword.values.newPassword}
-                            onChange={formikNewPassword.handleChange}
-                            onBlur={formikNewPassword.handleBlur}
-                            error={
-                                formikNewPassword.touched.newPassword &&
-                                Boolean(formikNewPassword.errors.newPassword)
-                            }
-                            helperText={
-                                formikNewPassword.touched.newPassword &&
-                                formikNewPassword.errors.newPassword
-                            }
+                            autoComplete="new-password"
+                            formik={formikNewPassword}
                         />
                     </Grid>
+
                     <Grid item xs={12} md={5} lg={4}>
-                        <TextField
+                        <MyTextField
                             type="password"
                             name="confirmNewPassword"
-                            id="confirmNewPassword"
-                            autoComplete="new-password"
                             label="Pot. Nowego Hasła"
-                            variant="outlined"
-                            fullWidth
-                            value={formikNewPassword.values.confirmNewPassword}
-                            onChange={formikNewPassword.handleChange}
-                            onBlur={formikNewPassword.handleBlur}
-                            error={
-                                formikNewPassword.touched.confirmNewPassword &&
-                                Boolean(formikNewPassword.errors.confirmNewPassword)
-                            }
-                            helperText={
-                                formikNewPassword.touched.confirmNewPassword &&
-                                formikNewPassword.errors.confirmNewPassword
-                            }
+                            autoComplete="new-password"
+                            formik={formikNewPassword}
                         />
                     </Grid>
                     <Grid item lg={4} sx={{ display: { xs: "none", lg: "flex" } }}></Grid>

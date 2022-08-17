@@ -2,10 +2,6 @@
     margin: 0;
 }
 
-.textFieldPassword > div > input {
-    -webkit-text-security: disc;
-}
-
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,

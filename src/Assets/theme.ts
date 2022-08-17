@@ -5,23 +5,15 @@ import "@fontsource/montserrat/600.css";
 import "@fontsource/montserrat/700.css";
 import { PaletteMode } from "@mui/material";
 
-// declare module "@mui/material/styles" {
-//     interface Palette {
-//         otherColor: Palette["primary"];
-//     }
+declare module "@mui/material/styles" {
+    interface Palette {
+        complementary: Palette["primary"];
+    }
 
-//     // allow configuration using `createTheme`
-//     interface PaletteOptions {
-//         otherColor?: PaletteOptions["primary"];
-//     }
-// }
-
-// // Update the Button's color prop options
-// declare module "@mui/material/Button" {
-//     interface ButtonPropsColorOverrides {
-//         otherColor: true;
-//     }
-// }
+    interface PaletteOptions {
+        complementary?: PaletteOptions["primary"];
+    }
+}
 
 export const getDesignTokens = (mode: PaletteMode) => ({
     palette: {
@@ -33,24 +25,19 @@ export const getDesignTokens = (mode: PaletteMode) => ({
                       main: "#468faf",
                   },
                   secondary: {
-                      main: "#468faf",
+                      main: "#000",
                   },
                   complementary: {
                       main: "#AF6646",
                   },
-                  neutral: {
-                      main: "#66A6C2",
-                  },
                   background: {
                       default: "#fff",
                       paper: "#fafafa",
-                      dark: "#f5f5f5",
                   },
                   divider: "#fff",
                   text: {
                       primary: "#000",
-                      secondary: "#000",
-                      color: "#468faf",
+                      secondary: "#468faf",
                   },
               }
             : {
@@ -64,19 +51,14 @@ export const getDesignTokens = (mode: PaletteMode) => ({
                   complementary: {
                       main: "#693B2C",
                   },
-                  neutral: {
-                      main: "#3B798D",
-                  },
                   background: {
                       default: "#303030",
                       paper: "#424242",
-                      light: "#616161",
                   },
                   divider: "#000",
                   text: {
                       primary: "#fff",
                       secondary: "#fff",
-                      color: "#fff",
                   },
               }),
     },
@@ -91,27 +73,6 @@ export const getDesignTokens = (mode: PaletteMode) => ({
             lg: 1025,
             xl: 1200,
         },
-    },
-    components: {
-        ...(mode === "light"
-            ? {
-                  MuiTextField: {
-                      styleOverrides: {
-                          root: {
-                              input: { backgroundColor: "#f5f5f5" },
-                          },
-                      },
-                  },
-              }
-            : {
-                  MuiTextField: {
-                      styleOverrides: {
-                          root: {
-                              input: { backgroundColor: "#616161" },
-                          },
-                      },
-                  },
-              }),
     },
 });
 

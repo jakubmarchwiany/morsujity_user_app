@@ -1,5 +1,6 @@
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
-import { Avatar, Box, Button, Container, Grid, Link, TextField, Typography } from "@mui/material";
+import { Avatar, Box, Button, Container, Link, Typography } from "@mui/material";
+import MyTextField from "components/my/MyTextField";
 import { useFormik } from "formik";
 import { useAppDispatch } from "hooks/redux";
 import { Link as NavLink, useNavigate } from "react-router-dom";
@@ -72,78 +73,30 @@ function Register() {
                 </Typography>
 
                 <Box component={"form"} noValidate onSubmit={formik.handleSubmit} sx={{ mt: 3 }}>
-                    <Grid container spacing={2}>
-                        <Grid item xs={12}>
-                            <TextField
-                                name="pseudonym"
-                                id="pseudonym"
-                                label="Ksywka (pseudonim, Imię i Nazwisko)"
-                                variant="outlined"
-                                color="secondary"
-                                fullWidth
-                                value={formik.values.pseudonym}
-                                onChange={formik.handleChange}
-                                onBlur={formik.handleBlur}
-                                error={formik.touched.pseudonym && Boolean(formik.errors.pseudonym)}
-                                helperText={formik.touched.pseudonym && formik.errors.pseudonym}
-                            />
-                        </Grid>
-                        <Grid item xs={12}>
-                            <TextField
-                                name="email"
-                                id="email"
-                                autoComplete="email"
-                                label="Adres email"
-                                variant="outlined"
-                                color="secondary"
-                                fullWidth
-                                value={formik.values.email}
-                                onChange={formik.handleChange}
-                                onBlur={formik.handleBlur}
-                                error={formik.touched.email && Boolean(formik.errors.email)}
-                                helperText={formik.touched.email && formik.errors.email}
-                            />
-                        </Grid>
-                        <Grid item xs={12}>
-                            <TextField
-                                type="password"
-                                name="password"
-                                id="password"
-                                autoComplete="new-password"
-                                label="Hasło"
-                                variant="outlined"
-                                color="secondary"
-                                fullWidth
-                                value={formik.values.password}
-                                onChange={formik.handleChange}
-                                onBlur={formik.handleBlur}
-                                error={formik.touched.password && Boolean(formik.errors.password)}
-                                helperText={formik.touched.password && formik.errors.password}
-                            />
-                        </Grid>
-                        <Grid item xs={12}>
-                            <TextField
-                                type="password"
-                                name="confirmPassword"
-                                id="confirmPassword"
-                                autoComplete="new-password"
-                                label="Potwierdzenie Hasła"
-                                variant="outlined"
-                                color="secondary"
-                                fullWidth
-                                value={formik.values.confirmPassword}
-                                onChange={formik.handleChange}
-                                onBlur={formik.handleBlur}
-                                error={
-                                    formik.touched.confirmPassword &&
-                                    Boolean(formik.errors.confirmPassword)
-                                }
-                                helperText={
-                                    formik.touched.confirmPassword && formik.errors.confirmPassword
-                                }
-                            />
-                        </Grid>
-                    </Grid>
+                    <MyTextField
+                        name="pseudonym"
+                        label={"Ksywka (pseudonim, Imię i Nazwisko)"}
+                        formik={formik}
+                    />
+
+                    <MyTextField name="email" label={"Adres email"} formik={formik} />
+
+                    <MyTextField
+                        type="password"
+                        name="password"
+                        label={"Hasło"}
+                        autoComplete="new-password"
+                        formik={formik}
+                    />
+
+                    <MyTextField
+                        type="password"
+                        name="confirmPassword"
+                        label={"Potwierdzenie Hasła"}
+                        autoComplete="new-password"
+                        formik={formik}
+                    />
+
                     <Button
                         type="submit"
                         fullWidth
@@ -153,18 +106,10 @@ function Register() {
                     >
                         Rejestruj
                     </Button>
-                    <Grid container justifyContent="flex-start">
-                        <Grid item>
-                            <Link
-                                component={NavLink}
-                                to="/login"
-                                variant="body2"
-                                color="text.color"
-                            >
-                                Masz już konto?
-                            </Link>
-                        </Grid>
-                    </Grid>
+
+                    <Link component={NavLink} to="/login" variant="body2" color="text.secondary">
+                        Masz już konto?
+                    </Link>
                 </Box>
             </Box>
         </Container>
