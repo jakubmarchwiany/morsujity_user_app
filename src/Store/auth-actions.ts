@@ -101,7 +101,7 @@ export const verifyEmail =
     (token: string, navigate: any): AppThunk =>
     async (AppDispatch) => {
         fetch(END_POINT + `/auth/verify-user-email`, {
-            method: "GET",
+            method: "POST",
             credentials: "include",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ token }),
