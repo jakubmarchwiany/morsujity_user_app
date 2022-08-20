@@ -50,6 +50,9 @@ const userSlice = createSlice({
         updatePseudonym(state, action: PayloadAction<string>) {
             return Object.assign(state, { pseudonym: action.payload });
         },
+        updateImage(state, action: PayloadAction<string>) {
+            return Object.assign(state, { image: action.payload });
+        },
         logout(state) {
             return Object.assign(state, {
                 logIn: false,

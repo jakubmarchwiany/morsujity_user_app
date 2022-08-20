@@ -101,3 +101,77 @@ export const changeUserPassword =
                 AppDispatch(uiActions.showErrorDefNotify());
             });
     };
+
+function dataURLtoFile(dataUrl: any, filename: any) {
+    var arr = dataUrl.split(","),
+        mime = arr[0].match(/:(.*?);/)[1],
+        bstr = atob(arr[1]),
+        n = bstr.length,
+        u8arr = new Uint8Array(n);
+
+    while (n--) {
+        u8arr[n] = bstr.charCodeAt(n);
+    }
+
+    return new File([u8arr], filename, { type: mime });
+}
+
+export const changeUserImage =
+    (base64EncodedImage: any): AppThunk =>
+    async (AppDispatch) => {
+        var data = new FormData();
+        data.append("userImage", dataURLtoFile(base64EncodedImage, "userImage.png"));
+        AppDispatch(
+            uiActions.showNotification({
+                type: "success",
+                message: "Wysyłam zdjęcie",
+            })
+        );
+        fetch(END_POINT + "/user/change-image", {
+            method: "POST",
+            body: data,
+            credentials: "include",
+        })
+            .then(async (response) => {
+                const data = await response.json();
+                if (response.ok) {
+                    AppDispatch(userActions.updateImage(data.image));
+                    AppDispatch(
+                        uiActions.showNotification({
+                            type: "success",
+                            message: data.message,
+                        })
+                    );
+                } else {
+                    AppDispatch(uiActions.showErrorNotification(data.message));
+                }
+            })
+            .catch(() => {
+                AppDispatch(uiActions.showErrorDefNotify());
+            });
+    };
+
+export const changeToDefUserImage = (): AppThunk => async (AppDispatch) => {
+    fetch(END_POINT + `/user/change-user-image-to-def`, {
+        method: "GET",
+        credentials: "include",
+        headers: { "Content-Type": "application/json" },
+    })
+        .then(async (response) => {
+            const data = await response.json();
+            if (response.ok) {
+                AppDispatch(userActions.updateImage(data.image));
+                AppDispatch(
+                    uiActions.showNotification({
+                        type: "success",
+                        message: data.message,
+                    })
+                );
+            } else {
+                AppDispatch(uiActions.showErrorNotification(data.message));
+            }
+        })
+        .catch(() => {
+            AppDispatch(uiActions.showErrorDefNotify());
+        });
+};
