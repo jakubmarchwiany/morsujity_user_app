@@ -1,4 +1,10 @@
-import { Box, createTheme, responsiveFontSizes, Stack, ThemeProvider } from "@mui/material";
+import {
+    createTheme,
+    responsiveFontSizes,
+    Stack,
+    ThemeProvider,
+    Unstable_Grid2 as Grid2
+} from "@mui/material";
 import "assets/app.css";
 import { getDesignTokens } from "assets/theme";
 import { useAppSelector } from "hooks/redux";
@@ -41,26 +47,30 @@ function App() {
 
     return (
         <ThemeProvider theme={theme}>
-            <Stack sx={{ minHeight: "100vh" }}>
+            <Stack height="100vh" display="flex" flexDirection="column">
                 <Navbar />
-                <Stack sx={{ flex: 1 }} direction="row" justifyContent="space-between">
-                    <Box
-                        flex={2}
-                        sx={{ display: { xs: "none", lg: "block" } }}
-                        bgcolor={"background.default"}
-                        color={"text.primary"}
-                    >
+                <Grid2
+                    container
+                    flex={1}
+                    overflow="auto"
+                    columns={20}
+                    bgcolor={"background.default"}
+                    color={"text.primary"}
+                >
+                    <Grid2 md={4} lg={3} sx={{ display: { xs: "none", md: "block" } }}>
                         <Navigator navbar={false} />
-                    </Box>
-                    <Box flex={9} bgcolor={"background.paper"} color={"text.primary"}>
+                    </Grid2>
+                    <Grid2 xs={20} md={12} lg={14} bgcolor={"background.paper"}>
                         <Routes>
                             {mainRoute()}
                             {userRoute()}
                             <Route path="*" element={<PageNotFound />} />
                         </Routes>
-                    </Box>
-                    <Ads />
-                </Stack>
+                    </Grid2>
+                    <Grid2 md={4} lg={3} sx={{ display: { xs: "none", md: "block" } }}>
+                        <Ads />
+                    </Grid2>
+                </Grid2>
                 <Notification />
                 <Footer />
             </Stack>
