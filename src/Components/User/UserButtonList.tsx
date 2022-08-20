@@ -8,7 +8,7 @@ import {
     Groups,
     Logout,
     Settings,
-    Storefront
+    Storefront,
 } from "@mui/icons-material";
 import {
     Avatar,
@@ -17,7 +17,7 @@ import {
     ListItem,
     ListItemButton,
     ListItemIcon,
-    ListItemText
+    ListItemText,
 } from "@mui/material";
 import { useState } from "react";
 import { Link } from "react-router-dom";
