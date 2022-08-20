@@ -29,7 +29,7 @@ const Navigator = (props: NavigatorProps) => {
     const mode = useAppSelector((state) => state.app.mode);
 
     const theme = useTheme<Theme>();
-    let bigScreen = useMediaQuery(theme.breakpoints.up("lg"));
+    let bigScreen = useMediaQuery(theme.breakpoints.up("md"));
 
     if (props.navbar) {
         bigScreen = !bigScreen;

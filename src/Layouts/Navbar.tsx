@@ -37,7 +37,7 @@ function Navbar() {
                 <Stack direction="row">
                     <AcUnitIcon
                         fontSize="large"
-                        sx={{ display: { xs: "none", lg: "flex" }, ml: 3, mr: 2 }}
+                        sx={{ display: { xs: "none", md: "flex" }, ml: 3, mr: 2 }}
                     />
                     <Typography
                         variant="h6"
@@ -47,7 +47,7 @@ function Navbar() {
                         sx={{
                             mr: 2,
 
-                            display: { xs: "none", lg: "flex" },
+                            display: { xs: "none", md: "flex" },
                             fontFamily: "monospace",
                             fontWeight: 700,
                             letterSpacing: ".15rem",
@@ -59,7 +59,7 @@ function Navbar() {
                     </Typography>
                 </Stack>
 
-                <Box sx={{ flexGrow: 1, display: { xs: "flex", lg: "none" } }}>
+                <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
                     <Tooltip title="Nawigator">
                         <IconButton
                             id="demo-positioned-button"
@@ -93,7 +93,7 @@ function Navbar() {
 
                 <Stack direction="row" p={0} m={0}>
                     <AcUnitIcon
-                        sx={{ display: { xs: "flex", lg: "none" }, mr: 1, alignSelf: "center" }}
+                        sx={{ display: { xs: "flex", md: "none" }, mr: 1, alignSelf: "center" }}
                     />
                     <Typography
                         variant="h6"
@@ -101,7 +101,7 @@ function Navbar() {
                         component={Link}
                         to={logIn ? type + "/dashboard" : "/"}
                         sx={{
-                            display: { xs: "flex", lg: "none" },
+                            display: { xs: "flex", md: "none" },
                             fontFamily: "monospace",
                             fontWeight: 700,
                             letterSpacing: ".15rem",
@@ -113,7 +113,7 @@ function Navbar() {
                     </Typography>
                 </Stack>
 
-                <Box sx={{ flexGrow: 1, display: { xs: "flex", lg: "none" } }} />
+                <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }} />
             </Toolbar>
         </AppBar>
     );

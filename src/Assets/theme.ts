@@ -34,7 +34,7 @@ export const getDesignTokens = (mode: PaletteMode) => ({
                       default: "#fff",
                       paper: "#fafafa",
                   },
-                  divider: "#fff",
+                  divider: "#D3D3D3",
                   text: {
                       primary: "#000",
                       secondary: "#468faf",
@@ -55,7 +55,7 @@ export const getDesignTokens = (mode: PaletteMode) => ({
                       default: "#303030",
                       paper: "#424242",
                   },
-                  divider: "#000",
+                  divider: "#D3D3D3",
                   text: {
                       primary: "#fff",
                       secondary: "#fff",
@@ -68,10 +68,10 @@ export const getDesignTokens = (mode: PaletteMode) => ({
     breakpoints: {
         values: {
             xs: 0,
-            sm: 481,
-            md: 769,
-            lg: 1025,
-            xl: 1200,
+            sm: 769,
+            md: 1024,
+            lg: 1216,
+            xl: 1408,
         },
     },
 });
