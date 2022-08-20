@@ -1,17 +1,12 @@
-import { Button, Link, Modal, styled, Typography } from "@mui/material";
+import { Button, Link, Typography } from "@mui/material";
 import { Box } from "@mui/system";
+import MyModal from "components/my/MyModal";
 import MyTextField from "components/my/MyTextField";
 import { useFormik } from "formik";
 import { useAppDispatch } from "hooks/redux";
 import { useState } from "react";
 import { requestResetPassword } from "store/auth-actions";
 import * as Yup from "yup";
-
-const StyledModal = styled(Modal)({
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-});
 
 const INITIAL_FORM_STATE = {
     email: "",
@@ -48,7 +43,7 @@ function ResetPassword() {
             >
                 Zapomniałeś hasło?
             </Link>
-            <StyledModal
+            <MyModal
                 open={open}
                 onClose={() => setOpen(false)}
                 aria-labelledby="modal-modal-title"
@@ -81,7 +76,7 @@ function ResetPassword() {
                         Wyślij
                     </Button>
                 </Box>
-            </StyledModal>
+            </MyModal>
         </>
     );
 }

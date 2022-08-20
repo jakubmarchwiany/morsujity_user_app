@@ -1,4 +1,5 @@
-import { Box, Button, Modal, styled, Typography } from "@mui/material";
+import { Box, Button, Typography } from "@mui/material";
+import MyModal from "components/my/MyModal";
 import MyTextField from "components/my/MyTextField";
 import { useFormik } from "formik";
 import { useAppDispatch } from "hooks/redux";
@@ -6,12 +7,6 @@ import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { resetPassword } from "store/auth-actions";
 import * as Yup from "yup";
-
-const StyledModal = styled(Modal)({
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-});
 
 const INITIAL_FORM_STATE = {
     password: "",
@@ -49,7 +44,7 @@ function NewPassword() {
     });
 
     return (
-        <StyledModal
+        <MyModal
             open={open}
             aria-labelledby="modal-modal-title"
             aria-describedby="modal-modal-description"
@@ -92,7 +87,7 @@ function NewPassword() {
                     Zmień
                 </Button>
             </Box>
-        </StyledModal>
+        </MyModal>
     );
 }
 export default NewPassword;
