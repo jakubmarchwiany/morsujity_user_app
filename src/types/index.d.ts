@@ -10,6 +10,7 @@ declare global {
             REACT_APP_ENV: "development" | "production";
             REACT_APP_DEV_API_ENDPOINT: string;
             REACT_APP_PRO_API_ENDPOINT: string;
+            REACT_APP_DEF_USER_IMAGE: string;
         }
     }
 }
