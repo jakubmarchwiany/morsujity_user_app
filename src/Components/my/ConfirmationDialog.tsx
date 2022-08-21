@@ -34,8 +34,8 @@ function ConfirmationDialog(props: Props) {
             </DialogTitle>
             <DialogContent dividers>{content}</DialogContent>
             <DialogActions>
-                <Button variant="contained" color={"error"} fullWidth onClick={handleCancel}>
-                    Cofam
+                <Button variant="outlined" color="secondary" fullWidth onClick={handleCancel}>
+                    Anuluj
                 </Button>
                 <Button
                     variant="contained"
