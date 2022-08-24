@@ -1,11 +1,11 @@
 import { DarkMode, LightMode } from "@mui/icons-material";
-import type { Theme } from "@mui/material";
 import {
     List,
     ListItem,
     ListItemButton,
     ListItemIcon,
     Switch,
+    Theme,
     useMediaQuery,
     useTheme,
 } from "@mui/material";

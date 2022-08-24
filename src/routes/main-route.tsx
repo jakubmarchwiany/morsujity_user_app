@@ -6,7 +6,7 @@ import {
     PageLogin,
     PageRegister,
     PageStatut,
-    PageWelcome,
+    PageWelcome
 } from "pages/index";
 import { Route } from "react-router-dom";
 

@@ -1,8 +1,7 @@
-import type { NavigateFunction } from "react-router-dom";
-import type { AppThunk } from "store";
+import { NavigateFunction } from "react-router-dom";
+import { AppThunk } from "store";
 import { postApi } from "utils/fetches";
-import type { UserData } from "./user-slice";
-import { userActions } from "./user-slice";
+import { userActions, UserData } from "./user-slice";
 
 export const registerUser =
     (pseudonym: string, email: string, password: string, navigate: NavigateFunction): AppThunk =>

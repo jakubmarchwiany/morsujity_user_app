@@ -1,6 +1,5 @@
 import Alert from "@mui/material/Alert";
-import type { SlideProps } from "@mui/material/Slide";
-import Slide from "@mui/material/Slide";
+import Slide, { SlideProps } from "@mui/material/Slide";
 import Snackbar from "@mui/material/Snackbar";
 import { useAppSelector } from "hooks/redux";
 import React, { memo } from "react";

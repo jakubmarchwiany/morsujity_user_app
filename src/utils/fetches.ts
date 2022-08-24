@@ -1,4 +1,4 @@
-import type { AppDispatch } from "store";
+import { AppDispatch } from "store";
 import { uiActions } from "store/ui-slice";
 
 const {

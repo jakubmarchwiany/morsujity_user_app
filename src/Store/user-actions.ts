@@ -1,11 +1,10 @@
 import Cookies from "js-cookie";
-import type { NavigateFunction } from "react-router-dom";
+import { NavigateFunction } from "react-router-dom";
 import { dataURLtoFile } from "utils/dataURLToFile";
 import { api, imageApi, postApi } from "utils/fetches";
-import type { AppThunk } from "./index";
+import { AppThunk } from "./index";
 import { uiActions } from "./ui-slice";
-import type { UserData } from "./user-slice";
-import { userActions } from "./user-slice";
+import { userActions, UserData } from "./user-slice";
 
 export const getUserData =
     (navigate: NavigateFunction): AppThunk =>
