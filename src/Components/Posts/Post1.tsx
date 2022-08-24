@@ -3,12 +3,12 @@ import { Box, Typography } from "@mui/material";
 function Post1() {
     return (
         <Box mb={30}>
-            <Typography variant="h2" mt={10} component="h1" textAlign="center">
+            <Typography variant='h2' mt={10} component='h1' textAlign='center'>
                 Jak zacząć morsowanie. Poradnik dla początkujących
             </Typography>
-            <Typography mt={10} mb={5} variant="body1" mx={10}>
+            <Typography mt={10} mb={5} variant='body1' mx={10}>
                 <div>
-                    <Typography variant="h6">ZASADY BEZPIECZNEGO ZIMOWEGO PŁYWANIA</Typography>
+                    <Typography variant='h6'>ZASADY BEZPIECZNEGO ZIMOWEGO PŁYWANIA</Typography>
                     <div>
                         &bull; Uprzednia adaptacja do niższych temperatur(np. za pomocą zimnych
                         prysznic&oacute;w).
@@ -40,7 +40,7 @@ function Post1() {
                     </div>
                 </div>
                 <div>
-                    <Typography variant="h6">
+                    <Typography variant='h6'>
                         DLA KOGO NIE JEST WSKAZANA ZIMNA TERMOGENEZA
                     </Typography>
 
@@ -55,14 +55,14 @@ function Post1() {
                     <div>&bull; Dla os&oacute;b z niewydolnością krążeniową.</div>
                 </div>
                 <div>
-                    <Typography variant="h6">CO TRZEBA ZABRAĆ</Typography>
+                    <Typography variant='h6'>CO TRZEBA ZABRAĆ</Typography>
 
                     <div></div>
                     <div>&bull; Ręcznik</div>
                     <div>&bull; Bieliznę na zmianę</div>
                 </div>
                 <div>
-                    <Typography variant="h6">CO MOŻNA ZABRAĆ</Typography>
+                    <Typography variant='h6'>CO MOŻNA ZABRAĆ</Typography>
 
                     <div>&bull; Rękawiczki(mogą być neoprenowe)</div>
                     <div>&bull; Obuwie do wody i(może być neoprenowe)</div>

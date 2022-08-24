@@ -12,7 +12,6 @@ import useSetMode from "hooks/use-set-mode";
 import Ads from "layouts/Ads";
 import Footer from "layouts/Footer";
 import Navbar from "layouts/Navbar";
-
 import Navigator from "layouts/Navigator";
 import Notification from "layouts/Notification";
 import { PageNotFound } from "pages/index";
@@ -27,10 +26,10 @@ function App() {
 
     const theme = useMemo(
         () => responsiveFontSizes(createTheme(getDesignTokens(appMode!))),
-        [appMode]
+        [appMode],
     );
 
-    const syncLogout = useCallback((event: any) => {
+    const syncLogout = useCallback((event: StorageEvent) => {
         if (event.key === "logout") {
             window.location.reload();
         }
@@ -47,12 +46,12 @@ function App() {
 
     return (
         <ThemeProvider theme={theme}>
-            <Stack height="100vh" display="flex" flexDirection="column">
+            <Stack height='100vh' display='flex' flexDirection='column'>
                 <Navbar />
                 <Grid2
                     container
                     flex={1}
-                    overflow="auto"
+                    overflow='auto'
                     columns={20}
                     bgcolor={"background.default"}
                     color={"text.primary"}
@@ -64,7 +63,7 @@ function App() {
                         <Routes>
                             {mainRoute()}
                             {userRoute()}
-                            <Route path="*" element={<PageNotFound />} />
+                            <Route path='*' element={<PageNotFound />} />
                         </Routes>
                     </Grid2>
                     <Grid2 md={4} lg={3} sx={{ display: { xs: "none", md: "block" } }}>

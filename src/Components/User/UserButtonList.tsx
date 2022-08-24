@@ -8,7 +8,7 @@ import {
     Groups,
     Logout,
     Settings,
-    Storefront,
+    Storefront
 } from "@mui/icons-material";
 import {
     Avatar,
@@ -17,7 +17,7 @@ import {
     ListItem,
     ListItemButton,
     ListItemIcon,
-    ListItemText,
+    ListItemText
 } from "@mui/material";
 import { useState } from "react";
 import { Link } from "react-router-dom";
@@ -47,7 +47,7 @@ function UserButtonList({ type, userImage, logoutHandler, close }: Props) {
                 </ListItemButton>
             </ListItem>
             <ListItem disablePadding onClick={close}>
-                <ListItemButton component={Link} to="#home">
+                <ListItemButton component={Link} to={`${type}/new-activity`}>
                     <ListItemIcon>
                         <AddTask fontSize="large" />
                     </ListItemIcon>
@@ -57,7 +57,7 @@ function UserButtonList({ type, userImage, logoutHandler, close }: Props) {
                     />
                 </ListItemButton>
             </ListItem>
-            <ListItemButton onClick={() => setOpen(!open)}>
+            <ListItemButton onClick={() => { setOpen(!open); }}>
                 <ListItemIcon>
                     <Groups fontSize="large" />
                 </ListItemIcon>
@@ -112,7 +112,7 @@ function UserButtonList({ type, userImage, logoutHandler, close }: Props) {
                         <Avatar
                             sx={{ width: 35, height: 35 }}
                             alt="Remy Sharp"
-                            src={userImage!}
+                            src={userImage}
                             variant="rounded"
                         />
                     </ListItemIcon>

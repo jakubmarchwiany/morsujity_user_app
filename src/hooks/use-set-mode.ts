@@ -8,10 +8,10 @@ export default function useSetMode() {
     const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
 
     useEffect(() => {
-        let mode = localStorage.getItem("mode");
-        if (mode) {
-            mode = JSON.parse(mode);
-            dispatch(appActions.setMode(mode!));
+        let mode: string | null = localStorage.getItem("mode");
+        if (mode !== null) {
+            mode = <string>JSON.parse(mode);
+            dispatch(appActions.setMode(mode));
         } else {
             mode = prefersDarkMode ? "dark" : "light";
             dispatch(appActions.setMode(mode));

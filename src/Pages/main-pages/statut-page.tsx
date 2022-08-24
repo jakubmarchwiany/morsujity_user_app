@@ -6,13 +6,12 @@ function PageStatut() {
         <>
             <Helmet>
                 <title>Morsujity</title>
-                <meta name="description" content="Regulamin korzystania z serwisu. Zasady" />
-                <link rel="canonical" href="/statut" />
+                <meta name='description' content='Regulamin korzystania z serwisu. Zasady' />
+                <link rel='canonical' href='/statut' />
             </Helmet>
 
             <Statut />
         </>
     );
 }
-
 export default PageStatut;

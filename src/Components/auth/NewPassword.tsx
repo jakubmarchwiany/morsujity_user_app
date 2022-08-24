@@ -30,7 +30,7 @@ const FORM_VALIDATION = Yup.object().shape({
 function NewPassword() {
     const [open, setOpen] = useState(true);
 
-    let { token } = useParams();
+    const { token } = useParams();
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
 
@@ -46,8 +46,8 @@ function NewPassword() {
     return (
         <MyModal
             open={open}
-            aria-labelledby="modal-modal-title"
-            aria-describedby="modal-modal-description"
+            aria-labelledby='modal-modal-title'
+            aria-describedby='modal-modal-description'
         >
             <Box
                 component={"form"}
@@ -55,32 +55,33 @@ function NewPassword() {
                 onSubmit={formik.handleSubmit}
                 bgcolor={"background.paper"}
                 color={"text.primary"}
+                mx={5}
                 px={5}
                 borderRadius={2}
             >
-                <Typography variant="h5" textAlign="center" mt={3}>
+                <Typography variant='h5' textAlign='center' mt={3}>
                     Nowe Hasło
                 </Typography>
 
                 <MyTextField
-                    name="password"
-                    type="password"
-                    label="Hasło"
-                    autoComplete="new-password"
+                    name='password'
+                    type='password'
+                    label='Hasło'
+                    autoComplete='new-password'
                     formik={formik}
                 />
                 <MyTextField
-                    name="confirmPassword"
-                    type="password"
-                    label="Potwierdzenie Hasła"
-                    autoComplete="new-password"
+                    name='confirmPassword'
+                    type='password'
+                    label='Potwierdzenie Hasła'
+                    autoComplete='new-password'
                     formik={formik}
                 />
 
                 <Button
-                    type="submit"
+                    type='submit'
                     fullWidth
-                    variant="contained"
+                    variant='contained'
                     sx={{ mt: 1, mb: 3 }}
                     disabled={!(formik.isValid && formik.dirty)}
                 >

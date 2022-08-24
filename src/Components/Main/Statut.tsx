@@ -3,7 +3,7 @@ import { Box, Typography } from "@mui/material";
 function Statut() {
     return (
         <Box mb={30}>
-            <Typography variant="h1" mt={5} textAlign={"center"}>
+            <Typography variant='h1' mt={5} textAlign={"center"}>
                 Regulamin
             </Typography>
             <Typography mt={10} mx={10} mb={5}>

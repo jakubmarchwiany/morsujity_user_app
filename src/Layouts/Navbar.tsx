@@ -14,7 +14,7 @@ import { Link } from "react-router-dom";
 import Navigator from "./Navigator";
 
 function Navbar() {
-    const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+    const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
     const open = Boolean(anchorEl);
 
     const logIn = useAppSelector((state) => state.user.logIn);
@@ -30,20 +30,20 @@ function Navbar() {
     return (
         <AppBar
             elevation={0}
-            position="static"
+            position='static'
             sx={{ top: "auto", bottom: 0, textAlign: "center", bgcolor: "primary.main" }}
         >
             <Toolbar sx={{ display: "flex", justifyContent: "space-between", minHeight: "64px" }}>
-                <Stack direction="row">
+                <Stack direction='row'>
                     <AcUnitIcon
-                        fontSize="large"
+                        fontSize='large'
                         sx={{ display: { xs: "none", md: "flex" }, ml: 3, mr: 2 }}
                     />
                     <Typography
-                        variant="h6"
+                        variant='h6'
                         noWrap
                         component={Link}
-                        to={logIn ? type + "/dashboard" : "/"}
+                        to={logIn ? type! + "/dashboard" : "/"}
                         sx={{
                             mr: 2,
 
@@ -60,21 +60,21 @@ function Navbar() {
                 </Stack>
 
                 <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
-                    <Tooltip title="Nawigator">
+                    <Tooltip title='Nawigator'>
                         <IconButton
-                            id="demo-positioned-button"
+                            id='demo-positioned-button'
                             aria-expanded={open ? "true" : undefined}
                             aria-controls={open ? "demo-positioned-menu" : undefined}
-                            aria-haspopup="true"
+                            aria-haspopup='true'
                             onClick={handleClick}
-                            color="inherit"
+                            color='inherit'
                         >
                             <MenuIcon />
                         </IconButton>
                     </Tooltip>
                     <Menu
-                        id="demo-positioned-menu"
-                        aria-labelledby="demo-positioned-button"
+                        id='demo-positioned-menu'
+                        aria-labelledby='demo-positioned-button'
                         anchorEl={anchorEl}
                         open={open}
                         onClose={handleClose}
@@ -91,15 +91,15 @@ function Navbar() {
                     </Menu>
                 </Box>
 
-                <Stack direction="row" p={0} m={0}>
+                <Stack direction='row' p={0} m={0}>
                     <AcUnitIcon
                         sx={{ display: { xs: "flex", md: "none" }, mr: 1, alignSelf: "center" }}
                     />
                     <Typography
-                        variant="h6"
+                        variant='h6'
                         noWrap
                         component={Link}
-                        to={logIn ? type + "/dashboard" : "/"}
+                        to={logIn ? type! + "/dashboard" : "/"}
                         sx={{
                             display: { xs: "flex", md: "none" },
                             fontFamily: "monospace",

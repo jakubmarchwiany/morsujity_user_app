@@ -6,12 +6,11 @@ function PageSettings() {
         <>
             <Helmet>
                 <title>Ustawienia</title>
-                <meta name="description" content="Ustawienia" />
+                <meta name='description' content='Ustawienia' />
             </Helmet>
 
             <Settings />
         </>
     );
 }
-
 export default PageSettings;

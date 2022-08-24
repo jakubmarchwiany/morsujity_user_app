@@ -3,7 +3,7 @@ import "@fontsource/montserrat/400.css";
 import "@fontsource/montserrat/500.css";
 import "@fontsource/montserrat/600.css";
 import "@fontsource/montserrat/700.css";
-import { PaletteMode } from "@mui/material";
+import type { PaletteMode } from "@mui/material";
 
 declare module "@mui/material/styles" {
     interface Palette {
@@ -25,7 +25,7 @@ export const getDesignTokens = (mode: PaletteMode) => ({
                       main: "#468faf",
                   },
                   secondary: {
-                      main: "#000",
+                      main: "#468faf",
                   },
                   complementary: {
                       main: "#AF6646",

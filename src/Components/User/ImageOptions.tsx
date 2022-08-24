@@ -1,3 +1,9 @@
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
+/* eslint-disable @typescript-eslint/strict-boolean-expressions */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-unsafe-call */
 import { Avatar, Button, ButtonGroup, Stack, Unstable_Grid2 as Grid2 } from "@mui/material";
 import ConfirmationDialog from "components/my/ConfirmationDialog";
 import MyModal from "components/my/MyModal";
@@ -5,6 +11,7 @@ import "cropperjs/dist/cropper.css";
 import { useAppDispatch, useAppSelector } from "hooks/redux";
 import { useState } from "react";
 import Cropper from "react-cropper";
+
 import { changeToDefUserImage, changeUserImage } from "store/user-actions";
 
 const { REACT_APP_DEF_USER_IMAGE: DEF_USER_IMAGE } = process.env;
@@ -60,7 +67,7 @@ function ImageOptions() {
         setOpenChangeImage(false);
         setImage(undefined);
         setCropData(undefined);
-        dispatch(changeUserImage(cropData));
+        dispatch(changeUserImage(cropData!));
     };
 
     return (
@@ -69,18 +76,18 @@ function ImageOptions() {
                 <Grid2 xs={20} xl={16} style={{ justifyContent: "center", display: "flex" }}>
                     <Avatar
                         sx={{ my: 2, width: 250, height: 250 }}
-                        alt="Remy Sharp"
+                        alt='Remy Sharp'
                         src={userImage!}
-                        variant="rounded"
+                        variant='rounded'
                     />
                 </Grid2>
                 <Grid2 xs={4}></Grid2>
                 <Grid2 xs={20} xl={16}>
-                    <ButtonGroup variant="contained" aria-label="outlined button group" fullWidth>
+                    <ButtonGroup variant='contained' aria-label='outlined button group' fullWidth>
                         <Button
-                            type="button"
-                            variant="contained"
-                            color="error"
+                            type='button'
+                            variant='contained'
+                            color='error'
                             onClick={handleDeleteUserImage}
                             disabled={userImage === DEF_USER_IMAGE}
                         >
@@ -88,9 +95,11 @@ function ImageOptions() {
                         </Button>
 
                         <Button
-                            type="button"
-                            variant="contained"
-                            onClick={() => setOpenChangeImage(true)}
+                            type='button'
+                            variant='contained'
+                            onClick={() => {
+                                setOpenChangeImage(true);
+                            }}
                         >
                             Nowe zdjęcie
                         </Button>
@@ -98,15 +107,15 @@ function ImageOptions() {
                 </Grid2>
             </Grid2>
             <ConfirmationDialog
-                content="Czy chcesz ustawić domyślne zdjęcie profilowe?"
+                content='Czy chcesz ustawić domyślne zdjęcie profilowe?'
                 open={openDialog}
                 onClose={handleDecision}
             />
             <MyModal
                 open={openChangeImage}
                 onClose={handleCloseChangeImage}
-                aria-labelledby="modal-modal-title"
-                aria-describedby="modal-modal-description"
+                aria-labelledby='modal-modal-title'
+                aria-describedby='modal-modal-description'
                 sx={{
                     marginLeft: "auto",
                     marginRight: "auto",
@@ -119,9 +128,9 @@ function ImageOptions() {
                 }}
             >
                 <Stack bgcolor={"background.paper"} color={"text.primary"}>
-                    <Button variant="contained" component="label">
+                    <Button variant='contained' component='label'>
                         Wybierz zdjęcie
-                        <input hidden accept="image/*" type="file" onChange={onChange} />
+                        <input hidden accept='image/*' type='file' onChange={onChange} />
                     </Button>
                     <Cropper
                         style={{
@@ -141,10 +150,10 @@ function ImageOptions() {
                         guides={true}
                     />
                     <Button
-                        type="button"
-                        variant="contained"
+                        type='button'
+                        variant='contained'
                         onClick={getCropData}
-                        disabled={!Boolean(image)}
+                        disabled={!image}
                     >
                         Wytnij
                     </Button>
@@ -154,12 +163,12 @@ function ImageOptions() {
                             maxWidth: "500px",
                         }}
                         src={cropData}
-                        alt="Wycięte zdjęcie"
+                        alt='Wycięte zdjęcie'
                     />
                     <Button
-                        type="button"
-                        variant="contained"
-                        disabled={!Boolean(cropData)}
+                        type='button'
+                        variant='contained'
+                        disabled={!cropData}
                         onClick={handleChangeImage}
                     >
                         Ustaw

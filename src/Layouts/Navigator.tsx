@@ -1,13 +1,13 @@
 import { DarkMode, LightMode } from "@mui/icons-material";
+import type { Theme } from "@mui/material";
 import {
     List,
     ListItem,
     ListItemButton,
     ListItemIcon,
     Switch,
-    Theme,
     useMediaQuery,
-    useTheme
+    useTheme,
 } from "@mui/material";
 import GuestButtonList from "components/main/GuestButtonList";
 import UserButtonList from "components/user/UserButtonList";
@@ -39,11 +39,9 @@ const Navigator = (props: NavigatorProps) => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        if (!user.logIn && Cookies.get("Authorization")) {
-            console.log("siema");
+        if (!user.logIn && Cookies.get("Authorization") !== undefined) {
             dispatch(getUserData(navigate));
         }
-        // eslint-disable-next-line
     }, []);
 
     const logoutHandler = () => {
@@ -68,9 +66,9 @@ const Navigator = (props: NavigatorProps) => {
                 <ListItemButton>
                     <ListItemIcon>
                         {mode === "dark" ? (
-                            <DarkMode fontSize="large" />
+                            <DarkMode fontSize='large' />
                         ) : (
-                            <LightMode fontSize="large" />
+                            <LightMode fontSize='large' />
                         )}
                     </ListItemIcon>
                     <Switch

@@ -7,15 +7,14 @@ function PageContact() {
             <Helmet>
                 <title>Morsujity</title>
                 <meta
-                    name="description"
-                    content="Strona kontaktowa. Napisz maila z pytanie. Staram sie odpisać jak najszybciej"
+                    name='description'
+                    content='Strona kontaktowa. Napisz maila z pytanie. Staram sie odpisać jak najszybciej'
                 />
-                <link rel="canonical" href="/contact" />
+                <link rel='canonical' href='/contact' />
             </Helmet>
 
             <Contact />
         </>
     );
 }
-
 export default PageContact;

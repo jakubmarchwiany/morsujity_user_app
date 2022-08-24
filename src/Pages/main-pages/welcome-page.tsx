@@ -7,17 +7,16 @@ function PageWelcome() {
             <Helmet>
                 <title>Morsujity</title>
                 <meta
-                    name="description"
-                    content="Witamj w Morsujity!
+                    name='description'
+                    content='Witamj w Morsujity!
                     Morsuj dołączaj do grup.
-                    Zdobywaj kolejne rangi!."
+                    Zdobywaj kolejne rangi!.'
                 />
-                <link rel="canonical" href="/" />
+                <link rel='canonical' href='/' />
             </Helmet>
 
             <Welcome />
         </>
     );
 }
-
 export default PageWelcome;

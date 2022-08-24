@@ -1,9 +1,10 @@
-import { PaletteMode } from "@mui/material";
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import type { PaletteMode } from "@mui/material";
+import type { PayloadAction } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 
-interface AppState {
+type AppState = {
     mode: PaletteMode | null;
-}
+};
 
 const initialState: AppState = {
     mode: "light",

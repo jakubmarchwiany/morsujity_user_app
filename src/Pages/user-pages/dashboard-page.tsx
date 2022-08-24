@@ -6,13 +6,12 @@ function PageDashboard() {
         <>
             <Helmet>
                 <title>Morsujity</title>
-                <meta name="description" content="Strona główna Morsujity." />
-                <link rel="canonical" href="/user/home" />
+                <meta name='description' content='Strona główna Morsujity.' />
+                <link rel='canonical' href='/user/home' />
             </Helmet>
 
             <Home />
         </>
     );
 }
-
 export default PageDashboard;

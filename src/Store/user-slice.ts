@@ -1,13 +1,14 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import type { PayloadAction } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 
 interface UserState {
     logIn: boolean;
-    token: null | string;
-    _id: null | string;
-    type: null | string;
-    email: null | string;
-    pseudonym: null | string;
-    image: null | string;
+    token: string | null;
+    _id: string | null;
+    type: string | null;
+    email: string | null;
+    pseudonym: string | null;
+    image: string | null;
 }
 
 const initialState: UserState = {
@@ -19,18 +20,18 @@ const initialState: UserState = {
     pseudonym: null,
     image: null,
 };
-interface DataType {
+export type UserData = {
     _id: number;
     type: string;
     email: string;
     pseudonym: string;
     image: string;
-}
+};
 
-interface LoginPayload {
+type LoginPayload = {
     token: string;
-    data: DataType;
-}
+    user: UserData;
+};
 
 const userSlice = createSlice({
     name: "user",
@@ -39,12 +40,12 @@ const userSlice = createSlice({
         login(state, action: PayloadAction<LoginPayload>) {
             return Object.assign(state, {
                 logIn: true,
-                _id: action.payload.data._id,
+                _id: action.payload.user._id,
                 token: action.payload.token,
-                type: action.payload.data.type,
-                email: action.payload.data.email,
-                pseudonym: action.payload.data.pseudonym,
-                image: action.payload.data.image,
+                type: action.payload.user.type,
+                email: action.payload.user.email,
+                pseudonym: action.payload.user.pseudonym,
+                image: action.payload.user.image,
             });
         },
         updatePseudonym(state, action: PayloadAction<string>) {

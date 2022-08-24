@@ -1,10 +1,4 @@
-import {
-    Button,
-    Dialog,
-    DialogActions,
-    DialogContent,
-    DialogTitle
-} from "@mui/material";
+import { Button, Dialog, DialogActions, DialogContent, DialogTitle } from "@mui/material";
 
 export interface Props {
     title?: string;
@@ -29,16 +23,16 @@ function ConfirmationDialog(props: Props) {
             open={open}
             {...other}
         >
-            <DialogTitle variant="h6">
-                {title ? title : "Czy na pewno chcesz to zrobić?"}
+            <DialogTitle variant='h6'>
+                {title !== undefined ? title : "Czy na pewno chcesz to zrobić?"}
             </DialogTitle>
             <DialogContent dividers>{content}</DialogContent>
             <DialogActions>
-                <Button variant="outlined" color="secondary" fullWidth onClick={handleCancel}>
+                <Button variant='outlined' color='secondary' fullWidth onClick={handleCancel}>
                     Anuluj
                 </Button>
                 <Button
-                    variant="contained"
+                    variant='contained'
                     color={"success"}
                     fullWidth
                     onClick={handleOk}
@@ -50,5 +44,4 @@ function ConfirmationDialog(props: Props) {
         </Dialog>
     );
 }
-
 export default ConfirmationDialog;

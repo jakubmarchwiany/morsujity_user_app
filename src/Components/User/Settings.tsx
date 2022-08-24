@@ -63,23 +63,23 @@ function Settings() {
 
     return (
         <Box sx={{ mx: { xs: 5, lg: 8, xl: 10 }, mt: 5 }}>
-            <Typography variant="h5" fontWeight={"bold"} mt={2}>
+            <Typography variant='h5' fontWeight={"bold"} mt={2}>
                 Konto
             </Typography>
-            <Typography variant="h3" fontWeight={"bold"}>
+            <Typography variant='h3' fontWeight={"bold"}>
                 Ustawienia
             </Typography>
             <Grid2 container>
                 <Grid2 xs={12} lg={6}>
                     <Box component={"form"} noValidate onSubmit={formikPseudonym.handleSubmit}>
-                        <Typography variant="h5" fontWeight={"bold"} mt={2}>
+                        <Typography variant='h5' fontWeight={"bold"} mt={2}>
                             Zmiana Ksywki
                         </Typography>
                         <Grid2 container columns={20}>
                             <Grid2 xs={20} sm={10} xl={8}>
                                 <MyTextField
-                                    name="pseudonym"
-                                    label="Ksywka"
+                                    name='pseudonym'
+                                    label='Ksywka'
                                     placeholder={pseudonym!}
                                     formik={formikPseudonym}
                                 />
@@ -92,10 +92,10 @@ function Settings() {
                             ></Grid2>
                             <Grid2 xs={20} sm={10} xl={8}>
                                 <Button
-                                    color="primary"
-                                    type="submit"
-                                    variant="contained"
-                                    size="medium"
+                                    color='primary'
+                                    type='submit'
+                                    variant='contained'
+                                    size='medium'
                                     fullWidth
                                     disabled={!(formikPseudonym.isValid && formikPseudonym.dirty)}
                                 >
@@ -106,16 +106,16 @@ function Settings() {
                     </Box>
 
                     <Box component={"form"} noValidate onSubmit={formikNewPassword.handleSubmit}>
-                        <Typography variant="h5" fontWeight={"bold"} mt={2}>
+                        <Typography variant='h5' fontWeight={"bold"} mt={2}>
                             Zmiana Hasła
                         </Typography>
                         <Grid2 container columns={20}>
                             <Grid2 xs={20} sm={10} xl={8}>
                                 <MyTextField
-                                    type="password"
-                                    name="oldPassword"
-                                    label="Aktualne Hasło"
-                                    autoComplete="new-password"
+                                    type='password'
+                                    name='oldPassword'
+                                    label='Aktualne Hasło'
+                                    autoComplete='new-password'
                                     formik={formikNewPassword}
                                 />
                             </Grid2>
@@ -127,20 +127,20 @@ function Settings() {
                             ></Grid2>
                             <Grid2 xs={20} sm={10} xl={8}>
                                 <MyTextField
-                                    type="password"
-                                    name="newPassword"
-                                    label="Nowe Hasło"
-                                    autoComplete="new-password"
+                                    type='password'
+                                    name='newPassword'
+                                    label='Nowe Hasło'
+                                    autoComplete='new-password'
                                     formik={formikNewPassword}
                                 />
                             </Grid2>
 
                             <Grid2 xs={20} sm={10} xl={8}>
                                 <MyTextField
-                                    type="password"
-                                    name="confirmNewPassword"
-                                    label="Pot. Nowego Hasła"
-                                    autoComplete="new-password"
+                                    type='password'
+                                    name='confirmNewPassword'
+                                    label='Pot. Nowego Hasła'
+                                    autoComplete='new-password'
                                     formik={formikNewPassword}
                                 />
                             </Grid2>
@@ -151,9 +151,9 @@ function Settings() {
                             ></Grid2>
                             <Grid2 xs={20} xl={16}>
                                 <Button
-                                    type="submit"
+                                    type='submit'
                                     fullWidth
-                                    variant="contained"
+                                    variant='contained'
                                     disabled={
                                         !(formikNewPassword.isValid && formikNewPassword.dirty)
                                     }
@@ -165,7 +165,7 @@ function Settings() {
                     </Box>
                 </Grid2>
                 <Grid2 xs={12} lg={6}>
-                    <Typography variant="h5" fontWeight={"bold"} mt={2}>
+                    <Typography variant='h5' fontWeight={"bold"} mt={2}>
                         Zmiana Profilowego
                     </Typography>
                     <ImageOptions />

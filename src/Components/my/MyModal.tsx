@@ -5,5 +5,4 @@ const MyModal = styled(Modal)({
     alignItems: "center",
     justifyContent: "center",
 });
-
 export default MyModal;

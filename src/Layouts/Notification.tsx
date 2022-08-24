@@ -1,5 +1,6 @@
 import Alert from "@mui/material/Alert";
-import Slide, { SlideProps } from "@mui/material/Slide";
+import type { SlideProps } from "@mui/material/Slide";
+import Slide from "@mui/material/Slide";
 import Snackbar from "@mui/material/Snackbar";
 import { useAppSelector } from "hooks/redux";
 import React, { memo } from "react";
@@ -8,14 +9,14 @@ import { uiActions } from "store/ui-slice";
 
 type TransitionProps = Omit<SlideProps, "direction">;
 function TransitionLeft(props: TransitionProps) {
-    return <Slide {...props} direction="right" mountOnEnter unmountOnExit />;
+    return <Slide {...props} direction='right' mountOnEnter unmountOnExit />;
 }
 
 function Notification() {
     const dispatch = useDispatch();
     const notify = useAppSelector((state) => state.ui);
 
-    const handleClose = (event?: React.SyntheticEvent | Event, reason?: string) => {
+    const handleClose = (event?: Event | React.SyntheticEvent, reason?: string) => {
         if (reason === "clickaway") return;
 
         dispatch(uiActions.hideNotification());
@@ -34,7 +35,7 @@ function Notification() {
             TransitionComponent={TransitionLeft}
             transitionDuration={notify.open ? 600 : 300}
         >
-            <Alert variant="outlined" onClose={handleClose} severity={notify.type}>
+            <Alert variant='outlined' onClose={handleClose} severity={notify.type}>
                 {notify.message}
             </Alert>
         </Snackbar>

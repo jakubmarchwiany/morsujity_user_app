@@ -7,7 +7,7 @@ import {
     Info,
     Login,
     Storefront,
-    Web
+    Web,
 } from "@mui/icons-material";
 import {
     Collapse,
@@ -15,7 +15,7 @@ import {
     ListItem,
     ListItemButton,
     ListItemIcon,
-    ListItemText
+    ListItemText,
 } from "@mui/material";
 import { memo, useState } from "react";
 import { Link } from "react-router-dom";
@@ -31,86 +31,90 @@ function GuestButtonList({ close }: Props) {
     return (
         <>
             <ListItem disablePadding onClick={close}>
-                <ListItemButton component={Link} to="/">
+                <ListItemButton component={Link} to='/'>
                     <ListItemIcon>
-                        <Web fontSize="large" />
+                        <Web fontSize='large' />
                     </ListItemIcon>
                     <ListItemText
                         primaryTypographyProps={{ letterSpacing: 1.5 }}
-                        primary="Strona główna"
+                        primary='Strona główna'
                     />
                 </ListItemButton>
             </ListItem>
             <ListItem disablePadding onClick={close}>
-                <ListItemButton component={Link} to="/login">
+                <ListItemButton component={Link} to='/login'>
                     <ListItemIcon>
-                        <Login fontSize="large" />
+                        <Login fontSize='large' />
                     </ListItemIcon>
                     <ListItemText
                         primaryTypographyProps={{ letterSpacing: 1.5 }}
-                        primary="Logowanie"
+                        primary='Logowanie'
                     />
                 </ListItemButton>
             </ListItem>
             <ListItem disablePadding onClick={close}>
-                <ListItemButton component={Link} to="/register">
+                <ListItemButton component={Link} to='/register'>
                     <ListItemIcon>
-                        <HowToReg fontSize="large" />
+                        <HowToReg fontSize='large' />
                     </ListItemIcon>
                     <ListItemText
                         primaryTypographyProps={{ letterSpacing: 1.5 }}
-                        primary="Rejestracja"
+                        primary='Rejestracja'
                     />
                 </ListItemButton>
             </ListItem>
-            <ListItemButton onClick={() => setOpen(!open)}>
+            <ListItemButton
+                onClick={() => {
+                    setOpen(!open);
+                }}
+            >
                 <ListItemIcon>
-                    <Book fontSize="large" />
+                    <Book fontSize='large' />
                 </ListItemIcon>
-                <ListItemText primaryTypographyProps={{ letterSpacing: 1.5 }} primary="Blog" />
+                <ListItemText primaryTypographyProps={{ letterSpacing: 1.5 }} primary='Blog' />
                 {open ? <ExpandLess /> : <ExpandMore />}
             </ListItemButton>
-            <Collapse in={open} timeout="auto" unmountOnExit>
-                <List component="div" disablePadding onClick={close}>
-                    <ListItemButton sx={{ pl: 4 }} component={Link} to="/blog">
+            <Collapse in={open} timeout='auto' unmountOnExit>
+                <List component='div' disablePadding onClick={close}>
+                    <ListItemButton sx={{ pl: 4 }} component={Link} to='/blog'>
                         <ListItemIcon style={{ minWidth: "40px" }}>
                             <Info />
                         </ListItemIcon>
-                        <ListItemText primary="O Aplikacja" />
+                        <ListItemText primary='O Aplikacja' />
                     </ListItemButton>
-                    <ListItemButton sx={{ pl: 4 }} component={Link} to="/blog">
+                    <ListItemButton sx={{ pl: 4 }} component={Link} to='/blog'>
                         <ListItemIcon style={{ minWidth: "40px" }}>
                             <Info />
                         </ListItemIcon>
-                        <ListItemText primary="Morsowanie ?" />
+                        <ListItemText primary='Morsowanie ?' />
                     </ListItemButton>
 
-                    <ListItemButton sx={{ pl: 4 }} component={Link} to="/blog">
+                    <ListItemButton sx={{ pl: 4 }} component={Link} to='/blog'>
                         <ListItemIcon style={{ minWidth: "40px" }}>
                             <Info />
                         </ListItemIcon>
-                        <ListItemText primary="+ / - Morsowania" />
+                        <ListItemText primary='+ / - Morsowania' />
                     </ListItemButton>
                 </List>
             </Collapse>
             <ListItem disablePadding onClick={close}>
-                <ListItemButton component={Link} to="/search">
+                <ListItemButton component={Link} to='/search'>
                     <ListItemIcon>
-                        <GroupAdd fontSize="large" />
+                        <GroupAdd fontSize='large' />
                     </ListItemIcon>
                     <ListItemText
                         primaryTypographyProps={{ letterSpacing: 1.5 }}
-                        primary="Szukaj Grupy"
+                        primary='Szukaj Grupy'
                     />
                 </ListItemButton>
             </ListItem>
 
             <ListItem disablePadding onClick={close}>
-                <ListItemButton component={Link} to="/shop" disabled>
+                <ListItemButton component={Link} to='/shop' disabled>
                     <ListItemIcon>
-                        <Storefront fontSize="large" />
+                        <Storefront fontSize='large' />
                     </ListItemIcon>
-                    <ListItemText primaryTypographyProps={{ letterSpacing: 1.5 }} primary="Sklep" />
+                    <ListItemText primaryTypographyProps={{ letterSpacing: 1.5 }} primary='Sklep' />
                 </ListItemButton>
             </ListItem>
         </>
