@@ -6,7 +6,7 @@ export interface Props {
     open: boolean;
     onClose: (decision: boolean) => void;
 }
-function ConfirmationDialog(props: Props) {
+function DialogConfirm(props: Props) {
     const { onClose, open, title, content, ...other } = props;
 
     const handleCancel = () => {
@@ -19,7 +19,11 @@ function ConfirmationDialog(props: Props) {
 
     return (
         <Dialog
-            sx={{ "& .MuiDialog-paper": { width: { xs: "100%", sm: "50%", lg: "30%" } } }}
+            sx={{
+                "& .MuiDialog-paper": {
+                    width: { xs: "90%", sm: "50%", md: "40%", lg: "30%", xl: "25%" },
+                },
+            }}
             open={open}
             {...other}
         >
@@ -44,4 +48,4 @@ function ConfirmationDialog(props: Props) {
         </Dialog>
     );
 }
-export default ConfirmationDialog;
+export default DialogConfirm;
