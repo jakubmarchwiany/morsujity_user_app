@@ -1,4 +1,4 @@
-import React from "react";
+import { StableNavigateContextProvider } from "middleware/StableNavigateContextProvider";
 import ReactDOM from "react-dom/client";
 import { HelmetProvider } from "react-helmet-async";
 import { Provider } from "react-redux";
@@ -15,7 +15,9 @@ root.render(
         <HelmetProvider>
             <Provider store={store}>
                 <BrowserRouter>
+                        <StableNavigateContextProvider>
                     <App />
+                        </StableNavigateContextProvider>
                 </BrowserRouter>
             </Provider>
         </HelmetProvider>

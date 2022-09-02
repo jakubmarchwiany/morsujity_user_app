@@ -12,12 +12,9 @@ import {
 import GuestButtonList from "components/main/GuestButtonList";
 import UserButtonList from "components/user/UserButtonList";
 import { useAppDispatch, useAppSelector } from "hooks/redux";
-import Cookies from "js-cookie";
-import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import { appActions } from "store/app-slice";
 import { logoutUser } from "store/auth-actions";
-import { getUserData } from "store/user-actions";
+
 
 interface NavigatorProps {
     navbar: boolean;
@@ -36,13 +33,6 @@ const Navigator = (props: NavigatorProps) => {
     }
 
     const dispatch = useAppDispatch();
-    const navigate = useNavigate();
-
-    useEffect(() => {
-        if (!user.logIn && Cookies.get("Authorization") !== undefined) {
-            dispatch(getUserData(navigate));
-        }
-    }, []);
 
     const logoutHandler = () => {
         dispatch(logoutUser(navigate));

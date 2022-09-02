@@ -7,9 +7,19 @@ import { uiActions } from "./ui-slice";
 import { userActions, UserData } from "./user-slice";
 
 export const getUserData =
-    (navigate: NavigateFunction): AppThunk =>
+    // eslint-disable-next-line @typescript-eslint/ban-types
+
+
+        (navigate: NavigateFunction, setLoading: Function): AppThunk =>
     async (appDispatch) => {
-        await postApi<{ user: UserData }>({}, "/user/get-data", appDispatch, 5000, undefined, true)
+            await postApi<{ user: UserData }>(
+                {},
+                "/user/get-data",
+                appDispatch,
+                5000,
+                undefined,
+                true,
+            )
             .then(({ user }) => {
                 appDispatch(
                     userActions.login({
@@ -18,9 +28,11 @@ export const getUserData =
                     }),
                 );
                 navigate(`/${user.type}/dashboard`, { replace: true });
+                    setLoading(false);
             })
             .catch(() => {
                 navigate("/login", { replace: true });
+                    setLoading(false);
             });
     };
 
