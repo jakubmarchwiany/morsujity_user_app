@@ -7,10 +7,10 @@ declare module "*.jpg" {
 declare global {
     namespace NodeJS {
         interface ProcessEnv {
-            REACT_APP_ENV: "development" | "production";
-            REACT_APP_DEV_API_ENDPOINT: string;
-            REACT_APP_PRO_API_ENDPOINT: string;
-            REACT_APP_DEF_USER_IMAGE: string;
+            VITE_ENV: "development" | "production";
+            VITE_DEV_API_ENDPOINT: string;
+            VITE_PRO_API_ENDPOINT: string;
+            VITE_DEF_USER_IMAGE: string;
         }
     }
 }

@@ -14,7 +14,7 @@ import Cropper from "react-cropper";
 
 import { changeToDefUserImage, changeUserImage } from "store/user-actions";
 
-const { REACT_APP_DEF_USER_IMAGE: DEF_USER_IMAGE } = process.env;
+const { VITE_DEF_USER_IMAGE: DEF_USER_IMAGE } = import.meta.env;
 
 function ImageOptions() {
     const [openDialog, setOpenDialog] = useState(false);
