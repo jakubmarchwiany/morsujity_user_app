@@ -5,7 +5,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 import { Avatar, Button, ButtonGroup, Stack, Unstable_Grid2 as Grid2 } from "@mui/material";
-import ConfirmationDialog from "components/my/ConfirmationDialog";
+import DialogConfirm from "components/my/DialogConfirm";
 import MyModal from "components/my/MyModal";
 import "cropperjs/dist/cropper.css";
 import { useAppDispatch, useAppSelector } from "hooks/redux";
@@ -15,6 +15,8 @@ import Cropper from "react-cropper";
 import { changeToDefUserImage, changeUserImage } from "store/user-actions";
 
 const { VITE_DEF_USER_IMAGE: DEF_USER_IMAGE } = import.meta.env;
+
+const userDefImage = new URL(DEF_USER_IMAGE, import.meta.url).href;
 
 function ImageOptions() {
     const [openDialog, setOpenDialog] = useState(false);
@@ -77,7 +79,7 @@ function ImageOptions() {
                     <Avatar
                         sx={{ my: 2, width: 250, height: 250 }}
                         alt='Remy Sharp'
-                        src={userImage!}
+                        src={userImage === "def" ? userDefImage! : userImage!}
                         variant='rounded'
                     />
                 </Grid2>
