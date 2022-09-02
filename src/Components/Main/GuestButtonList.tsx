@@ -7,16 +7,10 @@ import {
     Info,
     Login,
     Storefront,
-    Web
+    Web,
 } from "@mui/icons-material";
-import {
-    Collapse,
-    List,
-    ListItem,
-    ListItemButton,
-    ListItemIcon,
-    ListItemText
-} from "@mui/material";
+import { Collapse, List, ListItemButton, ListItemIcon, ListItemText } from "@mui/material";
+import MyListItem from "components/my/MyListItem";
 import { memo, useState } from "react";
 import { Link } from "react-router-dom";
 
@@ -30,39 +24,10 @@ function GuestButtonList({ close }: Props) {
 
     return (
         <>
-            <ListItem disablePadding onClick={close}>
-                <ListItemButton component={Link} to='/'>
-                    <ListItemIcon>
-                        <Web fontSize='large' />
-                    </ListItemIcon>
-                    <ListItemText
-                        primaryTypographyProps={{ letterSpacing: 1.5 }}
-                        primary='Strona główna'
-                    />
-                </ListItemButton>
-            </ListItem>
-            <ListItem disablePadding onClick={close}>
-                <ListItemButton component={Link} to='/login'>
-                    <ListItemIcon>
-                        <Login fontSize='large' />
-                    </ListItemIcon>
-                    <ListItemText
-                        primaryTypographyProps={{ letterSpacing: 1.5 }}
-                        primary='Logowanie'
-                    />
-                </ListItemButton>
-            </ListItem>
-            <ListItem disablePadding onClick={close}>
-                <ListItemButton component={Link} to='/register'>
-                    <ListItemIcon>
-                        <HowToReg fontSize='large' />
-                    </ListItemIcon>
-                    <ListItemText
-                        primaryTypographyProps={{ letterSpacing: 1.5 }}
-                        primary='Rejestracja'
-                    />
-                </ListItemButton>
-            </ListItem>
+            <MyListItem to='/' close={close} primary='Strona główna' Icon={Web} />
+            <MyListItem to='/login' close={close} primary='Logowanie' Icon={Login} />
+            <MyListItem to='/register' close={close} primary='Register' Icon={HowToReg} />
+
             <ListItemButton
                 onClick={() => {
                     setOpen(!open);
@@ -97,26 +62,16 @@ function GuestButtonList({ close }: Props) {
                     </ListItemButton>
                 </List>
             </Collapse>
-            <ListItem disablePadding onClick={close}>
-                <ListItemButton component={Link} to='/search'>
-                    <ListItemIcon>
-                        <GroupAdd fontSize='large' />
-                    </ListItemIcon>
-                    <ListItemText
-                        primaryTypographyProps={{ letterSpacing: 1.5 }}
-                        primary='Szukaj Grupy'
-                    />
-                </ListItemButton>
-            </ListItem>
 
-            <ListItem disablePadding onClick={close}>
-                <ListItemButton component={Link} to='/shop' disabled>
-                    <ListItemIcon>
-                        <Storefront fontSize='large' />
-                    </ListItemIcon>
-                    <ListItemText primaryTypographyProps={{ letterSpacing: 1.5 }} primary='Sklep' />
-                </ListItemButton>
-            </ListItem>
+            <MyListItem to='/search' close={close} primary='Szukaj Grupy' Icon={GroupAdd} />
+
+            <MyListItem
+                disabled={true}
+                to='/shop'
+                close={close}
+                primary='Sklep'
+                Icon={Storefront}
+            />
         </>
     );
 }
