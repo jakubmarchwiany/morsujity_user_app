@@ -69,14 +69,12 @@ export async function postApi<T>(
                     resolve(data);
                 } else {
                     appDispatch(uiActions.showErrorNotification(data.message));
-                    reject(data);
+                    if (customError) reject(data);
                 }
             })
             .catch(() => {
                 appDispatch(uiActions.showErrorDefNotify());
-                if (customError) {
-                    reject(new Error());
-                }
+                if (customError) reject(new Error());
             });
     });
 }
@@ -104,14 +102,12 @@ export async function imageApi<T>(
                     resolve(data);
                 } else {
                     appDispatch(uiActions.showErrorNotification(data.message));
-                    reject(data);
+                    if (customError) reject(data);
                 }
             })
             .catch(() => {
                 appDispatch(uiActions.showErrorDefNotify());
-                if (customError) {
-                    reject(new Error());
-                }
+                if (customError) reject(new Error());
             });
     });
 }
