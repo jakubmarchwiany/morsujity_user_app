@@ -106,7 +106,7 @@ function ImageOptions() {
                     </ButtonGroup>
                 </Grid2>
             </Grid2>
-            <ConfirmationDialog
+            <DialogConfirm
                 content='Czy chcesz ustawić domyślne zdjęcie profilowe?'
                 open={openDialog}
                 onClose={handleDecision}
@@ -114,13 +114,7 @@ function ImageOptions() {
             <MyModal
                 open={openChangeImage}
                 onClose={handleCloseChangeImage}
-                aria-labelledby='modal-modal-title'
-                aria-describedby='modal-modal-description'
                 sx={{
-                    marginLeft: "auto",
-                    marginRight: "auto",
-                    top: "10%",
-                    position: "absolute",
                     overflow: "scroll",
                     width: "521px",
                     height: "80%",

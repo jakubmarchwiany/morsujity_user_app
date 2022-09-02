@@ -1,5 +1,6 @@
 import { Box, Button, Typography } from "@mui/material";
 import MyModal from "components/my/MyModal";
+
 import MyTextField from "components/my/MyTextField";
 import { useFormik } from "formik";
 import { useAppDispatch } from "hooks/redux";
@@ -44,22 +45,9 @@ function NewPassword() {
     });
 
     return (
-        <MyModal
-            open={open}
-            aria-labelledby='modal-modal-title'
-            aria-describedby='modal-modal-description'
-        >
-            <Box
-                component={"form"}
-                noValidate
-                onSubmit={formik.handleSubmit}
-                bgcolor={"background.paper"}
-                color={"text.primary"}
-                mx={5}
-                px={5}
-                borderRadius={2}
-            >
-                <Typography variant='h5' textAlign='center' mt={3}>
+        <MyModal open={open}>
+            <Box noValidate component={"form"} onSubmit={formik.handleSubmit}>
+                <Typography variant='h4' textAlign='center' mb={2}>
                     Nowe Hasło
                 </Typography>
 
@@ -82,7 +70,7 @@ function NewPassword() {
                     type='submit'
                     fullWidth
                     variant='contained'
-                    sx={{ mt: 1, mb: 3 }}
+                    sx={{ mt: 1 }}
                     disabled={!(formik.isValid && formik.dirty)}
                 >
                     Zmień
