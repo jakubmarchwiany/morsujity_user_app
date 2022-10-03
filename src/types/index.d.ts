@@ -1,4 +1,4 @@
-export {};
+export { };
 
 declare module "*.jpg" {
     export default "" as string;
@@ -11,6 +11,7 @@ declare global {
             VITE_DEV_API_ENDPOINT: string;
             VITE_PRO_API_ENDPOINT: string;
             VITE_DEF_USER_IMAGE: string;
+            VITE_USER_IMAGE_PATH: string;
         }
     }
 }

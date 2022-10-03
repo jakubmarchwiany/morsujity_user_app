@@ -2,12 +2,12 @@ import { AppDispatch } from "store";
 import { uiActions } from "store/ui-slice";
 
 const {
-    VITE_ENV: ENV,
+    DEV,
     VITE_DEV_API_ENDPOINT: DEV_API_ENDPOINT,
     VITE_PRO_API_ENDPOINT: PRO_API_ENDPOINT,
 } = import.meta.env;
 
-const END_POINT: string = ENV === "development" ? DEV_API_ENDPOINT : PRO_API_ENDPOINT;
+const END_POINT: string = DEV ? DEV_API_ENDPOINT : PRO_API_ENDPOINT;
 
 type statusType = "error" | "info" | "success" | "warning";
 

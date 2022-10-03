@@ -32,6 +32,8 @@ type LoginPayload = {
     user: UserData;
 };
 
+const { VITE_USER_IMAGE_PATH: USER_IMAGE_PATH } = import.meta.env;
+
 const userSlice = createSlice({
     name: "user",
     initialState,
@@ -44,7 +46,7 @@ const userSlice = createSlice({
                 type: action.payload.user.type,
                 email: action.payload.user.email,
                 pseudonym: action.payload.user.pseudonym,
-                image: action.payload.user.image,
+                image: USER_IMAGE_PATH + action.payload.user.image + ".webp",
             });
         },
         updatePseudonym(state, action: PayloadAction<string>) {
