@@ -7,15 +7,14 @@ function PageBlog() {
             <Helmet>
                 <title>Blog</title>
                 <meta
-                    name="description"
-                    content="Jak morsować. Czy morsowanie jest bezpieczne. Zimna woda korzyści. Jak zostać morsem"
+                    name='description'
+                    content='Jak morsować. Czy morsowanie jest bezpieczne. Zimna woda korzyści. Jak zostać morsem'
                 />
-                <link rel="canonical" href="/blog" />
+                <link rel='canonical' href='/blog' />
             </Helmet>
 
             <Post1 />
         </>
     );
 }
-
 export default PageBlog;

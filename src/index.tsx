@@ -1,4 +1,7 @@
-import React from "react";
+import { LocalizationProvider } from "@mui/x-date-pickers";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { StableNavigateContextProvider } from "middleware/StableNavigateContextProvider";
+import { StrictMode } from "react";
 import ReactDOM from "react-dom/client";
 import { HelmetProvider } from "react-helmet-async";
 import { Provider } from "react-redux";
@@ -10,14 +13,19 @@ import validateEnv from "./utils/validate-env";
 validateEnv();
 
 const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement);
+
 root.render(
-    <React.StrictMode>
+    <StrictMode>
         <HelmetProvider>
-            <Provider store={store}>
-                <BrowserRouter>
-                    <App />
-                </BrowserRouter>
-            </Provider>
+            <LocalizationProvider dateAdapter={AdapterDayjs}>
+                <Provider store={store}>
+                    <BrowserRouter>
+                        <StableNavigateContextProvider>
+                            <App />
+                        </StableNavigateContextProvider>
+                    </BrowserRouter>
+                </Provider>
+            </LocalizationProvider>
         </HelmetProvider>
-    </React.StrictMode>
+    </StrictMode>,
 );

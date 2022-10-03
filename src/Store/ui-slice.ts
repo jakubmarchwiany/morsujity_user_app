@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 type UiState = {
     open: boolean;
-    type: "success" | "info" | "warning" | "error";
+    type: "error" | "info" | "success" | "warning";
     message: string;
     duration: number;
 };
@@ -15,7 +15,7 @@ const initialState: UiState = {
 };
 
 type payLoadNotify = {
-    type: "success" | "info" | "warning" | "error";
+    type: "error" | "info" | "success" | "warning";
     message: string;
     duration?: number;
 };
@@ -29,7 +29,7 @@ const uiSlice = createSlice({
             state.type = action.payload.type;
             state.message = action.payload.message;
             state.duration = 2500;
-            if (action.payload.duration) state.duration = action.payload.duration;
+            if (action.payload.duration !== undefined) state.duration = action.payload.duration;
         },
         showErrorNotification(state, action: PayloadAction<string>) {
             state.open = true;
@@ -40,7 +40,7 @@ const uiSlice = createSlice({
         showErrorDefNotify(state) {
             state.open = true;
             state.type = "error";
-            state.message = "Coś poszło nie tak :(";
+            state.message = "Serwer nie odpowiada :(";
             state.duration = 5000;
         },
         hideNotification(state) {

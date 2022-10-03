@@ -47,7 +47,7 @@ function Register() {
     });
 
     return (
-        <Container component="main" maxWidth="xs">
+        <Container component='main' maxWidth='xs'>
             <Box
                 sx={{
                     marginTop: 8,
@@ -65,49 +65,49 @@ function Register() {
                         color: "white",
                     }}
                 >
-                    <LockOutlinedIcon fontSize="large" />
+                    <LockOutlinedIcon fontSize='large' />
                 </Avatar>
 
-                <Typography component="h1" variant="h4">
+                <Typography component='h1' variant='h4'>
                     Stwórz konto
                 </Typography>
 
                 <Box component={"form"} noValidate onSubmit={formik.handleSubmit} sx={{ mt: 3 }}>
                     <MyTextField
-                        name="pseudonym"
+                        name='pseudonym'
                         label={"Ksywka (pseudonim, Imię i Nazwisko)"}
                         formik={formik}
                     />
 
-                    <MyTextField name="email" label={"Adres email"} formik={formik} />
+                    <MyTextField name='email' label={"Adres email"} formik={formik} />
 
                     <MyTextField
-                        type="password"
-                        name="password"
+                        type='password'
+                        name='password'
                         label={"Hasło"}
-                        autoComplete="new-password"
+                        autoComplete='new-password'
                         formik={formik}
                     />
 
                     <MyTextField
-                        type="password"
-                        name="confirmPassword"
+                        type='password'
+                        name='confirmPassword'
                         label={"Potwierdzenie Hasła"}
-                        autoComplete="new-password"
+                        autoComplete='new-password'
                         formik={formik}
                     />
 
                     <Button
-                        type="submit"
+                        type='submit'
                         fullWidth
-                        variant="contained"
+                        variant='contained'
                         sx={{ mt: 3, mb: 2 }}
                         disabled={!(formik.isValid && formik.dirty)}
                     >
                         Rejestruj
                     </Button>
 
-                    <Link component={NavLink} to="/login" variant="body2" color="text.secondary">
+                    <Link component={NavLink} to='/login' variant='body2' color='text.secondary'>
                         Masz już konto?
                     </Link>
                 </Box>

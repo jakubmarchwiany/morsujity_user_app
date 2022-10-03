@@ -1,5 +1,6 @@
 import { Box, Button, Typography } from "@mui/material";
 import MyModal from "components/my/MyModal";
+
 import MyTextField from "components/my/MyTextField";
 import { useFormik } from "formik";
 import { useAppDispatch } from "hooks/redux";
@@ -30,7 +31,7 @@ const FORM_VALIDATION = Yup.object().shape({
 function NewPassword() {
     const [open, setOpen] = useState(true);
 
-    let { token } = useParams();
+    const { token } = useParams();
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
 
@@ -44,44 +45,32 @@ function NewPassword() {
     });
 
     return (
-        <MyModal
-            open={open}
-            aria-labelledby="modal-modal-title"
-            aria-describedby="modal-modal-description"
-        >
-            <Box
-                component={"form"}
-                noValidate
-                onSubmit={formik.handleSubmit}
-                bgcolor={"background.paper"}
-                color={"text.primary"}
-                px={5}
-                borderRadius={2}
-            >
-                <Typography variant="h5" textAlign="center" mt={3}>
+        <MyModal open={open}>
+            <Box noValidate component={"form"} onSubmit={formik.handleSubmit}>
+                <Typography variant='h4' textAlign='center' mb={2}>
                     Nowe Hasło
                 </Typography>
 
                 <MyTextField
-                    name="password"
-                    type="password"
-                    label="Hasło"
-                    autoComplete="new-password"
+                    name='password'
+                    type='password'
+                    label='Hasło'
+                    autoComplete='new-password'
                     formik={formik}
                 />
                 <MyTextField
-                    name="confirmPassword"
-                    type="password"
-                    label="Potwierdzenie Hasła"
-                    autoComplete="new-password"
+                    name='confirmPassword'
+                    type='password'
+                    label='Potwierdzenie Hasła'
+                    autoComplete='new-password'
                     formik={formik}
                 />
 
                 <Button
-                    type="submit"
+                    type='submit'
                     fullWidth
-                    variant="contained"
-                    sx={{ mt: 1, mb: 3 }}
+                    variant='contained'
+                    sx={{ mt: 1 }}
                     disabled={!(formik.isValid && formik.dirty)}
                 >
                     Zmień

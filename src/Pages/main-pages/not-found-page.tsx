@@ -6,12 +6,11 @@ function PageNotFound() {
         <>
             <Helmet>
                 <title>Strona nie znaleziona</title>
-                <meta name="description" content="Strona nie znaleziona." />
+                <meta name='description' content='Strona nie znaleziona.' />
             </Helmet>
 
             <NotFound />
         </>
     );
 }
-
 export default PageNotFound;

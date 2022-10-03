@@ -7,8 +7,8 @@ import PageStatut from "./main-pages/statut-page";
 import PageWelcome from "./main-pages/welcome-page";
 
 import PageDashboard from "./user-pages/dashboard-page";
+import PageNewActivity from "./user-pages/new-activity-page";
 import PageSettings from "./user-pages/settings-page";
-
 
 export {
     PageNotFound,
@@ -19,6 +19,6 @@ export {
     PageStatut,
     PageBlog,
     PageDashboard,
-    PageSettings
+    PageSettings,
+    PageNewActivity,
 };
-

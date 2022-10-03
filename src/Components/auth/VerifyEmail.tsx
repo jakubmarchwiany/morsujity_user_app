@@ -4,9 +4,9 @@ import { useNavigate, useParams } from "react-router-dom";
 import { verifyEmail } from "store/auth-actions";
 
 function VerifyEmail() {
-    let { token } = useParams();
-    let navigate = useNavigate();
-    let dispatch = useAppDispatch();
+    const { token } = useParams();
+    const navigate = useNavigate();
+    const dispatch = useAppDispatch();
 
     useEffect(() => {
         dispatch(verifyEmail(token!, navigate));

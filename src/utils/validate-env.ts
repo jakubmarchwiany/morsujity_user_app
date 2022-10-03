@@ -1,11 +1,11 @@
 import { cleanEnv, str } from "envalid";
 
 function validateEnv() {
-    cleanEnv(process.env, {
-        REACT_APP_ENV: str({ choices: ["development", "production"] }),
-        REACT_APP_DEV_API_ENDPOINT: str(),
-        REACT_APP_PRO_API_ENDPOINT: str(),
-        REACT_APP_DEF_USER_IMAGE: str(),
+    cleanEnv(import.meta.env, {
+        VITE_DEV_API_ENDPOINT: str(),
+        VITE_PRO_API_ENDPOINT: str(),
+        VITE_DEF_USER_IMAGE: str(),
+        VITE_USER_IMAGE_PATH: str(),
     });
 }
 export default validateEnv;

@@ -1,4 +1,9 @@
-import { TextField, TextFieldProps } from "@mui/material";
+/* eslint-disable @typescript-eslint/strict-boolean-expressions */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import type { TextFieldProps } from "@mui/material";
+import { TextField } from "@mui/material";
 import { styled } from "@mui/material/styles";
 
 const StyledTextField = styled(TextField)<TextFieldProps>(({ theme }) => ({
@@ -48,15 +53,15 @@ type MyTextFieldType = {
     formik: any;
 };
 
-const MyTextField = ({ type, name, label, placeholder,autoComplete, formik }: MyTextFieldType) => (
+const MyTextField = ({ type, name, label, placeholder, autoComplete, formik }: MyTextFieldType) => (
     <StyledTextField
-        type={type ? type : "text"}
+        type={type !== undefined ? type : "text"}
         name={name}
         label={label}
-        placeholder={placeholder ? placeholder : undefined}
-        autoComplete={autoComplete ? autoComplete : name}
+        placeholder={placeholder !== undefined ? placeholder : undefined}
+        autoComplete={autoComplete !== undefined ? autoComplete : name}
         fullWidth
-        margin="normal"
+        margin='normal'
         value={formik.values[name]}
         onChange={formik.handleChange}
         onBlur={formik.handleBlur}

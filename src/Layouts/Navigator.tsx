@@ -7,17 +7,18 @@ import {
     Switch,
     Theme,
     useMediaQuery,
-    useTheme
+    useTheme,
 } from "@mui/material";
+
 import GuestButtonList from "components/main/GuestButtonList";
 import UserButtonList from "components/user/UserButtonList";
 import { useAppDispatch, useAppSelector } from "hooks/redux";
-import Cookies from "js-cookie";
-import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import { appActions } from "store/app-slice";
 import { logoutUser } from "store/auth-actions";
-import { getUserData } from "store/user-actions";
+
+const { VITE_DEF_USER_IMAGE: DEF_USER_IMAGE } = import.meta.env;
+
+const userDefImage = new URL(DEF_USER_IMAGE, import.meta.url).href;
 
 interface NavigatorProps {
     navbar: boolean;
@@ -36,19 +37,11 @@ const Navigator = (props: NavigatorProps) => {
     }
 
     const dispatch = useAppDispatch();
-    const navigate = useNavigate();
-
-    useEffect(() => {
-        if (!user.logIn && Cookies.get("Authorization")) {
-            console.log("siema");
-            dispatch(getUserData(navigate));
-        }
-        // eslint-disable-next-line
-    }, []);
 
     const logoutHandler = () => {
-        dispatch(logoutUser(navigate));
+        dispatch(logoutUser());
         window.localStorage.setItem("logout", Date.now().toString());
+        if (props.onClose != undefined) props.onClose();
     };
 
     return bigScreen ? (
@@ -57,7 +50,7 @@ const Navigator = (props: NavigatorProps) => {
                 <UserButtonList
                     logIn={user.logIn}
                     type={user.type!}
-                    userImage={user.image!}
+                    userImage={user.image! === "def" ? userDefImage : user.image!}
                     close={props.onClose}
                     logoutHandler={logoutHandler}
                 />
@@ -68,9 +61,9 @@ const Navigator = (props: NavigatorProps) => {
                 <ListItemButton>
                     <ListItemIcon>
                         {mode === "dark" ? (
-                            <DarkMode fontSize="large" />
+                            <DarkMode fontSize='large' />
                         ) : (
-                            <LightMode fontSize="large" />
+                            <LightMode fontSize='large' />
                         )}
                     </ListItemIcon>
                     <Switch
