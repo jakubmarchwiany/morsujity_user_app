@@ -115,7 +115,6 @@ function Settings() {
                                     type='password'
                                     name='oldPassword'
                                     label='Aktualne Hasło'
-                                    autoComplete='new-password'
                                     formik={formikNewPassword}
                                 />
                             </Grid2>
@@ -130,7 +129,6 @@ function Settings() {
                                     type='password'
                                     name='newPassword'
                                     label='Nowe Hasło'
-                                    autoComplete='new-password'
                                     formik={formikNewPassword}
                                 />
                             </Grid2>
@@ -140,7 +138,6 @@ function Settings() {
                                     type='password'
                                     name='confirmNewPassword'
                                     label='Pot. Nowego Hasła'
-                                    autoComplete='new-password'
                                     formik={formikNewPassword}
                                 />
                             </Grid2>
