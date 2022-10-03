@@ -5,15 +5,15 @@ import "@fontsource/montserrat/600.css";
 import "@fontsource/montserrat/700.css";
 import type { PaletteMode } from "@mui/material";
 
-declare module "@mui/material/styles" {
-    interface Palette {
-        complementary: Palette["primary"];
-    }
+// declare module "@mui/material/styles" {
+//   interface Palette {
+//     complementary: Palette["primary"];
+//   }
 
-    interface PaletteOptions {
-        complementary?: PaletteOptions["primary"];
-    }
-}
+//   interface PaletteOptions {
+//     complementary?: PaletteOptions["primary"];
+//   }
+// }
 
 export const getDesignTokens = (mode: PaletteMode) => ({
     palette: {
@@ -23,12 +23,11 @@ export const getDesignTokens = (mode: PaletteMode) => ({
                   // palette values for light mode
                   primary: {
                       main: "#468faf",
+                      contrastText: "#fff",
                   },
                   secondary: {
-                      main: "#468faf",
-                  },
-                  complementary: {
-                      main: "#AF6646",
+                      main: "#fff",
+                      contrastText: "#468faf",
                   },
                   background: {
                       default: "#fff",
@@ -44,12 +43,11 @@ export const getDesignTokens = (mode: PaletteMode) => ({
                   // palette values for dark mode
                   primary: {
                       main: "#2c5a69",
+                      contrastText: "#fff",
                   },
                   secondary: {
                       main: "#fff",
-                  },
-                  complementary: {
-                      main: "#693B2C",
+                      contrastText: "#fff",
                   },
                   background: {
                       default: "#303030",
