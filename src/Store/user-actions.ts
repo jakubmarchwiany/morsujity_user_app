@@ -11,7 +11,7 @@ export const getUserData =
 
 
         (navigate: NavigateFunction, setLoading: Function): AppThunk =>
-    async (appDispatch) => {
+        async (appDispatch) => {
             await postApi<{ user: UserData }>(
                 {},
                 "/user/get-data",
@@ -20,21 +20,21 @@ export const getUserData =
                 undefined,
                 true,
             )
-            .then(({ user }) => {
-                appDispatch(
-                    userActions.login({
-                        token: Cookies.get("Authorization")!,
-                        user: user,
-                    }),
-                );
-                navigate(`/${user.type}/dashboard`, { replace: true });
+                .then(({ user }) => {
+                    appDispatch(
+                        userActions.login({
+                            token: Cookies.get("Authorization")!,
+                            user: user,
+                        }),
+                    );
+                    navigate(`/${user.type}/dashboard`, { replace: true });
                     setLoading(false);
-            })
-            .catch(() => {
-                navigate("/login", { replace: true });
+                })
+                .catch(() => {
+                    navigate("/login", { replace: true });
                     setLoading(false);
-            });
-    };
+                });
+        };
 
 export const changeUserPseudonym =
     (pseudonym: string): AppThunk =>
@@ -91,3 +91,13 @@ export const changeToDefUserImage = (): AppThunk => async (appDispatch) => {
         },
     );
 };
+
+export const newActivity =
+    (isMors: boolean, data: string, duration: number, navigate: NavigateFunction): AppThunk =>
+    async (appDispatch) => {
+        await postApi<never>({ isMors, data, duration }, "/user/new-activity", appDispatch).then(
+            () => {
+                navigate(`/dashboard`, { replace: true });
+            },
+        );
+    };
