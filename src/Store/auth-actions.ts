@@ -1,6 +1,8 @@
+import Cookies from "js-cookie";
 import { NavigateFunction } from "react-router-dom";
 import { AppThunk } from "store";
 import { postApi } from "utils/fetches";
+import { uiActions } from "./ui-slice";
 import { userActions, UserData } from "./user-slice";
 
 export const registerUser =
@@ -49,14 +51,11 @@ export const loginUser =
         });
     };
 
-export const logoutUser =
-    (navigate: NavigateFunction): AppThunk =>
-    async (appDispatch) => {
-        await postApi<never>({}, "/auth/logout", appDispatch).then(() => {
-            appDispatch(userActions.logout());
-            navigate("/", { replace: true });
-        });
-    };
+export const logoutUser = (): AppThunk => (appDispatch) => {
+    appDispatch(userActions.logout());
+    appDispatch(uiActions.showNotification({ message: "Udało się wylogować", type: "success" }));
+    Cookies.remove("Authorization");
+};
 
 export const requestResetPassword =
     (email: string): AppThunk =>
