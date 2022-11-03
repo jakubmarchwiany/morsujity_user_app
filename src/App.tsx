@@ -4,10 +4,12 @@ import {
     Stack,
     ThemeProvider,
     Unstable_Grid2 as Grid2,
+    useMediaQuery,
 } from "@mui/material";
 import "assets/app.css";
 import { getDesignTokens } from "assets/theme";
-import { useAppDispatch, useAppSelector } from "hooks/redux";
+import NotFound from "components/main/NotFound";
+import { useAppDispatch } from "hooks/redux";
 import useSetMode from "hooks/use-set-mode";
 import Cookies from "js-cookie";
 import Ads from "layouts/Ads";
@@ -15,43 +17,46 @@ import Footer from "layouts/Footer";
 import LoadingPage from "layouts/LoadingPage";
 import Navbar from "layouts/Navbar";
 import Navigator from "layouts/Navigator";
-import Notification from "layouts/Notification";
-import { useStableNavigate } from "middleware/StableNavigateContextProvider";
-import { PageNotFound } from "pages/index";
 import { useCallback, useEffect, useMemo, useState } from "react";
+import toast, { Toaster, useToasterStore } from "react-hot-toast";
 import { Route, Routes } from "react-router-dom";
-import { mainRoute } from "routes/main-route";
 import { userRoute } from "routes/user-route";
 import { getUserData } from "store/user-actions";
+import { authorizationFail, removeUserCookieAndRedirect } from "utils/fetches";
 
 function App() {
     const [loading, setLoading] = useState(true);
-    const appMode = useAppSelector((state) => state.app.mode);
+    const [mode, setMode] = useSetMode();
 
+    const { toasts } = useToasterStore();
     const dispatch = useAppDispatch();
-    const navigate = useStableNavigate();
 
-    useSetMode();
+    const theme = useMemo(() => {
+        return responsiveFontSizes(createTheme(getDesignTokens(mode)));
+    }, [mode]);
 
+    const isBigScreen = useMediaQuery(theme.breakpoints.up("md"));
     useEffect(() => {
         if (Cookies.get("Authorization") !== undefined) {
-            dispatch(getUserData(navigate, setLoading));
+            dispatch(getUserData(setLoading));
         } else {
-            setLoading(false);
+            authorizationFail();
         }
     }, []);
 
-    const theme = useMemo(
-        () => responsiveFontSizes(createTheme(getDesignTokens(appMode!))),
-        [appMode],
-    );
+    // Enforce Limit
+    useEffect(() => {
+        toasts
+            .filter((t) => t.visible) // Only consider visible toasts
+            .filter((_, i) => i >= 3) // Is toast index over limit
+            .forEach((t) => toast.dismiss(t.id)); // Dismiss – Use toast.remove(t.id) removal without animation
+    }, [toasts]);
 
     const syncLogout = useCallback((event: StorageEvent) => {
         if (event.key === "logout") {
-            window.location.reload();
+            removeUserCookieAndRedirect();
         }
     }, []);
-
     useEffect(() => {
         window.addEventListener("storage", syncLogout);
         return () => {
@@ -64,7 +69,7 @@ function App() {
     ) : (
         <ThemeProvider theme={theme}>
             <Stack height='100vh' display='flex' flexDirection='column'>
-                <Navbar />
+                <Navbar switchMode={setMode} />
                 <Grid2
                     container
                     flex={1}
@@ -73,26 +78,49 @@ function App() {
                     bgcolor={"background.default"}
                     color={"text.primary"}
                 >
-                    <Grid2 md={4} lg={3} sx={{ display: { xs: "none", md: "block" } }}>
-                        <Navigator navbar={false} />
-                    </Grid2>
+                    {isBigScreen && (
+                        <Grid2 md={4} lg={3} mt={2}>
+                            <Navigator />
+                        </Grid2>
+                    )}
 
-                    <Grid2 xs={20} md={12} lg={14} bgcolor={"background.paper"}>
+                    <Grid2
+                        xs={20}
+                        md={12}
+                        lg={14}
+                        bgcolor={"background.paper"}
+                        py={{ xs: 1, sm: 2, md: 3, lg: 4 }}
+                    >
                         <Routes>
-                            {mainRoute()}
                             {userRoute()}
-                            <Route path='*' element={<PageNotFound />} />
+                            <Route path='*' element={<NotFound />} />
                         </Routes>
                     </Grid2>
 
-                    <Grid2 md={4} lg={3} sx={{ display: { xs: "none", md: "block" } }}>
-                        <Ads />
-                    </Grid2>
+                    {isBigScreen && (
+                        <Grid2 md={4} lg={3}>
+                            <Ads />
+                        </Grid2>
+                    )}
                 </Grid2>
-                <Notification />
+
                 <Footer />
             </Stack>
+            <Toaster
+                position='bottom-center'
+                gutter={10}
+                // reverseOrder={true}
+                containerStyle={{ marginBottom: "40px" }}
+                toastOptions={{
+                    style: {
+                        background: theme.palette.background.default,
+                        color: theme.palette.text.secondary,
+                        minWidth: "250px",
+                    },
+                }}
+            />
         </ThemeProvider>
     );
 }
+
 export default App;
