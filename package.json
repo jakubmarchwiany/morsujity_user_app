@@ -1,8 +1,17 @@
 {
     "name": "morsujity-user-app",
-    "private": true,
-    "version": "0.0.0",
-    "type": "module",
+    "version": "0.5.0",
+    "description": "Morsujity user app",
+    "homepage": "https://github.com/xkvbikx/morsujity-user-app",
+    "license": "GPL-3.0-or-later",
+    "author": {
+        "name": "Jakub Marchwiany",
+        "email": "jacobmarchwiany@gmail.com"
+    },
+    "engines": {
+        "node": "~16.15.1",
+        "npm": "~8.19.2"
+    },
     "scripts": {
         "dev": "vite",
         "build": "tsc && vite build",
