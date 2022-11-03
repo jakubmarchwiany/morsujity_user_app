@@ -1,112 +1,148 @@
-import { AppDispatch } from "store";
-import { uiActions } from "store/ui-slice";
+import Cookies from "js-cookie";
+import toast from "react-hot-toast";
 
-const {
-    DEV,
-    VITE_DEV_API_ENDPOINT: DEV_API_ENDPOINT,
-    VITE_PRO_API_ENDPOINT: PRO_API_ENDPOINT,
-} = import.meta.env;
+const { VITE_API_ENDPOINT, PROD } = import.meta.env;
 
-const END_POINT: string = DEV ? DEV_API_ENDPOINT : PRO_API_ENDPOINT;
+const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
+
+export const removeUserCookieAndRedirect = () => {
+    if (PROD) {
+        Cookies.remove("Authorization");
+        window.location.href = "/login";
+    }
+};
+
+export const authorizationFail = async () => {
+    toast.error("Przekierowywanie do strony logowania", { duration: 5000 });
+    await sleep(1000);
+    const timer = toast.error("5");
+    await sleep(1000);
+    toast.error("4", { id: timer });
+    await sleep(1000);
+    toast.error("3", { id: timer });
+    await sleep(1000);
+    toast.error("2", { id: timer });
+    await sleep(1000);
+    toast.error("1", { id: timer, duration: 1000 });
+    await sleep(1000);
+
+    removeUserCookieAndRedirect();
+};
 
 type statusType = "error" | "info" | "success" | "warning";
 
-export async function api<T>(
+export async function getFetch<T>(
     url: string,
-    appDispatch: AppDispatch,
-    duration = 2500,
-    type: statusType = "success",
-    customError = false,
+    options?: { duration?: number; type?: statusType; customError?: boolean; token?: string },
 ): Promise<T & { message: string }> {
     return new Promise((resolve, reject) => {
-        fetch(END_POINT + url, {
+        const {
+            duration = 2500,
+            type = "success",
+            customError = false,
+            token = undefined,
+        } = options;
+        const myHeaders = new Headers();
+        myHeaders.append("Content-Type", "application/json");
+        if (token) myHeaders.append("Authorization", `Bearer ${options.token}`);
+        const toastId = toast.loading("Ładowanie...");
+        fetch(VITE_API_ENDPOINT + url, {
             method: "GET",
-            credentials: "include",
-            headers: { "Content-Type": "application/json" },
+            headers: myHeaders,
         })
             .then(async (response) => {
                 const data = (await response.json()) as T & { message: string };
                 if (response.ok) {
-                    appDispatch(
-                        uiActions.showNotification({ message: data.message, type, duration }),
-                    );
+                    toast.success(data.message, { id: toastId });
                     resolve(data);
                 } else {
-                    appDispatch(uiActions.showErrorNotification(data.message));
-                    reject(data);
-                }
-            })
-            .catch(() => {
-                appDispatch(uiActions.showErrorDefNotify());
-                if (customError) {
-                    reject(new Error());
-                }
-            });
-    });
-}
+                    toast.error(data.message, { id: toastId });
+                    if (response.status === 401) authorizationFail();
 
-export async function postApi<T>(
-    body: object,
-    url: string,
-    appDispatch: AppDispatch,
-    duration = 2500,
-    type: statusType = "success",
-    customError = false,
-): Promise<T & { message: string }> {
-    return new Promise((resolve, reject) => {
-        fetch(END_POINT + url, {
-            method: "POST",
-            credentials: "include",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(body),
-        })
-            .then(async (response) => {
-                const data = (await response.json()) as T & { message: string };
-                if (response.ok) {
-                    appDispatch(
-                        uiActions.showNotification({ message: data.message, type, duration }),
-                    );
-                    resolve(data);
-                } else {
-                    appDispatch(uiActions.showErrorNotification(data.message));
                     if (customError) reject(data);
                 }
             })
             .catch(() => {
-                appDispatch(uiActions.showErrorDefNotify());
+                toast.error("Serwer nie odpowiada :(", { id: toastId });
                 if (customError) reject(new Error());
             });
     });
 }
 
-export async function imageApi<T>(
-    body: FormData,
+export async function postFetch<T>(
+    body: object,
     url: string,
-    appDispatch: AppDispatch,
-    duration = 2500,
-    type: statusType = "success",
-    customError = false,
+    options?: { duration?: number; type?: statusType; customError?: boolean; token?: string },
 ): Promise<T & { message: string }> {
     return new Promise((resolve, reject) => {
-        fetch(END_POINT + url, {
+        const {
+            duration = 2500,
+            type = "success",
+            customError = false,
+            token = undefined,
+        } = options;
+        const myHeaders = new Headers();
+        myHeaders.append("Content-Type", "application/json");
+        if (token !== "") myHeaders.append("Authorization", `Bearer ${token}`);
+        const toastId = toast.loading("Ładowanie...");
+        fetch(VITE_API_ENDPOINT + url, {
             method: "POST",
-            credentials: "include",
+            headers: myHeaders,
+            body: JSON.stringify(body),
+        })
+            .then(async (response) => {
+                const data = (await response.json()) as T & { message: string };
+                if (response.ok) {
+                    toast.success(data.message, { id: toastId });
+                    resolve(data);
+                } else {
+                    toast.error(data.message, { id: toastId });
+                    if (response.status === 401) authorizationFail();
+
+                    if (customError) reject(data);
+                }
+            })
+            .catch(() => {
+                toast.error("Serwer nie odpowiada :(", { id: toastId });
+                if (customError) reject(new Error());
+            });
+    });
+}
+
+export async function imageFetch<T>(
+    body: FormData,
+    url: string,
+    options?: { duration?: number; type?: statusType; customError?: boolean; token?: string },
+): Promise<T & { message: string }> {
+    return new Promise((resolve, reject) => {
+        const {
+            duration = 2500,
+            type = "success",
+            customError = false,
+            token = undefined,
+        } = options;
+        const myHeaders = new Headers();
+        if (token !== "") myHeaders.append("Authorization", `Bearer ${token}`);
+        const toastId = toast.loading("Ładowanie...");
+        fetch(VITE_API_ENDPOINT + url, {
+            method: "POST",
+            headers: myHeaders,
             body: body,
         })
             .then(async (response) => {
                 const data = (await response.json()) as T & { message: string };
                 if (response.ok) {
-                    appDispatch(
-                        uiActions.showNotification({ message: data.message, type, duration }),
-                    );
+                    toast.success(data.message, { id: toastId });
                     resolve(data);
                 } else {
-                    appDispatch(uiActions.showErrorNotification(data.message));
+                    toast.error(data.message, { id: toastId });
+                    if (response.status === 401) authorizationFail();
+
                     if (customError) reject(data);
                 }
             })
             .catch(() => {
-                appDispatch(uiActions.showErrorDefNotify());
+                toast.error("Serwer nie odpowiada :(", { id: toastId });
                 if (customError) reject(new Error());
             });
     });
