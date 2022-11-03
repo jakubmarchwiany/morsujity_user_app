@@ -1,10 +1,10 @@
 {
-    "name": "my-vue-app",
+    "name": "morsujity-user-app",
     "private": true,
     "version": "0.0.0",
     "type": "module",
     "scripts": {
-        "start": "vite",
+        "dev": "vite",
         "build": "tsc && vite build",
         "preview": "vite preview",
         "lint": "eslint src/**/*.{js,jsx,ts,tsx,json}",
@@ -29,6 +29,7 @@
         "react-cropper": "^2.1.8",
         "react-dom": "^18.2.0",
         "react-helmet-async": "^1.3.0",
+        "react-hot-toast": "^2.4.0",
         "react-redux": "^8.0.2",
         "react-router-dom": "^6.3.0",
         "typescript": "^4.7.4",

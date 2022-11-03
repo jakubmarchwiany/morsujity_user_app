@@ -15,17 +15,13 @@ validateEnv();
 const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement);
 
 root.render(
-    <StrictMode>
-        <HelmetProvider>
-            <LocalizationProvider dateAdapter={AdapterDayjs}>
-                <Provider store={store}>
-                    <BrowserRouter>
-                        <StableNavigateContextProvider>
-                            <App />
-                        </StableNavigateContextProvider>
-                    </BrowserRouter>
-                </Provider>
-            </LocalizationProvider>
-        </HelmetProvider>
-    </StrictMode>,
+    <LocalizationProvider dateAdapter={AdapterDayjs}>
+        <Provider store={store}>
+            <BrowserRouter>
+                <StableNavigateContextProvider>
+                    <App />
+                </StableNavigateContextProvider>
+            </BrowserRouter>
+        </Provider>
+    </LocalizationProvider>,
 );
