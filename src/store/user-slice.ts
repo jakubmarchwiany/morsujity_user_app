@@ -1,23 +1,23 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
+const { VITE_DEF_USER_IMAGE_URL, VITE_USERS_IMAGE_URL } = import.meta.env;
+
 interface UserState {
     logIn: boolean;
-    token: string | null;
     _id: string | null;
     type: string | null;
     email: string | null;
     pseudonym: string | null;
-    image: string | null;
+    image: string | undefined;
 }
 
 const initialState: UserState = {
     logIn: false,
-    token: null,
     _id: null,
     type: null,
     email: null,
     pseudonym: null,
-    image: null,
+    image: undefined,
 };
 export type UserData = {
     _id: number;
@@ -32,39 +32,40 @@ type LoginPayload = {
     user: UserData;
 };
 
-const { VITE_USER_IMAGE_PATH: USER_IMAGE_PATH } = import.meta.env;
-
 const userSlice = createSlice({
     name: "user",
     initialState,
     reducers: {
-        login(state, action: PayloadAction<LoginPayload>) {
+        setUserData(state, action: PayloadAction<LoginPayload>) {
+            let image: string;
+            if (action.payload.user.image === "def") {
+                image = VITE_DEF_USER_IMAGE_URL;
+            } else {
+                image = VITE_USERS_IMAGE_URL + action.payload.user.image + ".webp";
+            }
+
             return Object.assign(state, {
                 logIn: true,
-                _id: action.payload.user._id,
                 token: action.payload.token,
+                _id: action.payload.user._id,
                 type: action.payload.user.type,
                 email: action.payload.user.email,
                 pseudonym: action.payload.user.pseudonym,
-                image: USER_IMAGE_PATH + action.payload.user.image + ".webp",
+                image: image,
             });
         },
         updatePseudonym(state, action: PayloadAction<string>) {
             return Object.assign(state, { pseudonym: action.payload });
         },
         updateImage(state, action: PayloadAction<string>) {
-            return Object.assign(state, { image: action.payload });
-        },
-        logout(state) {
-            return Object.assign(state, {
-                logIn: false,
-                _id: null,
-                token: null,
-                type: null,
-                email: null,
-                pseudonym: null,
-                image: null,
-            });
+            let image: string;
+            if (action.payload === "def") {
+                image = VITE_DEF_USER_IMAGE_URL;
+            } else {
+                image = VITE_USERS_IMAGE_URL + action.payload + ".webp";
+            }
+
+            return Object.assign(state, { image: image });
         },
     },
 });
