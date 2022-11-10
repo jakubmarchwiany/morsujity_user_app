@@ -3,22 +3,36 @@ import imgUrl from "assets/def/user.webp";
 
 const { VITE_DEF_USER_IMAGE_URL, VITE_USERS_IMAGE_URL } = import.meta.env;
 
-interface UserState {
-    logIn: boolean;
+export type Rank = {
+    N: number;
+    image: string;
+    name: string;
+    subRank: { N: number; name: string };
+};
+
+export type Statistics = {
+    activity: string;
+    rank: Rank;
+    timeColdShowers: number;
+    timeMorses: number;
+};
+
+type UserState = {
     _id: string | null;
     type: string | null;
     email: string | null;
     pseudonym: string | null;
     image: string | undefined;
-}
+    statistics: Statistics | null;
+};
 
 const initialState: UserState = {
-    logIn: false,
     _id: null,
     type: null,
     email: null,
     pseudonym: null,
     image: undefined,
+    statistics: null,
 };
 export type UserData = {
     _id: number;
@@ -26,6 +40,7 @@ export type UserData = {
     email: string;
     pseudonym: string;
     image: string;
+    statistics: Statistics;
 };
 
 const userSlice = createSlice({
@@ -41,12 +56,12 @@ const userSlice = createSlice({
             }
 
             return Object.assign(state, {
-                logIn: true,
                 _id: action.payload._id,
                 type: action.payload.type,
                 email: action.payload.email,
                 pseudonym: action.payload.pseudonym,
                 image: image,
+                statistics: action.payload.statistics,
             });
         },
         updatePseudonym(state, action: PayloadAction<string>) {
@@ -61,6 +76,11 @@ const userSlice = createSlice({
             }
 
             return Object.assign(state, { image: image });
+        },
+        addNewActivity(state, action: PayloadAction<Statistics>) {
+            return Object.assign(state, {
+                statistics: action.payload,
+            });
         },
     },
 });
