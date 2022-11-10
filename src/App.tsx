@@ -37,7 +37,7 @@ function App() {
 
     const isBigScreen = useMediaQuery(theme.breakpoints.up("md"));
     useEffect(() => {
-        if (Cookies.get("Authorization") !== undefined) {
+        if (Cookies.get("Authentication") !== undefined) {
             dispatch(getUserData(setLoading));
         } else {
             authorizationFail();
