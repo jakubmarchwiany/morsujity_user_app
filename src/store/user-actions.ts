@@ -4,7 +4,7 @@ import { getFetch, imageFetch, postFetch } from "utils/fetches";
 import { authorizationFail, logout } from "utils/useful";
 
 import { AppThunk } from "./index";
-import { userActions, UserData } from "./user-slice";
+import { Statistics, userActions, UserData } from "./user-slice";
 
 export const logoutUser = () => {
     getFetch<never>("/auth/logout").then(() => {
@@ -59,9 +59,13 @@ export const changeToDefUserImage = (): AppThunk => async (appDispatch) => {
 };
 
 export const newActivity =
-    (isMors: boolean, data: string, duration: number, navigate: NavigateFunction): AppThunk =>
+    (isMors: boolean, date: string, duration: number, navigate: NavigateFunction): AppThunk =>
     (appDispatch) => {
-        postFetch<never>({ isMors, data, duration }, "/user/new-activity").then(() => {
+        postFetch<{ statistics: Statistics }>(
+            { isMors, date, duration },
+            "/user/new-activity",
+        ).then(({ statistics }) => {
+            appDispatch(userActions.addNewActivity(statistics));
             navigate(`/dashboard`, { replace: true });
         });
     };
