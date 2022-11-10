@@ -6,7 +6,7 @@ const MyToggleButtonGroup = styled(ToggleButtonGroup)<ToggleButtonProps>(({ them
         ? {
               "& .MuiToggleButton-root.Mui-selected": {
                   color: theme.palette.secondary.main,
-                  backgroundColor: alpha(theme.palette.primary.main, 0.3),
+                  backgroundColor: alpha(theme.palette.primary.main, 1),
               },
           }
         : {
