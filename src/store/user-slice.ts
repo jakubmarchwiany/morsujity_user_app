@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import imgUrl from "assets/def/user.webp";
 
 const { VITE_DEF_USER_IMAGE_URL, VITE_USERS_IMAGE_URL } = import.meta.env;
 
@@ -27,30 +28,24 @@ export type UserData = {
     image: string;
 };
 
-type LoginPayload = {
-    token: string;
-    user: UserData;
-};
-
 const userSlice = createSlice({
     name: "user",
     initialState,
     reducers: {
-        setUserData(state, action: PayloadAction<LoginPayload>) {
+        setUserData(state, action: PayloadAction<UserData>) {
             let image: string;
-            if (action.payload.user.image === "def") {
-                image = VITE_DEF_USER_IMAGE_URL;
+            if (action.payload.image === "def") {
+                image = imgUrl;
             } else {
-                image = VITE_USERS_IMAGE_URL + action.payload.user.image + ".webp";
+                image = VITE_USERS_IMAGE_URL + action.payload.image + ".webp";
             }
 
             return Object.assign(state, {
                 logIn: true,
-                token: action.payload.token,
-                _id: action.payload.user._id,
-                type: action.payload.user.type,
-                email: action.payload.user.email,
-                pseudonym: action.payload.user.pseudonym,
+                _id: action.payload._id,
+                type: action.payload.type,
+                email: action.payload.email,
+                pseudonym: action.payload.pseudonym,
                 image: image,
             });
         },
@@ -60,7 +55,7 @@ const userSlice = createSlice({
         updateImage(state, action: PayloadAction<string>) {
             let image: string;
             if (action.payload === "def") {
-                image = VITE_DEF_USER_IMAGE_URL;
+                image = imgUrl;
             } else {
                 image = VITE_USERS_IMAGE_URL + action.payload + ".webp";
             }
