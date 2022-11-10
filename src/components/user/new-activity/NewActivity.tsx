@@ -13,7 +13,6 @@ import dayjs, { Dayjs } from "dayjs";
 import { useAppDispatch } from "hooks/redux";
 import { useStableNavigate } from "middleware/StableNavigateContextProvider";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { newActivity } from "store/user-actions";
 import {
     handleChangeMinutes,
@@ -25,7 +24,6 @@ import {
 } from "./marks";
 
 function NewActivity() {
-    const [isOpen, setIsOpen] = useState(true);
     const [isMors, setIsMors] = useState(true);
     const [isToday, setIsToday] = useState(true);
     const [isExactDate, setIsExactDate] = useState(false);
@@ -59,7 +57,7 @@ function NewActivity() {
                 px: { xs: 0, sm: 10, md: 5, lg: 15, xl: 30 },
             }}
         >
-            <Stack p={5} borderRadius={5} boxShadow={5}>
+            <Stack px={5} py={3} borderRadius={5} boxShadow={5}>
                 <Typography variant='h3' mb={3} textAlign='center'>
                     Nowa Aktywność
                 </Typography>
@@ -69,7 +67,7 @@ function NewActivity() {
                     value={isMors}
                     exclusive
                     onChange={(event, value: boolean) => {
-                        setIsMors(value!);
+                        if (value !== null) setIsMors(value!);
                     }}
                     fullWidth
                 >
@@ -77,7 +75,7 @@ function NewActivity() {
                     <ToggleButton value={false}>Zimny Prysznic</ToggleButton>
                 </MyToggleButtonGroup>
 
-                <Typography variant='h4' my={3} textAlign='center'>
+                <Typography variant='h4' my={2} textAlign='center'>
                     Czas trwania
                 </Typography>
                 <Slider
@@ -107,18 +105,19 @@ function NewActivity() {
                     marks={secMarks}
                 />
 
-                <Typography variant='h4' my={3} textAlign='center'>
+                <Typography variant='h4' my={2} textAlign='center'>
                     Data
                 </Typography>
 
                 <MyToggleButtonGroup
-                    sx={{ mb: 3 }}
                     color='secondary'
                     value={isToday}
                     exclusive
                     onChange={(event, value: boolean) => {
-                        setIsToday(value!);
-                        setDate(dayjs());
+                        if (value !== null) {
+                            setIsToday(value!);
+                            setDate(dayjs());
+                        }
                     }}
                     fullWidth
                 >
@@ -139,13 +138,14 @@ function NewActivity() {
                 )}
 
                 <MyToggleButtonGroup
-                    sx={{ my: 3 }}
                     color='secondary'
                     value={isExactDate}
                     exclusive
                     onChange={(event, value: boolean) => {
-                        setTime(null);
-                        setIsExactDate(value!);
+                        if (value !== null) {
+                            setTime(null);
+                            setIsExactDate(value!);
+                        }
                     }}
                     fullWidth
                 >
