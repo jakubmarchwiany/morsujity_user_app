@@ -22,10 +22,10 @@ import toast, { Toaster, useToasterStore } from "react-hot-toast";
 import { Route, Routes } from "react-router-dom";
 import { userRoute } from "routes/user-route";
 import { getUserData } from "store/user-actions";
-import { authorizationFail, removeUserCookieAndRedirect } from "utils/fetches";
+import { authorizationFail, logout } from "utils/useful";
 
 function App() {
-    const [loading, setLoading] = useState(true);
+    const [isLogged, setIsLogged] = useState(false);
     const [mode, setMode] = useSetMode();
 
     const { toasts } = useToasterStore();
@@ -37,8 +37,8 @@ function App() {
 
     const isBigScreen = useMediaQuery(theme.breakpoints.up("md"));
     useEffect(() => {
-        if (Cookies.get("Authentication") !== undefined) {
-            dispatch(getUserData(setLoading));
+        if (Cookies.get("authorization") !== undefined) {
+            dispatch(getUserData(setIsLogged));
         } else {
             authorizationFail();
         }
@@ -54,7 +54,7 @@ function App() {
 
     const syncLogout = useCallback((event: StorageEvent) => {
         if (event.key === "logout") {
-            removeUserCookieAndRedirect();
+            logout();
         }
     }, []);
     useEffect(() => {
@@ -64,48 +64,49 @@ function App() {
         };
     }, [syncLogout]);
 
-    return loading ? (
-        <LoadingPage />
-    ) : (
+    return (
         <ThemeProvider theme={theme}>
-            <Stack height='100vh' display='flex' flexDirection='column'>
-                <Navbar switchMode={setMode} />
-                <Grid2
-                    container
-                    flex={1}
-                    overflow='auto'
-                    columns={20}
-                    bgcolor={"background.default"}
-                    color={"text.primary"}
-                >
-                    {isBigScreen && (
-                        <Grid2 md={4} lg={3} mt={2}>
-                            <Navigator />
-                        </Grid2>
-                    )}
-
+            {isLogged ? (
+                <Stack height='100vh' display='flex' flexDirection='column'>
+                    <Navbar switchMode={setMode} />
                     <Grid2
-                        xs={20}
-                        md={12}
-                        lg={14}
-                        bgcolor={"background.paper"}
-                        py={{ xs: 1, sm: 2, md: 3, lg: 4 }}
+                        container
+                        flex={1}
+                        overflow='auto'
+                        columns={20}
+                        bgcolor={"background.default"}
+                        color={"text.primary"}
                     >
-                        <Routes>
-                            {userRoute()}
-                            <Route path='*' element={<NotFound />} />
-                        </Routes>
-                    </Grid2>
+                        {isBigScreen && (
+                            <Grid2 md={4} lg={3} mt={2}>
+                                <Navigator />
+                            </Grid2>
+                        )}
 
-                    {isBigScreen && (
-                        <Grid2 md={4} lg={3}>
-                            <Ads />
+                        <Grid2
+                            xs={20}
+                            md={12}
+                            lg={14}
+                            bgcolor={"background.paper"}
+                            py={{ xs: 1, sm: 2, md: 3, lg: 4 }}
+                        >
+                            <Routes>
+                                {userRoute()}
+                                <Route path='*' element={<NotFound />} />
+                            </Routes>
                         </Grid2>
-                    )}
-                </Grid2>
 
-                <Footer />
-            </Stack>
+                        {isBigScreen && (
+                            <Grid2 md={4} lg={3}>
+                                <Ads />
+                            </Grid2>
+                        )}
+                    </Grid2>
+                    <Footer />
+                </Stack>
+            ) : (
+                <LoadingPage />
+            )}
             <Toaster
                 position='bottom-center'
                 gutter={10}
