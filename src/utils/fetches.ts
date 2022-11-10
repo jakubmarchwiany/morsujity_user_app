@@ -33,21 +33,16 @@ type statusType = "error" | "info" | "success" | "warning";
 
 export async function getFetch<T>(
     url: string,
-    options?: { duration?: number; type?: statusType; customError?: boolean; token?: string },
+    options?: { customError?: boolean; token?: string },
 ): Promise<T & { message: string }> {
     return new Promise((resolve, reject) => {
-        const {
-            duration = 2500,
-            type = "success",
-            customError = false,
-            token = undefined,
-        } = options;
         const myHeaders = new Headers();
         myHeaders.append("Content-Type", "application/json");
-        if (token) myHeaders.append("Authorization", `Bearer ${options.token}`);
+        if (options?.token) myHeaders.append("Authorization", `Bearer ${options.token}`);
         const toastId = toast.loading("Ładowanie...");
         fetch(VITE_API_ENDPOINT + url, {
             method: "GET",
+            credentials: "include",
             headers: myHeaders,
         })
             .then(async (response) => {
@@ -59,12 +54,12 @@ export async function getFetch<T>(
                     toast.error(data.message, { id: toastId });
                     if (response.status === 401) authorizationFail();
 
-                    if (customError) reject(data);
+                    if (options?.customError) reject(data);
                 }
             })
-            .catch(() => {
+            .catch((error) => {
                 toast.error("Serwer nie odpowiada :(", { id: toastId });
-                if (customError) reject(new Error());
+                if (options?.customError) reject(error);
             });
     });
 }
@@ -72,21 +67,16 @@ export async function getFetch<T>(
 export async function postFetch<T>(
     body: object,
     url: string,
-    options?: { duration?: number; type?: statusType; customError?: boolean; token?: string },
+    options?: { customError?: boolean; token?: string },
 ): Promise<T & { message: string }> {
     return new Promise((resolve, reject) => {
-        const {
-            duration = 2500,
-            type = "success",
-            customError = false,
-            token = undefined,
-        } = options;
         const myHeaders = new Headers();
         myHeaders.append("Content-Type", "application/json");
-        if (token !== "") myHeaders.append("Authorization", `Bearer ${token}`);
+        if (options?.token) myHeaders.append("Authorization", `Bearer ${options.token}`);
         const toastId = toast.loading("Ładowanie...");
         fetch(VITE_API_ENDPOINT + url, {
             method: "POST",
+            credentials: "include",
             headers: myHeaders,
             body: JSON.stringify(body),
         })
@@ -99,12 +89,13 @@ export async function postFetch<T>(
                     toast.error(data.message, { id: toastId });
                     if (response.status === 401) authorizationFail();
 
-                    if (customError) reject(data);
+                    if (options?.customError) reject(data);
                 }
             })
-            .catch(() => {
+            .catch((error) => {
                 toast.error("Serwer nie odpowiada :(", { id: toastId });
-                if (customError) reject(new Error());
+
+                if (options?.customError) reject(error);
             });
     });
 }
@@ -112,20 +103,16 @@ export async function postFetch<T>(
 export async function imageFetch<T>(
     body: FormData,
     url: string,
-    options?: { duration?: number; type?: statusType; customError?: boolean; token?: string },
+    options?: { customError?: boolean; token?: string },
 ): Promise<T & { message: string }> {
     return new Promise((resolve, reject) => {
-        const {
-            duration = 2500,
-            type = "success",
-            customError = false,
-            token = undefined,
-        } = options;
         const myHeaders = new Headers();
-        if (token !== "") myHeaders.append("Authorization", `Bearer ${token}`);
+        if (options?.token) myHeaders.append("Authorization", `Bearer ${options.token}`);
+
         const toastId = toast.loading("Ładowanie...");
         fetch(VITE_API_ENDPOINT + url, {
             method: "POST",
+            credentials: "include",
             headers: myHeaders,
             body: body,
         })
@@ -138,12 +125,12 @@ export async function imageFetch<T>(
                     toast.error(data.message, { id: toastId });
                     if (response.status === 401) authorizationFail();
 
-                    if (customError) reject(data);
+                    if (options?.customError) reject(data);
                 }
             })
-            .catch(() => {
+            .catch((error) => {
                 toast.error("Serwer nie odpowiada :(", { id: toastId });
-                if (customError) reject(new Error());
+                if (options?.customError) reject(error);
             });
     });
 }
