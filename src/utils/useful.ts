@@ -28,7 +28,9 @@ export const authorizationFail = async () => {
 
 export const logout = async () => {
     if (PROD) {
-        Cookies.remove("Authorization");
-        window.location.href = window.location.origin;
+        Cookies.remove("authorization");
+        let newURL = window.location.hostname;
+        newURL = newURL.substring(newURL.indexOf(".") + 1);
+        window.location.href = newURL;
     }
 };
