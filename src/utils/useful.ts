@@ -21,9 +21,10 @@ export const sleeper = async (duration: number) => {
 };
 
 export const authorizationFail = async () => {
-    toast.error("Przekierowanie do strony logowania", { duration: 5000 });
+    Cookies.remove("authorization");
+    toast.error("Zaloguj się ponownie", { duration: 3000 });
     await sleeper(3);
-    logout();
+    window.location.reload();
 };
 
 export const logout = async () => {
