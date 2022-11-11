@@ -6,7 +6,7 @@ const { PROD } = import.meta.env;
 // Cookies.set(
 //     "authorization",
 //     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MzZjZjI0MzEwMTEyNGFkMzQ1YjlmOWQiLCJ1c2VyVHlwZSI6InVzZXIiLCJpYXQiOjE2NjgwODY2NzMsImV4cCI6MTY2ODY5MTQ3M30.KuC79nLQwcCPEy__gIjfpX_0HCK359NKTIZLg2JN7gU",
-//     { expires: 60 * 60 * 24 * 1000 },
+//     { expires: 7 },
 // );
 
 export const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
