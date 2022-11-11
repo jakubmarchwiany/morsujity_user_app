@@ -25,7 +25,7 @@ export async function getFetch<T>(
                     resolve(data);
                 } else {
                     toast.error(data.message, { id: toastId });
-                    if (response.status === 401) authorizationFail();
+                    if (response.status === 401) await authorizationFail();
 
                     if (options?.customError) reject(data);
                 }
@@ -60,14 +60,13 @@ export async function postFetch<T>(
                     resolve(data);
                 } else {
                     toast.error(data.message, { id: toastId });
-                    if (response.status === 401) authorizationFail();
+                    if (response.status === 401) await authorizationFail();
 
                     if (options?.customError) reject(data);
                 }
             })
             .catch((error) => {
                 toast.error("Serwer nie odpowiada :(", { id: toastId });
-
                 if (options?.customError) reject(error);
             });
     });
@@ -96,7 +95,7 @@ export async function imageFetch<T>(
                     resolve(data);
                 } else {
                     toast.error(data.message, { id: toastId });
-                    if (response.status === 401) authorizationFail();
+                    if (response.status === 401) await authorizationFail();
 
                     if (options?.customError) reject(data);
                 }
