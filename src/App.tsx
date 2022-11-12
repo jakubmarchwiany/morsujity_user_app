@@ -22,10 +22,10 @@ import toast, { Toaster, useToasterStore } from "react-hot-toast";
 import { Route, Routes } from "react-router-dom";
 import { userRoute } from "routes/user-route";
 import { getUserData } from "store/user-actions";
-import { authorizationFail, logout } from "utils/useful";
+import { logout } from "utils/useful";
 
 function App() {
-    const [isLogged, setIsLogged] = useState(false);
+    const [isLogged, setIsLogged] = useState<boolean | undefined>(undefined);
     const [mode, setMode] = useSetMode();
 
     const { toasts } = useToasterStore();
@@ -40,7 +40,8 @@ function App() {
         if (Cookies.get("authorization") !== undefined) {
             dispatch(getUserData(setIsLogged));
         } else {
-            authorizationFail();
+            toast.error("Zaloguj się ponownie", { duration: 3000 });
+            setIsLogged(false);
         }
     }, []);
 
@@ -105,7 +106,7 @@ function App() {
                     <Footer />
                 </Stack>
             ) : (
-                <LoadingPage />
+                <LoadingPage isLogged={isLogged} />
             )}
             <Toaster
                 position='bottom-center'
@@ -123,5 +124,4 @@ function App() {
         </ThemeProvider>
     );
 }
-
 export default App;

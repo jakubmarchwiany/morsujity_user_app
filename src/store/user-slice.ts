@@ -1,5 +1,4 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import imgUrl from "assets/def/user.webp";
 
 const { VITE_DEF_USER_IMAGE_URL, VITE_USERS_IMAGE_URL } = import.meta.env;
 
@@ -50,7 +49,7 @@ const userSlice = createSlice({
         setUserData(state, action: PayloadAction<UserData>) {
             let image: string;
             if (action.payload.image === "def") {
-                image = imgUrl;
+                image = VITE_DEF_USER_IMAGE_URL;
             } else {
                 image = VITE_USERS_IMAGE_URL + action.payload.image + ".webp";
             }
@@ -70,7 +69,7 @@ const userSlice = createSlice({
         updateImage(state, action: PayloadAction<string>) {
             let image: string;
             if (action.payload === "def") {
-                image = imgUrl;
+                image = VITE_DEF_USER_IMAGE_URL;
             } else {
                 image = VITE_USERS_IMAGE_URL + action.payload + ".webp";
             }
