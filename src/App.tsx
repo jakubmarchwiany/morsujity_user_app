@@ -19,8 +19,8 @@ import Navbar from "layouts/Navbar";
 import Navigator from "layouts/Navigator";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
-import { Navigate, Route, Routes } from "react-router-dom";
-import { userRoute } from "routes/user-route";
+import { Route, Routes } from "react-router-dom";
+import { mainRoute } from "routes/main-route";
 import { getUserData } from "store/user-actions";
 import { logout } from "utils/useful";
 
@@ -83,7 +83,7 @@ function App() {
                             py={{ xs: 1, sm: 2, md: 3, lg: 4 }}
                         >
                             <Routes>
-                                {userRoute()}
+                                {mainRoute()}
                                 <Route path='*' element={<NotFound />} />
                             </Routes>
                         </Grid2>

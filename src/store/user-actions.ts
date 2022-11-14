@@ -66,6 +66,6 @@ export const newActivity =
             "/user/new-activity",
         ).then(({ statistics }) => {
             appDispatch(userActions.addNewActivity(statistics));
-            navigate(`/dashboard`, { replace: true });
+            navigate(`/`, { replace: true });
         });
     };

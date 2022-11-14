@@ -19,7 +19,7 @@ function NotFound() {
 
                 <MyLinkButton
                     text='Powrót do Panelu głównego'
-                    to='user/dashboard'
+                    to='/'
                     isActive={false}
                     size='large'
                     Icon={Dashboard}

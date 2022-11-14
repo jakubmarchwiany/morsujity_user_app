@@ -19,8 +19,6 @@ import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { logoutUser } from "store/user-actions";
 
-const PREFIX = "/user";
-
 interface NavigatorProps {
     closeMenu?: () => void;
 }
@@ -42,15 +40,15 @@ const Navigator = ({ closeMenu }: NavigatorProps) => {
         <Stack>
             <MyLinkButton
                 text='Panel główny'
-                to={`${PREFIX}/dashboard`}
-                isActive={location.pathname === `${PREFIX}/dashboard`}
+                to={`/`}
+                isActive={location.pathname === `/`}
                 Icon={Dashboard}
                 closeMenu={closeMenu}
             />
             <MyLinkButton
                 text='Dodaj Aktywność'
-                to={`${PREFIX}/new-activity`}
-                isActive={location.pathname === `${PREFIX}/new-activity`}
+                to={`/new-activity`}
+                isActive={location.pathname === `/new-activity`}
                 Icon={AddTask}
                 closeMenu={closeMenu}
             />
@@ -72,24 +70,24 @@ const Navigator = ({ closeMenu }: NavigatorProps) => {
                 <Stack>
                     <MyLinkButton
                         text='Hipotermia'
-                        to={`${PREFIX}/group/1`}
-                        isActive={location.pathname === `${PREFIX}/group/1`}
+                        to={`/group/1`}
+                        isActive={location.pathname === `/group/1`}
                         size='small'
                         Icon={Group}
                         closeMenu={closeMenu}
                     />
                     <MyLinkButton
                         text='Chełmskie Morsy'
-                        to={`${PREFIX}/group/2`}
-                        isActive={location.pathname === `${PREFIX}/group/2`}
+                        to={`/group/2`}
+                        isActive={location.pathname === `/group/2`}
                         size='small'
                         Icon={Group}
                         closeMenu={closeMenu}
                     />
                     <MyLinkButton
                         text='Szukaj Grupy'
-                        to={`${PREFIX}/search`}
-                        isActive={location.pathname === `${PREFIX}/search`}
+                        to={`/search`}
+                        isActive={location.pathname === `/search`}
                         size='small'
                         Icon={GroupAdd}
                         closeMenu={closeMenu}
@@ -113,24 +111,24 @@ const Navigator = ({ closeMenu }: NavigatorProps) => {
                 <Stack pl={2}>
                     <MyLinkButton
                         text='O Aplikacja'
-                        to={`${PREFIX}/post/1`}
-                        isActive={location.pathname === `${PREFIX}/post/1`}
+                        to={`/post/1`}
+                        isActive={location.pathname === `/post/1`}
                         size='small'
                         Icon={Info}
                         closeMenu={closeMenu}
                     />
                     <MyLinkButton
                         text='+ / - Morsowania'
-                        to={`${PREFIX}/post/2`}
-                        isActive={location.pathname === `${PREFIX}/post/2`}
+                        to={`/post/2`}
+                        isActive={location.pathname === `/post/2`}
                         size='small'
                         Icon={Info}
                         closeMenu={closeMenu}
                     />
                     <MyLinkButton
                         text='Morsowanie ?'
-                        to={`${PREFIX}/post/3`}
-                        isActive={location.pathname === `${PREFIX}/post/3`}
+                        to={`/post/3`}
+                        isActive={location.pathname === `/post/3`}
                         size='small'
                         Icon={Info}
                         closeMenu={closeMenu}
@@ -139,12 +137,12 @@ const Navigator = ({ closeMenu }: NavigatorProps) => {
             </Collapse>
             <MyLinkButton
                 text='Sklep'
-                to={`${PREFIX}/shop`}
+                to={`/shop`}
                 isActive={true}
                 Icon={Storefront}
                 closeMenu={close}
             />
-            <Link to={`${PREFIX}/account`} style={{ textDecoration: "none" }}>
+            <Link to={`/account`} style={{ textDecoration: "none" }}>
                 <Button
                     size='large'
                     startIcon={
@@ -155,7 +153,7 @@ const Navigator = ({ closeMenu }: NavigatorProps) => {
                             variant='rounded'
                         />
                     }
-                    disabled={location.pathname === `${PREFIX}/account`}
+                    disabled={location.pathname === `/account`}
                     sx={{
                         color: "secondary.contrastText",
                     }}
@@ -167,8 +165,8 @@ const Navigator = ({ closeMenu }: NavigatorProps) => {
             </Link>
             <MyLinkButton
                 text='Ustawienia'
-                to={`${PREFIX}/settings`}
-                isActive={location.pathname === `${PREFIX}/settings`}
+                to={`/settings`}
+                isActive={location.pathname === `/settings`}
                 Icon={Settings}
                 closeMenu={close}
             />

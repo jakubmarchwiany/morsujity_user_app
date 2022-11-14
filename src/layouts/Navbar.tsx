@@ -48,7 +48,7 @@ function Navbar({ switchMode }: NavbarProps) {
                         }}
                     />
 
-                    <Link to='/user/dashboard' style={{ textDecoration: "none" }}>
+                    <Link to='/' style={{ textDecoration: "none" }}>
                         <MuiLink
                             component='p'
                             variant='h6'
