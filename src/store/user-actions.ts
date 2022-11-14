@@ -38,7 +38,9 @@ export const changeUserPseudonym =
 export const changeUserPassword =
     (oldPassword: string, newPassword: string): AppThunk =>
     () => {
-        postFetch<never>({ oldPassword, newPassword }, "/auth/change-password");
+        postFetch<never>({ oldPassword, newPassword }, "/auth/change-password").then(async () => {
+            authorizationFail();
+        });
     };
 
 export const changeUserImage =
