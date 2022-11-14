@@ -18,8 +18,8 @@ import LoadingPage from "layouts/LoadingPage";
 import Navbar from "layouts/Navbar";
 import Navigator from "layouts/Navigator";
 import { useCallback, useEffect, useMemo, useState } from "react";
-import toast, { Toaster, useToasterStore } from "react-hot-toast";
-import { Route, Routes } from "react-router-dom";
+import toast, { Toaster } from "react-hot-toast";
+import { Navigate, Route, Routes } from "react-router-dom";
 import { userRoute } from "routes/user-route";
 import { getUserData } from "store/user-actions";
 import { logout } from "utils/useful";
@@ -28,7 +28,6 @@ function App() {
     const [isLogged, setIsLogged] = useState<boolean | undefined>(undefined);
     const [mode, setMode] = useSetMode();
 
-    const { toasts } = useToasterStore();
     const dispatch = useAppDispatch();
 
     const theme = useMemo(() => {
@@ -44,14 +43,6 @@ function App() {
             setIsLogged(false);
         }
     }, []);
-
-    // Enforce Limit
-    useEffect(() => {
-        toasts
-            .filter((t) => t.visible) // Only consider visible toasts
-            .filter((_, i) => i >= 3) // Is toast index over limit
-            .forEach((t) => toast.dismiss(t.id)); // Dismiss – Use toast.remove(t.id) removal without animation
-    }, [toasts]);
 
     const syncLogout = useCallback((event: StorageEvent) => {
         if (event.key === "logout") {
