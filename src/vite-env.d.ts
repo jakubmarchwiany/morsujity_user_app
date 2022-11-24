@@ -2,6 +2,7 @@
 
 interface ImportMetaEnv {
     readonly VITE_API_ENDPOINT: string;
+    readonly VITE_DOMAIN_URL: string;
     readonly VITE_DEF_USER_IMAGE_URL: string;
     readonly VITE_USERS_IMAGE_URL: string;
 }
