@@ -1,5 +1,7 @@
 import Cookies from "js-cookie";
 import toast from "react-hot-toast";
+import dayjs from "dayjs";
+
 
 const { PROD } = import.meta.env;
 
@@ -34,4 +36,15 @@ export const logout = async () => {
         newURL = newURL.substring(newURL.indexOf(".") + 1);
         window.location.href = newURL;
     }
+};
+
+export const displayTime = (time: number) => {
+    return `${Math.floor(time / 60)} min ${time % 60 !== 0 ? (time % 60) + " sek" : ""}`
+};
+
+export const displayDate = (date: string) => {
+    if(dayjs(date).hour() === 0 && dayjs(date).minute() === 0)
+        return dayjs(date).format("DD.MM.YYYY");
+    else
+        return dayjs(date).format("DD.MM.YYYY HH:mm");
 };
