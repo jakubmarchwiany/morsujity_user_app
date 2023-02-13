@@ -4,7 +4,7 @@ import { getFetch, imageFetch, postFetch } from "utils/fetches";
 import { authorizationFail, logout } from "utils/useful";
 
 import { AppThunk } from "./index";
-import { Statistics, userActions, UserData } from "./user-slice";
+import { Activity, Rank, Statistics, userActions, UserData } from "./user-slice";
 
 export const logoutUser = () => {
     getFetch<never>("/auth/logout").then(() => {
@@ -22,10 +22,19 @@ export const getUserData =
                 appDispatch(userActions.setUserData(user));
                 setIsLogged(true);
             })
-            .catch(() => {
+            .catch((e) => {
                 authorizationFail();
             });
     };
+
+export const getAllActivity = (): AppThunk => (appDispatch) => {
+    getFetch<{ activity: Activity[] }>("/user/allActivity", {
+        customError: true,
+    }).then(({ activity }) => {
+        console.log(activity);
+        appDispatch(userActions.setAllActivity(activity));
+    });
+};
 
 export const changeUserPseudonym =
     (pseudonym: string): AppThunk =>
@@ -63,11 +72,26 @@ export const changeToDefUserImage = (): AppThunk => async (appDispatch) => {
 export const newActivity =
     (isMors: boolean, date: string, duration: number, navigate: NavigateFunction): AppThunk =>
     (appDispatch) => {
-        postFetch<{ statistics: Statistics }>(
-            { isMors, date, duration },
-            "/user/new-activity",
-        ).then(({ statistics }) => {
-            appDispatch(userActions.addNewActivity(statistics));
+        postFetch<{
+            data: {
+                rank: Rank;
+                subRank: Rank;
+                timeColdShowers: number;
+                timeMorses: number;
+                activity: Activity;
+            };
+        }>({ isMors, date, duration }, "/user/new-activity").then(({ data }) => {
+            appDispatch(userActions.newActivity(data));
             navigate(`/`, { replace: true });
+        });
+    };
+
+export const deleteActivity =
+    (activityID: string): AppThunk =>
+    (appDispatch) => {
+        postFetch<{
+            data: { rank: Rank; subRank: Rank; timeColdShowers: number; timeMorses: number };
+        }>({ activityID }, "/user/delete-activity").then(({ data }) => {
+            appDispatch(userActions.deleteActivity({ ...data, activityID }));
         });
     };

@@ -4,22 +4,28 @@ const { VITE_DEF_USER_IMAGE_URL, VITE_USERS_IMAGE_URL } = import.meta.env;
 
 export type Rank = {
     N: number;
-    image: string;
     name: string;
-    subRank: { N: number; name: string };
+    maxValue: number;
+};
+
+export type Activity = {
+    _id: string;
+    isMors: boolean;
+    date: string;
+    duration: number;
 };
 
 export type Statistics = {
-    activity: string;
     rank: Rank;
+    subRank: Rank;
     timeColdShowers: number;
     timeMorses: number;
+    activity: Activity[];
 };
 
 type UserState = {
     _id: string | null;
     type: string | null;
-    email: string | null;
     pseudonym: string | null;
     image: string | undefined;
     statistics: Statistics | null;
@@ -28,18 +34,30 @@ type UserState = {
 const initialState: UserState = {
     _id: null,
     type: null,
-    email: null,
     pseudonym: null,
     image: undefined,
     statistics: null,
 };
 export type UserData = {
     _id: number;
-    type: string;
-    email: string;
     pseudonym: string;
     image: string;
     statistics: Statistics;
+};
+
+type newActivityP = {
+    activity: Activity;
+    rank: Rank;
+    subRank: Rank;
+    timeColdShowers: number;
+    timeMorses: number;
+};
+type deleteActivityP = {
+    activityID: string;
+    rank: Rank;
+    subRank: Rank;
+    timeColdShowers: number;
+    timeMorses: number;
 };
 
 const userSlice = createSlice({
@@ -56,11 +74,14 @@ const userSlice = createSlice({
 
             return Object.assign(state, {
                 _id: action.payload._id,
-                type: action.payload.type,
-                email: action.payload.email,
                 pseudonym: action.payload.pseudonym,
                 image: image,
                 statistics: action.payload.statistics,
+            });
+        },
+        setAllActivity(state, action: PayloadAction<Activity[]>) {
+            return Object.assign(state, {
+                statistics: { ...state.statistics, activity: action.payload },
             });
         },
         updatePseudonym(state, action: PayloadAction<string>) {
@@ -76,9 +97,28 @@ const userSlice = createSlice({
 
             return Object.assign(state, { image: image });
         },
-        addNewActivity(state, action: PayloadAction<Statistics>) {
+        newActivity(state, action: PayloadAction<newActivityP>) {
+            const { activity, rank, subRank, timeColdShowers, timeMorses } = action.payload;
             return Object.assign(state, {
-                statistics: action.payload,
+                statistics: {
+                    activity: [...state.statistics!.activity, activity],
+                    rank: rank,
+                    subRank: subRank,
+                    timeColdShowers: timeColdShowers,
+                    timeMorses: timeMorses,
+                },
+            });
+        },
+        deleteActivity(state, action: PayloadAction<deleteActivityP>) {
+            const { activityID, rank, subRank, timeColdShowers, timeMorses } = action.payload;
+            return Object.assign(state, {
+                statistics: {
+                    activity: state.statistics!.activity.filter((a) => a._id !== activityID),
+                    rank: rank,
+                    subRank: subRank,
+                    timeColdShowers: timeColdShowers,
+                    timeMorses: timeMorses,
+                },
             });
         },
     },
