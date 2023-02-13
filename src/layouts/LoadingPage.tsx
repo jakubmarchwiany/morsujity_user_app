@@ -41,7 +41,7 @@ function LoadingPage({ isLogged }: Props) {
                         expires: 7,
                         path: "/",
                     });
-                    await sleeper(3);
+                    await sleeper(2);
                     window.location.reload();
                 })
                 .catch(() => {

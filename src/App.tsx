@@ -94,7 +94,7 @@ function App() {
                             </Grid2>
                         )}
                     </Grid2>
-                    <Footer />
+                    {/* <Footer /> */}
                 </Stack>
             ) : (
                 <LoadingPage isLogged={isLogged} />
