@@ -10,7 +10,7 @@ import {
     Info,
     Logout,
     Settings,
-    Storefront,
+    Storefront
 } from "@mui/icons-material";
 import { Avatar, Button, Collapse, Stack } from "@mui/material";
 import MyLinkButton from "components/my/MyLinkButton";
@@ -142,7 +142,7 @@ const Navigator = ({ closeMenu }: NavigatorProps) => {
                 Icon={Storefront}
                 closeMenu={close}
             />
-            <Link to={`/account`} style={{ textDecoration: "none" }}>
+            <Link to={`/statistics`} style={{ textDecoration: "none" }}>
                 <Button
                     size='large'
                     startIcon={
@@ -153,14 +153,14 @@ const Navigator = ({ closeMenu }: NavigatorProps) => {
                             variant='rounded'
                         />
                     }
-                    disabled={location.pathname === `/account`}
+                    disabled={location.pathname === `/statistics`}
                     sx={{
                         color: "secondary.contrastText",
                     }}
                     fullWidth
                     onClick={closeMenu}
                 >
-                    Konto
+                    Statystyki
                 </Button>
             </Link>
             <MyLinkButton
