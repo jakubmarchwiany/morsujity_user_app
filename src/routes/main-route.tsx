@@ -1,10 +1,10 @@
 import Contact from "components/main/Contact";
 import Statut from "components/main/Statut";
-import Statistics from "components/user/Statistics";
+import Statistics from "components/user/statistics/Statistics";
 // import Account from "components/user/Account";
 import DashBoard from "components/user/Dashboard";
 import NewActivity from "components/user/new-activity/NewActivity";
-import Settings from "components/user/Settings";
+import Settings from "components/user/settings/Settings";
 import { Route } from "react-router-dom";
 
 export function mainRoute() {
