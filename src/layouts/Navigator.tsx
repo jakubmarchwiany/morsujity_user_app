@@ -9,6 +9,7 @@ import {
     Groups,
     Info,
     Logout,
+    Search,
     Settings,
     Storefront
 } from "@mui/icons-material";
@@ -72,7 +73,7 @@ const Navigator = ({ closeMenu }: NavigatorProps) => {
                         text='Hipotermia'
                         to={`/group/1`}
                         isActive={location.pathname === `/group/1`}
-                        size='small'
+                        size='medium'
                         Icon={Group}
                         closeMenu={closeMenu}
                     />
@@ -80,7 +81,7 @@ const Navigator = ({ closeMenu }: NavigatorProps) => {
                         text='Chełmskie Morsy'
                         to={`/group/2`}
                         isActive={location.pathname === `/group/2`}
-                        size='small'
+                        size='medium'
                         Icon={Group}
                         closeMenu={closeMenu}
                     />
@@ -88,6 +89,14 @@ const Navigator = ({ closeMenu }: NavigatorProps) => {
                         text='Szukaj Grupy'
                         to={`/search`}
                         isActive={location.pathname === `/search`}
+                        size='small'
+                        Icon={Search}
+                        closeMenu={closeMenu}
+                    />
+                    <MyLinkButton
+                        text='Stwórz grupę'
+                        to={`/new-group`}
+                        isActive={location.pathname === `/new-group`}
                         size='small'
                         Icon={GroupAdd}
                         closeMenu={closeMenu}
