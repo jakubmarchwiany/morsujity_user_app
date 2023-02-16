@@ -1,9 +1,12 @@
 import LoadingButton from "@mui/lab/LoadingButton";
-import { Box, Button, Container, Stack, Typography } from "@mui/material";
+import { Box, Button, Container, Stack, ToggleButton, Typography } from "@mui/material";
 import MyTextField from "components/my/MyTextField";
+import MyToggleButtonGroup from "components/my/MyToggleButtonGroup";
 import { useFormik } from "formik";
-import React, { useState } from "react";
+import "mapbox-gl/dist/mapbox-gl.css";
+import { useState } from "react";
 import * as Yup from "yup";
+import SetGroupMap from "./maps/SetGroupMap";
 
 const INITIAL_FORM_STATE = {
     name: "",
@@ -18,11 +21,14 @@ const FORM_VALIDATION = Yup.object().shape({
     description: Yup.string()
         .required("Wymagane")
         .min(20, "Opis za krótka - Co najmniej 20 znaków")
-        .max(280, "Opis za długa - Maksymalnie 30 znaków"),
+        .max(280, "Opis za długa - Maksymalnie 280 znaków"),
 });
 
 function NewGroup() {
     const [isLoading, setIsLoading] = useState(false);
+    const [isPublic, setIsPublic] = useState(true);
+    const [coordinates, setCoordinates] = useState<[number, number]>([19, 52]);
+    const [isMapVisible, setIsMapVisible] = useState(false);
 
     const formikNewGroup = useFormik({
         initialValues: INITIAL_FORM_STATE,
@@ -38,7 +44,7 @@ function NewGroup() {
             }}
         >
             <Stack px={5} py={3} borderRadius={5} boxShadow={5}>
-                <Typography variant='h3' mb={3} textAlign='center'>
+                <Typography variant='h3' mb={2} textAlign='center'>
                     Stwórz grupę
                 </Typography>
 
@@ -50,21 +56,51 @@ function NewGroup() {
                         formik={formikNewGroup}
                     />
                     <MyTextField
-                        name='password'
+                        name='description'
                         label='Opis'
-                        sx={{ mb: 2, input: { color: "white" } }}
+                        multiline
+                        minRows={3}
+                        maxRows={5}
+                        sx={{ mb: 1, input: { color: "white" } }}
                         formik={formikNewGroup}
                     />
+                    <MyToggleButtonGroup
+                        color='secondary'
+                        value={isPublic}
+                        exclusive
+                        size='small'
+                        onChange={(event, value: boolean) => {
+                            if (value !== null) setIsPublic(value!);
+                        }}
+                        fullWidth
+                        sx={{ mb: 1 }}
+                    >
+                        <ToggleButton value={true}>Publiczna</ToggleButton>
+                        <ToggleButton value={false}>Prywatna</ToggleButton>
+                    </MyToggleButtonGroup>
+
+                    {isMapVisible ? (
+                        <SetGroupMap coordinates={coordinates} setCoordinates={setCoordinates} />
+                    ) : (
+                        <Button
+                            fullWidth
+                            color='secondary'
+                            variant='outlined'
+                            onClick={() => setIsMapVisible(true)}
+                        >
+                            Ustaw lokalizacje grupy
+                        </Button>
+                    )}
 
                     <LoadingButton
                         loading={isLoading}
                         type='submit'
                         variant='contained'
-                        disabled={!(formikNewGroup.isValid && formikNewGroup.dirty)}
+                        disabled={!(formikNewGroup.isValid && formikNewGroup.dirty && isMapVisible)}
                         fullWidth
                         sx={{ my: 1 }}
                     >
-                        Zaloguj
+                        Stwórz grupę
                     </LoadingButton>
                 </Box>
             </Stack>
