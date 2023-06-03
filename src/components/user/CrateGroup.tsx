@@ -6,7 +6,8 @@ import { useFormik } from "formik";
 import "mapbox-gl/dist/mapbox-gl.css";
 import { useState } from "react";
 import * as Yup from "yup";
-import SetGroupMap from "./maps/SetGroupMap";
+import NewGroupMap from "./maps/NewGroupMap";
+import { postFetch } from "utils/fetches";
 
 const INITIAL_FORM_STATE = {
     name: "",
@@ -24,7 +25,7 @@ const FORM_VALIDATION = Yup.object().shape({
         .max(280, "Opis za długa - Maksymalnie 280 znaków"),
 });
 
-function NewGroup() {
+function CreateGroup() {
     const [isLoading, setIsLoading] = useState(false);
     const [isPublic, setIsPublic] = useState(true);
     const [coordinates, setCoordinates] = useState<[number, number]>([19, 52]);
@@ -33,7 +34,12 @@ function NewGroup() {
     const formikNewGroup = useFormik({
         initialValues: INITIAL_FORM_STATE,
         validationSchema: FORM_VALIDATION,
-        onSubmit: () => {},
+        onSubmit: ({ name, description }, { resetForm }) => {
+            setIsLoading(true);
+
+
+
+        },
     });
 
     return (
@@ -80,7 +86,7 @@ function NewGroup() {
                     </MyToggleButtonGroup>
 
                     {isMapVisible ? (
-                        <SetGroupMap coordinates={coordinates} setCoordinates={setCoordinates} />
+                        <NewGroupMap coordinates={coordinates} setCoordinates={setCoordinates} />
                     ) : (
                         <Button
                             fullWidth
@@ -108,4 +114,4 @@ function NewGroup() {
     );
 }
 
-export default NewGroup;
+export default CreateGroup;

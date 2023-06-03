@@ -6,7 +6,7 @@ import DashBoard from "components/user/Dashboard";
 import NewActivity from "components/user/new-activity/NewActivity";
 import Settings from "components/user/settings/Settings";
 import { Route } from "react-router-dom";
-import NewGroup from "components/user/NewGroup";
+import CreateGroup from "components/user/CrateGroup";
 
 export function mainRoute() {
     return [
@@ -15,7 +15,7 @@ export function mainRoute() {
             <Route key='new-activity' path='new-activity' element={<NewActivity />} />
             <Route key='statistics' path='statistics' element={<Statistics />} />
             <Route key='settings' path='settings' element={<Settings />} />
-            <Route key='new-group' path='new-group' element={<NewGroup />} />
+            <Route key='new-group' path='new-group' element={<CreateGroup />} />
             <Route key='contact' path='contact' element={<Contact />} />,
             <Route key='statut' path='statut' element={<Statut />} />,
             {/* <Route key='blog' path='blog' element={<Blog />} />, */}

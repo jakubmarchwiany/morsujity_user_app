@@ -9,7 +9,7 @@ type Props = {
     setCoordinates: (coordinates: [number, number]) => void;
 };
 
-function SetGroupMap({ coordinates, setCoordinates }: Props) {
+function NewGroupMap({ coordinates, setCoordinates }: Props) {
     const onWheel = (event: any) => {
         if (event.originalEvent.ctrlKey | event.originalEvent.altKey) {
             return;
@@ -48,4 +48,4 @@ function SetGroupMap({ coordinates, setCoordinates }: Props) {
         </Map>
     );
 }
-export default SetGroupMap;
+export default NewGroupMap;
