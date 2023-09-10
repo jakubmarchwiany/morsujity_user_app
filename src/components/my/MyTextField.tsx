@@ -49,14 +49,14 @@ const MyTextField = (props: MyTextFieldType) => {
     const {name, formik} = props
     return (
     <StyledTextField
-        {...props}
-        variant="standard"  
+        variant="filled"  
         fullWidth
         value={formik.values[name]}
         onChange={formik.handleChange}
         onBlur={formik.handleBlur}
         error={formik.touched[name] && Boolean(formik.errors[name])}
         helperText={formik.touched[name] && formik.errors[name]}
+        {...props}
     />
 )};
 

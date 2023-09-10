@@ -1,20 +1,19 @@
 import {
-    createTheme,
-    responsiveFontSizes,
+    Unstable_Grid2 as Grid2,
     Stack,
     ThemeProvider,
-    Unstable_Grid2 as Grid2,
+    createTheme,
+    responsiveFontSizes,
     useMediaQuery,
 } from "@mui/material";
 import "assets/app.css";
 import { getDesignTokens } from "assets/theme";
+import LoadingPage from "components/loading_page/LoadingPage";
 import NotFound from "components/main/NotFound";
 import { useAppDispatch } from "hooks/redux";
 import useSetMode from "hooks/use-set-mode";
 import Cookies from "js-cookie";
 import Ads from "layouts/Ads";
-import Footer from "layouts/Footer";
-import LoadingPage from "layouts/LoadingPage";
 import Navbar from "layouts/Navbar";
 import Navigator from "layouts/Navigator";
 import { useCallback, useEffect, useMemo, useState } from "react";
@@ -39,7 +38,7 @@ function App() {
         if (Cookies.get("authorization") !== undefined) {
             dispatch(getUserData(setIsLogged));
         } else {
-            toast.error("Zaloguj się ponownie", { duration: 3000 });
+            toast.error("Zaloguj się", { duration: 2000 });
             setIsLogged(false);
         }
     }, []);
@@ -102,7 +101,6 @@ function App() {
             <Toaster
                 position='bottom-center'
                 gutter={10}
-                // reverseOrder={true}
                 containerStyle={{ marginBottom: "40px" }}
                 toastOptions={{
                     style: {
