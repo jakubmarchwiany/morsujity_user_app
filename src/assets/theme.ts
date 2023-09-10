@@ -66,13 +66,15 @@ export const getDesignTokens = (mode: PaletteMode) => ({
     breakpoints: {
         values: {
             xs: 0,
-            sm: 769,
+            sm: 768,
             md: 1024,
             lg: 1216,
             xl: 1408,
         },
     },
 });
+
+export const standardSize = { xs: "95%", sm: "50%", md: "40%", lg: "35%", xl: "25%" };
 
 //Light mode
 // "50": "#e4f5fe",
