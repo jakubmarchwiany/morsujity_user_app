@@ -1,10 +1,12 @@
-import { Box, Typography } from "@mui/material";
+import { Stack, Typography } from "@mui/material";
 
 function Ads() {
     return (
-        <Box bgcolor='red' p={2}>
-            <Typography variant='h1'>Ads</Typography>
-        </Box>
+        <Stack height={"100%"} alignItems={"center"} justifyContent={"center"}>
+            <Typography variant='h2'>
+                A<br />D<br />S
+            </Typography>
+        </Stack>
     );
 }
 export default Ads;

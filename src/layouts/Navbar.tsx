@@ -62,7 +62,7 @@ function Navbar({ switchMode }: NavbarProps) {
                     </Link>
                 </Stack>
                 <Box>
-                    <IconButton sx={{ ml: 1 }} onClick={switchMode} color='inherit'>
+                    <IconButton sx={{ ml: 1, color: "white" }} onClick={switchMode}>
                         {theme.palette.mode === "dark" ? <DarkMode /> : <LightMode />}
                     </IconButton>
                     {isSmallScreen && (

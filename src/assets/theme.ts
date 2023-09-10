@@ -23,7 +23,7 @@ export const getDesignTokens = (mode: PaletteMode) => ({
                   // palette values for light mode
                   primary: {
                       main: "#468faf",
-                      contrastText: "#fff",
+                      contrastText: "#000",
                   },
                   secondary: {
                       main: "#fff",
