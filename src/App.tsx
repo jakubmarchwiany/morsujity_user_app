@@ -1,65 +1,30 @@
-import {
-    Unstable_Grid2 as Grid2,
-    Stack,
-    ThemeProvider,
-    createTheme,
-    responsiveFontSizes,
-    useMediaQuery,
-} from "@mui/material";
+import { Unstable_Grid2 as Grid2, Stack, ThemeProvider, useMediaQuery } from "@mui/material";
 import "assets/app.css";
-import { getDesignTokens } from "assets/theme";
 import { LoadingPage } from "components/loading_page/LoadingPage";
-import { useAppDispatch } from "hooks/redux";
-import { useSetMode } from "hooks/useSetMode";
-import Cookies from "js-cookie";
+import { useAutoLogoutCallback } from "hooks/useAutoLogoutCallback";
+import { useStateIsLogged } from "hooks/useIsLoggedState";
+import { useStateThemeMode } from "hooks/useThemeModeState";
 import { Ads } from "layouts/Ads";
 import { Navbar } from "layouts/Navbar";
 import { Navigator } from "layouts/Navigator";
 import { NotFound } from "layouts/NotFound";
-import { useCallback, useEffect, useMemo, useState } from "react";
-import toast, { Toaster } from "react-hot-toast";
+import { Toaster } from "react-hot-toast";
 import { Route, Routes } from "react-router-dom";
 import { mainRoute } from "routes/main.route";
-import { getUserData } from "store/user.actions";
-import { logout } from "utils/useful";
 
 export function App() {
-    const [isLogged, setIsLogged] = useState<boolean | undefined>(undefined);
-    const [mode, setMode] = useSetMode();
+    const [isLogged] = useStateIsLogged();
+    const [themeMode, setThemeMode] = useStateThemeMode();
 
-    const dispatch = useAppDispatch();
+    useAutoLogoutCallback();
 
-    const theme = useMemo(() => {
-        return responsiveFontSizes(createTheme(getDesignTokens(mode)));
-    }, [mode]);
-
-    const isBigScreen = useMediaQuery(theme.breakpoints.up("md"));
-    useEffect(() => {
-        if (Cookies.get("authorization") !== undefined) {
-            dispatch(getUserData(setIsLogged));
-        } else {
-            toast.error("Zaloguj się", { duration: 2000 });
-            setIsLogged(false);
-        }
-    }, []);
-
-    const syncLogout = useCallback((event: StorageEvent) => {
-        if (event.key === "logout") {
-            logout();
-        }
-    }, []);
-    useEffect(() => {
-        window.addEventListener("storage", syncLogout);
-        return () => {
-            window.removeEventListener("storage", syncLogout);
-        };
-    }, [syncLogout]);
+    const isBigScreen = useMediaQuery(themeMode.breakpoints.up("md"));
 
     return (
-        <ThemeProvider theme={theme}>
+        <ThemeProvider theme={themeMode}>
             {isLogged ? (
                 <Stack height='100vh' display='flex' flexDirection='column'>
-                    <Navbar switchMode={setMode} />
+                    <Navbar switchMode={setThemeMode} />
                     <Grid2
                         container
                         flex={1}
@@ -98,8 +63,8 @@ export function App() {
                 containerStyle={{ marginBottom: "40px" }}
                 toastOptions={{
                     style: {
-                        background: theme.palette.background.default,
-                        color: theme.palette.primary.contrastText,
+                        background: themeMode.palette.background.default,
+                        color: themeMode.palette.primary.contrastText,
                         minWidth: "250px",
                     },
                 }}
