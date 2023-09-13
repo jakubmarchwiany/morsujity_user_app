@@ -4,10 +4,8 @@ import { Avatar, Box, Checkbox, FormControlLabel, Link, Stack, Typography } from
 import { standardSize } from "assets/theme";
 import { MyTextField } from "components/my/MyTextField";
 import { useFormik } from "formik";
-import Cookies from "js-cookie";
 import { useState } from "react";
-import { postFetch } from "utils/fetches";
-import { sleep } from "utils/sleep";
+import { loginIn } from "store/auth.actions";
 import { object, string } from "yup";
 
 const LOGIN_FORM_STATE = {
@@ -31,27 +29,7 @@ export function Login() {
         validationSchema: LOGIN_VALIDATION,
         onSubmit: ({ email, password }, { resetForm }) => {
             setIsLoading(true);
-            postFetch<{
-                message: string;
-                data: { expires: number; domain: string; token: string };
-            }>({ email, password }, "/auth/login", {
-                customError: true,
-            })
-                .then(async ({ data }) => {
-                    const { domain, expires, token } = data;
-
-                    console.log(data);
-                    Cookies.set("authorization", token, {
-                        expires: rememberMe ? expires / 24 / 60 / 60 : undefined,
-                        path: "/",
-                        domain: domain,
-                    });
-                    await sleep(1000);
-                    window.location.reload();
-                })
-                .catch(() => {
-                    setIsLoading(false);
-                });
+            loginIn(setIsLoading, email, password, rememberMe);
         },
     });
 
