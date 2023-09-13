@@ -1,13 +1,12 @@
 import { useCallback, useEffect } from "react";
-import { logout } from "utils/useful";
 
 export function useAutoLogoutCallback() {
-    const autoLogout = useCallback((event: StorageEvent) => {
+    const autoLogout = useCallback(async (event: StorageEvent) => {
         if (event.key === "logout") {
-            logout();
+            location.reload();
         }
     }, []);
-    
+
     useEffect(() => {
         window.addEventListener("storage", autoLogout);
         return () => {

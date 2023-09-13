@@ -3,15 +3,9 @@ import Cookies from "js-cookie";
 import { NavigateFunction } from "react-router-dom";
 import { dataURLtoFile } from "utils/dataURLToFile";
 import { getFetch, imageFetch, postFetch } from "utils/fetches";
-import { authorizationFail, logout, sleep } from "utils/useful";
+import { authorizationFail, sleep } from "utils/useful";
 import { AppThunk } from "./index";
 import { Activity, Rank, UserData, userActions } from "./user.slice";
-
-export const logoutUser = () => {
-    getFetch<never>("/auth/logout").then(() => {
-        logout();
-    });
-};
 
 export const getUserData =
     (setIsLogged: Function): AppThunk =>

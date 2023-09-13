@@ -1,9 +1,6 @@
+import dayjs from "dayjs";
 import Cookies from "js-cookie";
 import toast from "react-hot-toast";
-import dayjs from "dayjs";
-import { ENV } from "utils/validate_env";
-
-const { isProd } = ENV;
 
 // Cookies.set(
 //     "authorization",
@@ -27,15 +24,6 @@ export const authorizationFail = async () => {
     toast.error("Zaloguj się ponownie", { duration: 3000 });
     await sleeper(3);
     window.location.reload();
-};
-
-export const logout = async () => {
-    if (isProd) {
-        Cookies.remove("authorization");
-        let newURL = window.location.hostname;
-        newURL = newURL.substring(newURL.indexOf(".") + 1);
-        window.location.href = newURL;
-    }
 };
 
 export const displayTime = (time: number) => {

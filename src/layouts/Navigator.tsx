@@ -14,10 +14,10 @@ import {
 } from "@mui/icons-material";
 import { Avatar, Button, Collapse, Stack } from "@mui/material";
 import { MyLinkButton } from "components/my/MyLinkButton";
-import { useAppSelector } from "hooks/redux";
+import { useAppDispatch, useAppSelector } from "hooks/redux";
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { logoutUser } from "store/user.actions";
+import { logout } from "store/auth.actions";
 
 interface NavigatorProps {
     closeMenu?: () => void;
@@ -30,9 +30,11 @@ export function Navigator({ closeMenu }: NavigatorProps) {
     const userImage = useAppSelector((state) => state.user.image);
     const location = useLocation();
 
+    const dispatch = useAppDispatch();
+
     const logoutHandler = () => {
-        logoutUser();
-        window.localStorage.setItem("logout", Date.now().toString());
+        dispatch(logout);
+
         if (closeMenu != undefined) closeMenu();
     };
 
