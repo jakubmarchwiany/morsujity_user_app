@@ -1,6 +1,6 @@
 import Cookies from "js-cookie";
 import { getFetch } from "utils/fetches";
-import { sleep } from "utils/useful";
+import { sleep } from "utils/sleep";
 import { ENV } from "utils/validate_env";
 
 const { isProd } = ENV;

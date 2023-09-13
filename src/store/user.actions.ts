@@ -3,7 +3,8 @@ import Cookies from "js-cookie";
 import { NavigateFunction } from "react-router-dom";
 import { dataURLtoFile } from "utils/dataURLToFile";
 import { getFetch, imageFetch, postFetch } from "utils/fetches";
-import { authorizationFail, sleep } from "utils/useful";
+import { authorizationFail } from "utils/useful";
+import { sleep } from "utils/sleep";
 import { AppThunk } from "./index";
 import { Activity, Rank, UserData, userActions } from "./user.slice";
 

@@ -7,7 +7,7 @@ import { useFormik } from "formik";
 import Cookies from "js-cookie";
 import { useState } from "react";
 import { postFetch } from "utils/fetches";
-import { sleep } from "utils/useful";
+import { sleep } from "utils/sleep";
 import { object, string } from "yup";
 
 const LOGIN_FORM_STATE = {
