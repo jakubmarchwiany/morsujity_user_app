@@ -1,5 +1,5 @@
 import { Stack, Typography } from "@mui/material";
-import MyLinkButton from "components/my/MyLinkButton";
+import { MyLinkButton } from "components/my/MyLinkButton";
 
 function Footer() {
     return (

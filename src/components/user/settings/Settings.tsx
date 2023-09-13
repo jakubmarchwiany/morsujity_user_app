@@ -1,10 +1,10 @@
-import { Box, Button, Container, Stack, Typography, Unstable_Grid2 as Grid2 } from "@mui/material";
-import MyTextField from "components/my/MyTextField";
+import { Box, Button, Container, Unstable_Grid2 as Grid2, Stack, Typography } from "@mui/material";
+import { MyTextField } from "components/my/MyTextField";
 import { useFormik } from "formik";
 import { useAppDispatch, useAppSelector } from "hooks/redux";
-import { changeUserPassword, changeUserPseudonym } from "store/user-actions";
+import { changeUserPassword, changeUserPseudonym } from "store/user.actions";
 import * as Yup from "yup";
-import ImageOptions from "./ImageOptions";
+import { ImageOptions } from "./ImageOptions";
 
 const PSEUDONYM_FORM_STATE = {
     pseudonym: "",
@@ -35,10 +35,10 @@ const NEW_PASSWORD_VALIDATION = Yup.object().shape({
         .matches(/(?=.*[!@#$%^&*])/, "Musi zawierać znak specjalny (! @ # $ % ^ & *)"),
     confirmNewPassword: Yup.string()
         .required("Wymagane")
-        .oneOf([Yup.ref("newPassword"), null], "Hasła muszą być takie same"),
+        .oneOf([Yup.ref("newPassword")], "Hasła muszą być takie same"),
 });
 
-function Settings() {
+export function Settings() {
     const dispatch = useAppDispatch();
 
     const pseudonym = useAppSelector((state) => state.user.pseudonym);
@@ -55,9 +55,8 @@ function Settings() {
     const formikNewPassword = useFormik({
         initialValues: NEW_PASSWORD_FORM_STATE,
         validationSchema: NEW_PASSWORD_VALIDATION,
-        onSubmit: ({ oldPassword, newPassword }, { resetForm }) => {
+        onSubmit: ({ oldPassword, newPassword }) => {
             dispatch(changeUserPassword(oldPassword, newPassword));
-            resetForm();
         },
     });
 
@@ -184,4 +183,3 @@ function Settings() {
         </Container>
     );
 }
-export default Settings;

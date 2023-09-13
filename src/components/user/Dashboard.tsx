@@ -19,7 +19,7 @@ const Item = styled(Paper)(({ theme }) => ({
     borderRadius: 25,
 }));
 
-function DashBoard() {
+export function DashBoard() {
     const statisics = useAppSelector((state) => state.user.statistics);
 
     const generateLastActivities = () => {
@@ -83,4 +83,3 @@ function DashBoard() {
         </Container>
     );
 }
-export default DashBoard;

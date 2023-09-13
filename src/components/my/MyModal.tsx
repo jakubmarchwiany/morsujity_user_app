@@ -16,7 +16,7 @@ type MyModalPropsType = {
     xl?: number;
 } & ModalProps;
 
-const MyModal = ({
+export const MyModal = ({
     open,
     onClose,
     children,
@@ -44,4 +44,3 @@ MyModalPropsType) => (
         </Box>
     </StyledModal>
 );
-export default MyModal;

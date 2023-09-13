@@ -1,8 +1,9 @@
 import Cookies from "js-cookie";
 import toast from "react-hot-toast";
+import { ENV } from "utils/validate_env";
 import { authorizationFail } from "./useful";
 
-const { VITE_API_ENDPOINT } = import.meta.env;
+const { VITE_API_ENDPOINT } = ENV;
 
 export async function getFetch<T>(
     url: string,

@@ -1,14 +1,14 @@
 import { Box, CircularProgress, Container } from "@mui/material";
-import Login from "./Login"
+import { Login } from "./Login";
 
 type Props = {
     isLogged: boolean | undefined;
 };
 
-function LoadingPage({ isLogged }: Props) {
+export function LoadingPage({ isLogged }: Props) {
     return (
         <Container
-            component="main"
+            component='main'
             maxWidth={false}
             sx={{
                 display: "flex",
@@ -28,4 +28,3 @@ function LoadingPage({ isLogged }: Props) {
         </Container>
     );
 }
-export default LoadingPage;

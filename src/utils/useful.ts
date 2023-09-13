@@ -1,9 +1,9 @@
 import Cookies from "js-cookie";
 import toast from "react-hot-toast";
 import dayjs from "dayjs";
+import { ENV } from "utils/validate_env";
 
-
-const { PROD } = import.meta.env;
+const { isProd } = ENV;
 
 // Cookies.set(
 //     "authorization",
@@ -30,7 +30,7 @@ export const authorizationFail = async () => {
 };
 
 export const logout = async () => {
-    if (PROD) {
+    if (isProd) {
         Cookies.remove("authorization");
         let newURL = window.location.hostname;
         newURL = newURL.substring(newURL.indexOf(".") + 1);
@@ -39,12 +39,11 @@ export const logout = async () => {
 };
 
 export const displayTime = (time: number) => {
-    return `${Math.floor(time / 60)} min ${time % 60 !== 0 ? (time % 60) + " sek" : ""}`
+    return `${Math.floor(time / 60)} min ${time % 60 !== 0 ? (time % 60) + " sek" : ""}`;
 };
 
 export const displayDate = (date: string) => {
-    if(dayjs(date).hour() === 0 && dayjs(date).minute() === 0)
+    if (dayjs(date).hour() === 0 && dayjs(date).minute() === 0)
         return dayjs(date).format("DD.MM.YYYY");
-    else
-        return dayjs(date).format("DD.MM.YYYY HH:mm");
+    else return dayjs(date).format("DD.MM.YYYY HH:mm");
 };

@@ -6,7 +6,7 @@ export interface Props {
     open: boolean;
     onClose: (decision: boolean) => void;
 }
-function DialogConfirm(props: Props) {
+export function DialogConfirm(props: Props) {
     const { onClose, open, title, content, ...other } = props;
 
     const handleCancel = () => {
@@ -48,4 +48,3 @@ function DialogConfirm(props: Props) {
         </Dialog>
     );
 }
-export default DialogConfirm;

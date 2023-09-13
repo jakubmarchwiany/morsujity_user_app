@@ -10,20 +10,20 @@ import {
     Info,
     Logout,
     Settings,
-    Storefront
+    Storefront,
 } from "@mui/icons-material";
 import { Avatar, Button, Collapse, Stack } from "@mui/material";
-import MyLinkButton from "components/my/MyLinkButton";
+import { MyLinkButton } from "components/my/MyLinkButton";
 import { useAppSelector } from "hooks/redux";
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { logoutUser } from "store/user-actions";
+import { logoutUser } from "store/user.actions";
 
 interface NavigatorProps {
     closeMenu?: () => void;
 }
 
-const Navigator = ({ closeMenu }: NavigatorProps) => {
+export function Navigator({ closeMenu }: NavigatorProps) {
     const [isBlogOpen, setIsBlogOpen] = useState(false);
     const [isGroupsOpen, setIsGroupsOpen] = useState(true);
 
@@ -182,5 +182,4 @@ const Navigator = ({ closeMenu }: NavigatorProps) => {
             </Button>
         </Stack>
     );
-};
-export default Navigator;
+}

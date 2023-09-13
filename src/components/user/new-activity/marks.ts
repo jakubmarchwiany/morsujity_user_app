@@ -1,9 +1,9 @@
 type Marks = { value: number; label: string }[];
 
-export const minMarks: Marks = [
+export const minutesMarks: Marks = [
     {
         value: 0,
-        label: "0 min",
+        label: "0 m",
     },
     {
         value: 5,
@@ -27,14 +27,14 @@ export const minMarks: Marks = [
     },
     {
         value: 60,
-        label: "60 min",
+        label: "60 m",
     },
 ];
 
-export const secMarks: Marks = [
+export const secundsMarks: Marks = [
     {
         value: 0,
-        label: "0 sec",
+        label: "0 s",
     },
     {
         value: 15,
@@ -50,22 +50,14 @@ export const secMarks: Marks = [
     },
     {
         value: 60,
-        label: "60 sec",
+        label: "60 s",
     },
 ];
 
-export function minValueText(value: number) {
+export function minutesValueText(value: number) {
     return `${value} min`;
 }
 
-export function secValueText(value: number) {
+export function secundsValueText(value: number) {
     return `${value} sec`;
-}
-
-export function handleChangeMinutes(newValue: number | number[], setMinutes: Function) {
-    setMinutes(newValue as number);
-}
-
-export function handleChangeSeconds(newValue: number | number[], setSeconds: Function) {
-    setSeconds(newValue as number);
 }

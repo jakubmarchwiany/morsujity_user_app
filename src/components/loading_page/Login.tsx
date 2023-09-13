@@ -2,7 +2,7 @@ import { LockOpenOutlined } from "@mui/icons-material";
 import { LoadingButton } from "@mui/lab";
 import { Avatar, Box, Checkbox, FormControlLabel, Link, Stack, Typography } from "@mui/material";
 import { standardSize } from "assets/theme";
-import MyTextField from "components/my/MyTextField";
+import { MyTextField } from "components/my/MyTextField";
 import { useFormik } from "formik";
 import Cookies from "js-cookie";
 import { useState } from "react";
@@ -22,7 +22,7 @@ const LOGIN_VALIDATION = object().shape({
 
 const { VITE_DOMAIN_URL: DOMAIN_URL } = import.meta.env;
 
-function Login() {
+export function Login() {
     const [isLoading, setIsLoading] = useState(false);
     const [rememberMe, setRememberMe] = useState(false);
 
@@ -124,4 +124,3 @@ function Login() {
         </Stack>
     );
 }
-export default Login;

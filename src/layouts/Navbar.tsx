@@ -7,15 +7,15 @@ import Box from "@mui/material/Box";
 import MuiLink from "@mui/material/Link";
 import Menu from "@mui/material/Menu";
 import Toolbar from "@mui/material/Toolbar";
-import { memo, useState } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
-import Navigator from "./Navigator";
+import { Navigator } from "./Navigator";
 
 interface NavbarProps {
     switchMode: () => void;
 }
 
-function Navbar({ switchMode }: NavbarProps) {
+export function Navbar({ switchMode }: NavbarProps) {
     const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
     const open = Boolean(anchorEl);
 
@@ -103,4 +103,3 @@ function Navbar({ switchMode }: NavbarProps) {
         </AppBar>
     );
 }
-export default memo(Navbar);

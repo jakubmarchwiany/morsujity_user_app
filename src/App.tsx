@@ -8,22 +8,22 @@ import {
 } from "@mui/material";
 import "assets/app.css";
 import { getDesignTokens } from "assets/theme";
-import LoadingPage from "components/loading_page/LoadingPage";
-import NotFound from "components/main/NotFound";
+import { LoadingPage } from "components/loading_page/LoadingPage";
 import { useAppDispatch } from "hooks/redux";
-import useSetMode from "hooks/use-set-mode";
+import { useSetMode } from "hooks/useSetMode";
 import Cookies from "js-cookie";
-import Ads from "layouts/Ads";
-import Navbar from "layouts/Navbar";
-import Navigator from "layouts/Navigator";
+import { Ads } from "layouts/Ads";
+import { Navbar } from "layouts/Navbar";
+import { Navigator } from "layouts/Navigator";
+import { NotFound } from "layouts/NotFound";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import { Route, Routes } from "react-router-dom";
-import { mainRoute } from "routes/main-route";
-import { getUserData } from "store/user-actions";
+import { mainRoute } from "routes/main.route";
+import { getUserData } from "store/user.actions";
 import { logout } from "utils/useful";
 
-function App() {
+export function App() {
     const [isLogged, setIsLogged] = useState<boolean | undefined>(undefined);
     const [mode, setMode] = useSetMode();
 
@@ -66,7 +66,7 @@ function App() {
                         overflow='auto'
                         columns={20}
                         bgcolor={"background.default"}
-                        color={"text.primary"}
+                        color={"primary.contrastText"}
                     >
                         {isBigScreen && (
                             <Grid2 md={4} lg={3} mt={2}>
@@ -74,13 +74,7 @@ function App() {
                             </Grid2>
                         )}
 
-                        <Grid2
-                            xs={20}
-                            md={12}
-                            lg={14}
-                            bgcolor={"background.paper"}
-                            py={{ xs: 1, sm: 2, md: 3, lg: 4 }}
-                        >
+                        <Grid2 xs={20} md={12} lg={14} bgcolor={"background.paper"}>
                             <Routes>
                                 {mainRoute()}
                                 <Route path='*' element={<NotFound />} />
@@ -105,7 +99,7 @@ function App() {
                 toastOptions={{
                     style: {
                         background: theme.palette.background.default,
-                        color: theme.palette.text.secondary,
+                        color: theme.palette.primary.contrastText,
                         minWidth: "250px",
                     },
                 }}
@@ -113,4 +107,3 @@ function App() {
         </ThemeProvider>
     );
 }
-export default App;

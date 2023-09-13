@@ -45,19 +45,18 @@ type MyTextFieldType = {
     formik: any;
 } & TextFieldProps;
 
-const MyTextField = (props: MyTextFieldType) => {
-    const {name, formik} = props
+export function MyTextField(props: MyTextFieldType) {
+    const { name, formik } = props;
     return (
-    <StyledTextField
-        variant="filled"  
-        fullWidth
-        value={formik.values[name]}
-        onChange={formik.handleChange}
-        onBlur={formik.handleBlur}
-        error={formik.touched[name] && Boolean(formik.errors[name])}
-        helperText={formik.touched[name] && formik.errors[name]}
-        {...props}
-    />
-)};
-
-export default MyTextField;
+        <StyledTextField
+            variant='filled'
+            fullWidth
+            value={formik.values[name]}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            error={formik.touched[name] && Boolean(formik.errors[name])}
+            helperText={formik.touched[name] && formik.errors[name]}
+            {...props}
+        />
+    );
+}

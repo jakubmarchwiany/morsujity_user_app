@@ -80,10 +80,18 @@ export const getDesignTokens = (mode: PaletteMode) => ({
                 },
             },
         },
+        MuiButton: {
+            styleOverrides: {
+                root: {
+                    color: "white", // Set the text color to white
+                },
+            },
+        },
     },
 });
 
 export const standardSize = { xs: "95%", sm: "50%", md: "40%", lg: "35%", xl: "25%" };
+export const panelStandardSize = { xs: "95%", sm: "80%", md: "70%", lg: "60%", xl: "50%" };
 
 //Light mode
 // "50": "#e4f5fe",

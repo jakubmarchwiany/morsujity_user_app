@@ -1,6 +1,6 @@
 import { Stack, Typography } from "@mui/material";
 
-function Ads() {
+export function Ads() {
     return (
         <Stack height={"100%"} alignItems={"center"} justifyContent={"center"}>
             <Typography variant='h2'>
@@ -9,4 +9,3 @@ function Ads() {
         </Stack>
     );
 }
-export default Ads;

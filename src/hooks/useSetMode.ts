@@ -2,7 +2,7 @@ import { PaletteMode, useMediaQuery } from "@mui/material";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 
-export default function useSetMode() {
+export function useSetMode() {
     const [mode, setMode] = useState<PaletteMode>("light");
 
     const switchMode = () => {

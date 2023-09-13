@@ -15,7 +15,7 @@ type Props = {
     closeMenu?: () => void;
 };
 
-function MyLinkButton({
+export function MyLinkButton({
     text,
     to,
     isActive = false,
@@ -40,5 +40,3 @@ function MyLinkButton({
         </Link>
     );
 }
-
-export default MyLinkButton;

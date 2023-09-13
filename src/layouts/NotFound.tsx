@@ -1,8 +1,8 @@
 import { Dashboard } from "@mui/icons-material";
 import { Box, Container, Typography } from "@mui/material";
-import MyLinkButton from "components/my/MyLinkButton";
+import {MyLinkButton} from "components/my/MyLinkButton";
 
-function NotFound() {
+export function NotFound() {
     return (
         <Container
             component='main'
@@ -28,4 +28,3 @@ function NotFound() {
         </Container>
     );
 }
-export default NotFound;

@@ -2,11 +2,11 @@ import { Delete } from "@mui/icons-material";
 import IconButton from "@mui/material/IconButton";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import { useAppDispatch, useAppSelector } from "hooks/redux";
-import { deleteActivity } from "store/user-actions";
-import { Activity } from "store/user-slice";
+import { deleteActivity } from "store/user.actions";
+import { Activity } from "store/user.slice";
 import { displayDate, displayTime } from "utils/useful";
 
-const columns: GridColDef[] = [
+export const columns: GridColDef[] = [
     {
         field: "type",
         type: "string",
@@ -52,7 +52,7 @@ const columns: GridColDef[] = [
     },
 ];
 
-export default function ActivityTable() {
+export function ActivityTable() {
     const userActivies = useAppSelector((state) => state.user.statistics?.activity);
 
     const dispatch = useAppDispatch();
@@ -82,11 +82,11 @@ export default function ActivityTable() {
                 onCellClick={onCellClick}
                 rows={addRows(userActivies!)}
                 columns={columns}
-                pageSize={5}
-                rowsPerPageOptions={[5]}
+                // pageSize={5}
+                // rowsPerPageOptions={[5]}
                 disableColumnFilter={true}
                 disableColumnMenu={true}
-                disableSelectionOnClick={true}
+                // disableSelectionOnClick={true}
                 disableColumnSelector={true}
             />
         </div>
