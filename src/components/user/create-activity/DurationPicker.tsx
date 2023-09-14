@@ -1,4 +1,4 @@
-import { Slider } from "@mui/material";
+import { Slider, Typography } from "@mui/material";
 import {
     minutesMarks,
     minutesValueText,
@@ -22,6 +22,9 @@ export function DurationPicker({
 }: Props) {
     return (
         <>
+            <Typography variant='h4' textAlign='center' mt={2}>
+                Czas trwania
+            </Typography>
             <Slider
                 min={0}
                 max={60}
@@ -35,7 +38,6 @@ export function DurationPicker({
                 marks={minutesMarks}
                 sx={{ width: "90%", mt: 1 }}
             />
-
             <Slider
                 size='small'
                 defaultValue={0}

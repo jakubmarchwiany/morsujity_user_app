@@ -47,10 +47,6 @@ export function CreateActivity() {
 
                 <ActivityPicker activityType={activityType} setActivityType={setActivityType} />
 
-                <Typography variant='h4' textAlign='center' mt={2}>
-                    Czas trwania
-                </Typography>
-
                 <DurationPicker
                     durationInMinutes={durationInMinutes}
                     durationInSeconds={durationInSeconds}
@@ -61,7 +57,6 @@ export function CreateActivity() {
                 <Typography variant='h4' mt={2} textAlign='center'>
                     Data
                 </Typography>
-
                 <MobileDateTimePicker
                     defaultValue={activityDate}
                     onChange={(newValue) => newValue && setActivityDate(newValue)}
