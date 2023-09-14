@@ -27,7 +27,7 @@ const userSlice = createSlice({
         setUserData(state, action: PayloadAction<UserData>) {
             return { ...action.payload };
         },
-        changePseudonym(state, action: PayloadAction<string>) {
+        updatePseudonym(state, action: PayloadAction<string>) {
             state.pseudonym = action.payload;
         },
         changeImage(state, action: PayloadAction<string>) {

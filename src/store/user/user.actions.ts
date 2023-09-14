@@ -32,12 +32,12 @@ export const getUserData =
             });
     };
 
-export const changePseudonym =
+export const updatePseudonym =
     (pseudonym: string): AppThunk =>
     (appDispatch) => {
-        postFetch<{ pseudonym: string }>({ pseudonym }, "/user/settings/change-pseudonym").then(
+        postFetch<{ pseudonym: string }>({ pseudonym }, "/user/settings/update-pseudonym").then(
             () => {
-                appDispatch(userActions.changePseudonym(pseudonym));
+                appDispatch(userActions.updatePseudonym(pseudonym));
             },
         );
     };

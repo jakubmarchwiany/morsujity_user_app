@@ -1,28 +1,17 @@
 import { Box, Button, Container, Unstable_Grid2 as Grid2, Stack, Typography } from "@mui/material";
 import { MyTextField } from "components/my/MyTextField";
 import { useFormik } from "formik";
-import { useAppDispatch, useAppSelector } from "hooks/redux";
+import { useAppDispatch } from "hooks/redux";
+import { changePassword } from "store/user/user.actions";
 import * as Yup from "yup";
 import { ImageOptions } from "./ImageOptions";
-import { changePseudonym, changePassword } from "store/user/user.actions";
-
-
-const PSEUDONYM_FORM_STATE = {
-    pseudonym: "",
-};
+import { UpdatePseudonym } from "./UpdatePseudonym";
 
 const NEW_PASSWORD_FORM_STATE = {
     oldPassword: "",
     newPassword: "",
     confirmNewPassword: "",
 };
-
-const PSEUDONYM_VALIDATION = Yup.object().shape({
-    pseudonym: Yup.string()
-        .required("Wymagane")
-        .min(3, "Ksywka za krótka - Co najmniej 3 znaki")
-        .max(30, "Ksywka za długa - Maksymalnie 30 znaków"),
-});
 
 const NEW_PASSWORD_VALIDATION = Yup.object().shape({
     oldPassword: Yup.string().required("Wymagane"),
@@ -42,17 +31,6 @@ const NEW_PASSWORD_VALIDATION = Yup.object().shape({
 export function Settings() {
     const dispatch = useAppDispatch();
 
-    const pseudonym = useAppSelector((state) => state.user.pseudonym);
-
-    const formikPseudonym = useFormik({
-        initialValues: PSEUDONYM_FORM_STATE,
-        validationSchema: PSEUDONYM_VALIDATION,
-        onSubmit: ({ pseudonym }, { resetForm }) => {
-            dispatch(changePseudonym(pseudonym));
-            resetForm();
-        },
-    });
-
     const formikNewPassword = useFormik({
         initialValues: NEW_PASSWORD_FORM_STATE,
         validationSchema: NEW_PASSWORD_VALIDATION,
@@ -62,56 +40,13 @@ export function Settings() {
     });
 
     return (
-        <Container
-            component='main'
-            sx={{
-                px: { xs: 0, sm: 10, md: 5, lg: 10, xl: 10 },
-            }}
-        >
-            <Stack p={5} borderRadius={5} boxShadow={5}>
-                <Typography variant='h5' fontWeight={"bold"}>
-                    Konto
-                </Typography>
-                <Typography variant='h3' fontWeight={"bold"}>
-                    Ustawienia
-                </Typography>
+        <Container component='main' sx={{ display: "flex", justifyContent: "center" }}>
+            <Stack mt={{ xs: 5, md: 10 }} alignItems='center'>
+                <Typography variant='h5'>Konto</Typography>
+                <Typography variant='h3'>Ustawienia</Typography>
                 <Grid2 container>
                     <Grid2 xs={12} xl={6}>
-                        <Box component={"form"} noValidate onSubmit={formikPseudonym.handleSubmit}>
-                            <Typography variant='h5' fontWeight={"bold"} mt={2}>
-                                Zmiana Ksywki
-                            </Typography>
-                            <Grid2 container columns={20}>
-                                <Grid2 xs={20} sm={10} xl={8}>
-                                    <MyTextField
-                                        name='pseudonym'
-                                        label='Ksywka'
-                                        placeholder={pseudonym!}
-                                        formik={formikPseudonym}
-                                    />
-                                </Grid2>
-                                <Grid2
-                                    xs={20}
-                                    sm={10}
-                                    xl={12}
-                                    sx={{ display: { xs: "none", sm: "flex" } }}
-                                ></Grid2>
-                                <Grid2 xs={20} sm={10} xl={8}>
-                                    <Button
-                                        color='primary'
-                                        type='submit'
-                                        variant='contained'
-                                        size='medium'
-                                        fullWidth
-                                        disabled={
-                                            !(formikPseudonym.isValid && formikPseudonym.dirty)
-                                        }
-                                    >
-                                        Aktualizuj
-                                    </Button>
-                                </Grid2>
-                            </Grid2>
-                        </Box>
+                        <UpdatePseudonym />
 
                         <Box
                             component={"form"}
