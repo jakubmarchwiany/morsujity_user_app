@@ -49,8 +49,8 @@ export function Navigator({ closeMenu }: NavigatorProps) {
             />
             <MyLinkButton
                 text='Dodaj Aktywność'
-                to={`/new-activity`}
-                isActive={location.pathname === `/new-activity`}
+                to={`/create-activity`}
+                isActive={location.pathname === `/create-activity`}
                 Icon={AddTask}
                 closeMenu={closeMenu}
             />

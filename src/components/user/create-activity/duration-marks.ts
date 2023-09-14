@@ -49,8 +49,8 @@ export const secundsMarks: Marks = [
         label: "45",
     },
     {
-        value: 60,
-        label: "60 s",
+        value: 59,
+        label: "59 s",
     },
 ];
 

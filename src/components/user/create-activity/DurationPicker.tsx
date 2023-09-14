@@ -1,11 +1,11 @@
 import { Slider } from "@mui/material";
 import {
     minutesMarks,
-    secundsValueText,
-    secundsMarks,
     minutesValueText,
-} from "components/user/new-activity/marks";
-import React, { Dispatch } from "react";
+    secundsMarks,
+    secundsValueText,
+} from "components/user/create-activity/duration-marks";
+import { Dispatch } from "react";
 
 type Props = {
     durationInMinutes: number;
@@ -40,7 +40,7 @@ export function DurationPicker({
                 size='small'
                 defaultValue={0}
                 min={0}
-                max={60}
+                max={59}
                 value={durationInSeconds}
                 onChange={(event, newValue) => setDurationInSeconds(newValue as number)}
                 aria-label='Small'

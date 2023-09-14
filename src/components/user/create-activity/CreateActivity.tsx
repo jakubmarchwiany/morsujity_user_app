@@ -6,11 +6,11 @@ import { useAppDispatch } from "hooks/redux";
 import useLocalStorageState from "hooks/useLocalStorageState";
 import { useStableNavigate } from "middleware/StableNavigateContextProvider";
 import { useState } from "react";
-import { newActivity } from "store/statistics/activity.actions";
+import { createActivity } from "store/statistics/activity.actions";
 import { ActivityPicker, ActivityTypes } from "./ActivityPicker";
 import { DurationPicker } from "./DurationPicker";
 
-function NewActivity() {
+export function CreateActivity() {
     const [activityType, setActivityType] = useLocalStorageState<ActivityTypes>(
         "activityType",
         ActivityTypes.ColdShower,
@@ -30,11 +30,11 @@ function NewActivity() {
     const dispatch = useAppDispatch();
     const navigate = useStableNavigate();
 
-    const handleNewActivity = () => {
+    const handleCreateActivity = () => {
         const totalDurationInSeconds = durationInMinutes * 60 + durationInSeconds;
 
         dispatch(
-            newActivity(activityType, activityDate.toString(), totalDurationInSeconds, navigate),
+            createActivity(activityType, activityDate.toString(), totalDurationInSeconds, navigate),
         );
     };
 
@@ -42,7 +42,7 @@ function NewActivity() {
         <Container component='main' sx={{ display: "flex", justifyContent: "center" }}>
             <Stack mt={{ xs: 5, md: 10 }} alignItems='center' width={panelStandardSize}>
                 <Typography variant='h3' textAlign='center'>
-                    Nowa Aktywność
+                    Dodaj Aktywność
                 </Typography>
 
                 <ActivityPicker activityType={activityType} setActivityType={setActivityType} />
@@ -69,11 +69,10 @@ function NewActivity() {
                     sx={{ width: "165px", mt: 1 }}
                 />
 
-                <Button variant='contained' sx={{ mt: 2 }} onClick={handleNewActivity} fullWidth>
+                <Button variant='contained' sx={{ mt: 2 }} onClick={handleCreateActivity} fullWidth>
                     Dodaj
                 </Button>
             </Stack>
         </Container>
     );
 }
-export default NewActivity;
