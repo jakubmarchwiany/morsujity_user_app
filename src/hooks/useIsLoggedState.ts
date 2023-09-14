@@ -1,8 +1,8 @@
 import { useAppDispatch } from "hooks/redux";
 import Cookies from "js-cookie";
-import { Dispatch, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
-import { getUserData } from "store/user.actions";
+import { getUserData } from "store/user/user.actions";
 
 export function useStateIsLogged(): [boolean | undefined] {
     const [isLogged, setIsLogged] = useState<boolean | undefined>(undefined);

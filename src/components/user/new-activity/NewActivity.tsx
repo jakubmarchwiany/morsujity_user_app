@@ -6,9 +6,9 @@ import { useAppDispatch } from "hooks/redux";
 import useLocalStorageState from "hooks/useLocalStorageState";
 import { useStableNavigate } from "middleware/StableNavigateContextProvider";
 import { useState } from "react";
-import { newActivity } from "store/user.actions";
 import { ActivityPicker, ActivityTypes } from "./ActivityPicker";
 import { DurationPicker } from "./DurationPicker";
+import { newActivity } from "store/user/user.actions";
 
 function NewActivity() {
     const [activityType, setActivityType] = useLocalStorageState<ActivityTypes>(

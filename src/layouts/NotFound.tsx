@@ -1,6 +1,6 @@
 import { Dashboard } from "@mui/icons-material";
 import { Box, Container, Typography } from "@mui/material";
-import {MyLinkButton} from "components/my/MyLinkButton";
+import { MyLinkButton } from "components/my/MyLinkButton";
 
 export function NotFound() {
     return (

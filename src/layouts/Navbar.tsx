@@ -20,7 +20,6 @@ export function Navbar({ switchMode }: NavbarProps) {
     const open = Boolean(anchorEl);
 
     const theme = useTheme<Theme>();
-    const isSmallScreen = useMediaQuery(theme.breakpoints.down("md"));
 
     const handleClick = (event: React.MouseEvent<HTMLElement>) => {
         setAnchorEl(event.currentTarget);
@@ -28,6 +27,8 @@ export function Navbar({ switchMode }: NavbarProps) {
     const handleCloseMenu = () => {
         setAnchorEl(null);
     };
+
+    const isSmallScreen = useMediaQuery(theme.breakpoints.down("md"));
 
     return (
         <AppBar

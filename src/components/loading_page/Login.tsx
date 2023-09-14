@@ -5,7 +5,7 @@ import { standardSize } from "assets/theme";
 import { MyTextField } from "components/my/MyTextField";
 import { useFormik } from "formik";
 import { useState } from "react";
-import { loginIn } from "store/auth.actions";
+import { loginIn } from "store/user/auth.actions";
 import { object, string } from "yup";
 
 const LOGIN_FORM_STATE = {

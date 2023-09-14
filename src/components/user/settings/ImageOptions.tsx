@@ -11,8 +11,7 @@ import "cropperjs/dist/cropper.css";
 import { useAppDispatch, useAppSelector } from "hooks/redux";
 import { useState } from "react";
 import Cropper from "react-cropper";
-
-import { changeToDefUserImage, changeUserImage } from "store/user.actions";
+import { setUserImageToDef, changeUserImage } from "store/user/settings.actions";
 
 export function ImageOptions() {
     const [openDialog, setOpenDialog] = useState(false);
@@ -27,7 +26,7 @@ export function ImageOptions() {
     const handleDecision = (decision: boolean) => {
         setOpenDialog(false);
 
-        if (decision) dispatch(changeToDefUserImage());
+        if (decision) dispatch(setUserImageToDef());
     };
 
     const handleDeleteUserImage = () => {

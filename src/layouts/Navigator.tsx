@@ -17,7 +17,7 @@ import { MyLinkButton } from "components/my/MyLinkButton";
 import { useAppDispatch, useAppSelector } from "hooks/redux";
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { logout } from "store/auth.actions";
+import { logout } from "store/user/auth.actions";
 
 interface NavigatorProps {
     closeMenu?: () => void;

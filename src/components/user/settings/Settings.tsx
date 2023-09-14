@@ -2,9 +2,9 @@ import { Box, Button, Container, Unstable_Grid2 as Grid2, Stack, Typography } fr
 import { MyTextField } from "components/my/MyTextField";
 import { useFormik } from "formik";
 import { useAppDispatch, useAppSelector } from "hooks/redux";
-import { changeUserPassword, changeUserPseudonym } from "store/user.actions";
 import * as Yup from "yup";
 import { ImageOptions } from "./ImageOptions";
+import { changePseudonym, changePassword } from "store/user/settings.actions";
 
 const PSEUDONYM_FORM_STATE = {
     pseudonym: "",
@@ -47,7 +47,7 @@ export function Settings() {
         initialValues: PSEUDONYM_FORM_STATE,
         validationSchema: PSEUDONYM_VALIDATION,
         onSubmit: ({ pseudonym }, { resetForm }) => {
-            dispatch(changeUserPseudonym(pseudonym));
+            dispatch(changePseudonym(pseudonym));
             resetForm();
         },
     });
@@ -56,7 +56,7 @@ export function Settings() {
         initialValues: NEW_PASSWORD_FORM_STATE,
         validationSchema: NEW_PASSWORD_VALIDATION,
         onSubmit: ({ oldPassword, newPassword }) => {
-            dispatch(changeUserPassword(oldPassword, newPassword));
+            dispatch(changePassword(oldPassword, newPassword));
         },
     });
 
