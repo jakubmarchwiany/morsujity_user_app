@@ -10,7 +10,7 @@ import { userActions } from "./user.slice";
 type UserData = {
     _id: string;
     pseudonym: string;
-    imageUrl: string;
+    image: string;
     statistics: StatisticsState;
 };
 
@@ -21,7 +21,7 @@ export const getUserData =
             customError: true,
         })
             .then(({ data }) => {
-                const { _id, imageUrl, pseudonym, statistics } = data;
+                const { _id, image: imageUrl, pseudonym, statistics } = data;
 
                 appDispatch(userActions.setUserData({ _id, imageUrl, pseudonym }));
                 appDispatch(statisticsActions.setStatistics(statistics));
@@ -58,7 +58,7 @@ export const changeUserImage =
         const data = new FormData();
         data.append("userImage", dataURLtoFile(base64EncodedImage, "userImage.png"));
 
-        imageFetch<{ image: string }>(data, "/user/settings/change-image").then(({ image }) => {
+        imageFetch<{ image: string }>(data, "/user/settings/update-image").then(({ image }) => {
             appDispatch(userActions.changeImage(image));
         });
     };

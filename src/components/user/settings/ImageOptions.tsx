@@ -86,7 +86,7 @@ export function ImageOptions() {
                             variant='contained'
                             color='error'
                             onClick={handleDeleteUserImage}
-                            disabled={userImage?.includes("def/user.webp")}
+                            disabled={userImage?.includes("def.webp")}
                         >
                             Usuń zdjęcie
                         </Button>

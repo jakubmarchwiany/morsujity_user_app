@@ -27,7 +27,7 @@ export function Navigator({ closeMenu }: NavigatorProps) {
     const [isBlogOpen, setIsBlogOpen] = useState(false);
     const [isGroupsOpen, setIsGroupsOpen] = useState(true);
 
-    const userImage = useAppSelector((state) => state.user.imageUrl);
+    const imageUrl = useAppSelector((state) => state.user.imageUrl);
     const location = useLocation();
 
     const dispatch = useAppDispatch();
@@ -151,7 +151,7 @@ export function Navigator({ closeMenu }: NavigatorProps) {
                         <Avatar
                             sx={{ width: 22, height: 22 }}
                             alt='Remy Sharp'
-                            src={userImage}
+                            src={imageUrl}
                             variant='rounded'
                         />
                     }
