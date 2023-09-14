@@ -2,8 +2,8 @@ import { Delete } from "@mui/icons-material";
 import IconButton from "@mui/material/IconButton";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import { useAppDispatch, useAppSelector } from "hooks/redux";
-import { deleteActivity } from "store/user/user.actions";
-import { Activity } from "store/user/user.slice";
+import { deleteActivity } from "store/statistics/activity.actions";
+import { Activity } from "store/statistics/statistics.slice";
 import { displayDate, displayTime } from "utils/useful";
 
 export const columns: GridColDef[] = [

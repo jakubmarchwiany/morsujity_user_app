@@ -6,9 +6,9 @@ import { useAppDispatch } from "hooks/redux";
 import useLocalStorageState from "hooks/useLocalStorageState";
 import { useStableNavigate } from "middleware/StableNavigateContextProvider";
 import { useState } from "react";
+import { newActivity } from "store/statistics/activity.actions";
 import { ActivityPicker, ActivityTypes } from "./ActivityPicker";
 import { DurationPicker } from "./DurationPicker";
-import { newActivity } from "store/user/user.actions";
 
 function NewActivity() {
     const [activityType, setActivityType] = useLocalStorageState<ActivityTypes>(
@@ -31,10 +31,12 @@ function NewActivity() {
     const navigate = useStableNavigate();
 
     const handleNewActivity = () => {
-        dispatch(newActivity(activityType, activityDate.toString(), durationInSeconds, navigate));
-    };
+        const totalDurationInSeconds = durationInMinutes * 60 + durationInSeconds;
 
-    console.log(activityType, durationInMinutes, durationInSeconds, activityDate);
+        dispatch(
+            newActivity(activityType, activityDate.toString(), totalDurationInSeconds, navigate),
+        );
+    };
 
     return (
         <Container component='main' sx={{ display: "flex", justifyContent: "center" }}>

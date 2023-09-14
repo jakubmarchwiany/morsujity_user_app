@@ -27,7 +27,7 @@ export function Navigator({ closeMenu }: NavigatorProps) {
     const [isBlogOpen, setIsBlogOpen] = useState(false);
     const [isGroupsOpen, setIsGroupsOpen] = useState(true);
 
-    const userImage = useAppSelector((state) => state.user.image);
+    const userImage = useAppSelector((state) => state.user.imageUrl);
     const location = useLocation();
 
     const dispatch = useAppDispatch();

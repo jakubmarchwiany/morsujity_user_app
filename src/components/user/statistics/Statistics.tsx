@@ -10,9 +10,10 @@ import {
     Unstable_Grid2,
 } from "@mui/material";
 import { useAppDispatch, useAppSelector } from "hooks/redux";
+import { getAllActivity } from "store/statistics/activity.actions";
 import { displayTime } from "utils/useful";
 import { ActivityTable } from "./ActivityTable";
-import { getAllActivity } from "store/user/user.actions";
+
 
 export function Statistics() {
     const s = useAppSelector((state) => state.user.statistics);

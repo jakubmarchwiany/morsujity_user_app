@@ -4,14 +4,14 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
-import { Avatar, Button, ButtonGroup, Stack, Unstable_Grid2 as Grid2 } from "@mui/material";
+import { Avatar, Button, ButtonGroup, Unstable_Grid2 as Grid2, Stack } from "@mui/material";
 import { DialogConfirm } from "components/my/DialogConfirm";
 import { MyModal } from "components/my/MyModal";
 import "cropperjs/dist/cropper.css";
 import { useAppDispatch, useAppSelector } from "hooks/redux";
 import { useState } from "react";
 import Cropper from "react-cropper";
-import { setUserImageToDef, changeUserImage } from "store/user/settings.actions";
+import { changeUserImage, setUserImageToDef } from "store/user/user.actions";
 
 export function ImageOptions() {
     const [openDialog, setOpenDialog] = useState(false);
@@ -20,7 +20,7 @@ export function ImageOptions() {
     const [cropData, setCropData] = useState(undefined);
     const [cropper, setCropper] = useState<any>();
 
-    const userImage = useAppSelector((state) => state.user.image);
+    const userImage = useAppSelector((state) => state.user.imageUrl);
     const dispatch = useAppDispatch();
 
     const handleDecision = (decision: boolean) => {

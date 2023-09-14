@@ -4,7 +4,8 @@ import { useFormik } from "formik";
 import { useAppDispatch, useAppSelector } from "hooks/redux";
 import * as Yup from "yup";
 import { ImageOptions } from "./ImageOptions";
-import { changePseudonym, changePassword } from "store/user/settings.actions";
+import { changePseudonym, changePassword } from "store/user/user.actions";
+
 
 const PSEUDONYM_FORM_STATE = {
     pseudonym: "",

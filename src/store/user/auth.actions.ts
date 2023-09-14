@@ -37,11 +37,11 @@ export const loginIn = (
 export const logout = () => {
     getFetch<never>("/auth/logout").then(async () => {
         await sleep(1000);
-        removeCookieAndRedirect();
+        deleteCookieAndRedirect();
     });
 };
 
-const removeCookieAndRedirect = async () => {
+const deleteCookieAndRedirect = async () => {
     console.log(isProd);
     if (isProd) {
         Cookies.remove("authorization");

@@ -20,10 +20,10 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 
 export function DashBoard() {
-    const statisics = useAppSelector((state) => state.user.statistics);
+    const statisics = useAppSelector((state) => state.statistics);
 
     const generateLastActivities = () => {
-        let newArray = [...statisics!.activity];
+        let newArray = [...statisics.activities!];
         return newArray
             .sort(function (a, b) {
                 const dateA = new Date(a.date!);
