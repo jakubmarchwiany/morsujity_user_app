@@ -87,6 +87,13 @@ export const getDesignTokens = (mode: PaletteMode) => ({
                 },
             },
         },
+        MuiTooltip: {
+            styleOverrides: {
+                tooltip: {
+                    fontSize: "1rem",
+                },
+            },
+        },
     },
 });
 
