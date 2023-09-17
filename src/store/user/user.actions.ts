@@ -42,7 +42,7 @@ export const updatePseudonym =
         );
     };
 
-export const changePassword =
+export const updatePassword =
     (oldPassword: string, newPassword: string): AppThunk =>
     () => {
         postFetch<never>({ oldPassword, newPassword }, "/auth/password/change").then(async () => {
@@ -52,19 +52,19 @@ export const changePassword =
         });
     };
 
-export const changeUserImage =
+export const updateUserImage =
     (base64EncodedImage: string): AppThunk =>
     (appDispatch) => {
         const data = new FormData();
         data.append("userImage", dataURLtoFile(base64EncodedImage, "userImage.png"));
 
         imageFetch<{ image: string }>(data, "/user/settings/update-image").then(({ image }) => {
-            appDispatch(userActions.changeImage(image));
+            appDispatch(userActions.updateImage(image));
         });
     };
 
 export const setUserImageToDef = (): AppThunk => async (appDispatch) => {
     getFetch<{ image: string }>("/user/settings/set-image-to-def").then(({ image }) => {
-        appDispatch(userActions.changeImage(image));
+        appDispatch(userActions.updateImage(image));
     });
 };

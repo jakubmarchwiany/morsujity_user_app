@@ -32,13 +32,13 @@ export function UpdatePseudonym() {
 
     return (
         <Stack component={"form"} noValidate onSubmit={formikPseudonym.handleSubmit}>
-            <Typography variant='h5'>Zmiana Ksywki</Typography>
+            <Typography variant='h4'>Zmiana Ksywki</Typography>
             <MyTextField
                 name='pseudonym'
                 label='Ksywka'
                 placeholder={pseudonym!}
                 formik={formikPseudonym}
-                sx={{ mt: 2 }}
+                sx={{ mt: 1 }}
             />
             <Button
                 color='primary'

@@ -2,7 +2,7 @@ import { Button, Stack, Typography } from "@mui/material";
 import { MyTextField } from "components/my/MyTextField";
 import { useFormik } from "formik";
 import { useAppDispatch } from "hooks/redux";
-import { changePassword } from "store/user/user.actions";
+import { updatePassword } from "store/user/user.actions";
 import { object, ref, string } from "yup";
 
 const NEW_PASSWORD_FORM_STATE = {
@@ -33,19 +33,19 @@ export function UpdatePassword() {
         initialValues: NEW_PASSWORD_FORM_STATE,
         validationSchema: NEW_PASSWORD_VALIDATION,
         onSubmit: ({ oldPassword, newPassword }) => {
-            dispatch(changePassword(oldPassword, newPassword));
+            dispatch(updatePassword(oldPassword, newPassword));
         },
     });
     return (
-        <Stack component={"form"} noValidate onSubmit={formikNewPassword.handleSubmit}>
-            <Typography variant='h5'>Zmiana Hasła</Typography>
+        <Stack component={"form"} noValidate onSubmit={formikNewPassword.handleSubmit} mt={2}>
+            <Typography variant='h4'>Zmiana Hasła</Typography>
 
             <MyTextField
                 type='password'
                 name='oldPassword'
                 label='Aktualne Hasło'
                 formik={formikNewPassword}
-                sx={{ mt: 2 }}
+                sx={{ mt: 1 }}
             />
 
             <Stack direction={"row"} gap={0.2}>

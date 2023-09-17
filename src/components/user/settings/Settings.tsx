@@ -1,23 +1,22 @@
 import { Container, Unstable_Grid2 as Grid2, Stack, Typography } from "@mui/material";
-import { ImageOptions } from "./ImageOptions";
+import { UpdateImage } from "./UpdateImage";
 import { UpdatePassword } from "./UpdatePassword";
 import { UpdatePseudonym } from "./UpdatePseudonym";
 
 export function Settings() {
     return (
         <Container component='main' sx={{ display: "flex", justifyContent: "center" }}>
-            <Stack mt={{ xs: 1, md: 5 }} alignItems='center'>
-                <Typography variant='h5'>Konto</Typography>
-                <Typography variant='h3'>Ustawienia</Typography>
-                <Grid2 container>
+            <Stack mt={{ xs: 2, md: 3 }} alignItems='center'>
+                <Typography variant='h4'>Konto</Typography>
+                <Typography variant='h2'>Ustawienia</Typography>
+                <Grid2 container mt={3} spacing={2}>
                     <Grid2 xs={12} xl={6}>
                         <UpdatePseudonym />
 
                         <UpdatePassword />
                     </Grid2>
                     <Grid2 xs={12} xl={6}>
-                       
-                        <ImageOptions />
+                        <UpdateImage />
                     </Grid2>
                 </Grid2>
             </Stack>

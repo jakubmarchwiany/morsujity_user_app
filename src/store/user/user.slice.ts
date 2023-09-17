@@ -1,7 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-const { VITE_DEF_USER_IMAGE_URL, VITE_USERS_IMAGE_URL } = import.meta.env;
-
 type UserState = {
     _id: string | undefined;
     pseudonym: string | undefined;
@@ -30,7 +28,7 @@ const userSlice = createSlice({
         updatePseudonym(state, action: PayloadAction<string>) {
             state.pseudonym = action.payload;
         },
-        changeImage(state, action: PayloadAction<string>) {
+        updateImage(state, action: PayloadAction<string>) {
             state.imageUrl = action.payload;
         },
     },
