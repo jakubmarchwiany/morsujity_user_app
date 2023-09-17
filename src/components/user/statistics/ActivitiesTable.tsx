@@ -1,17 +1,20 @@
 import { Delete } from "@mui/icons-material";
 import IconButton from "@mui/material/IconButton";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
-import { useAppDispatch, useAppSelector } from "hooks/redux";
+import { displayDate, displayTime } from "components/user/statistics/display";
+import { useAppDispatch } from "hooks/redux";
 import { deleteActivity } from "store/statistics/activity.actions";
 import { Activity } from "store/statistics/statistics.slice";
-import { displayDate, displayTime } from "utils/useful";
+
+type Props = {
+    activities: Activity[];
+};
 
 export const columns: GridColDef[] = [
     {
         field: "type",
         type: "string",
         headerName: "Rodzaj",
-        description: "Ta kolumna zawiera informacje na temat typu aktywności",
         align: "center",
         headerAlign: "center",
         flex: 1,
@@ -21,7 +24,6 @@ export const columns: GridColDef[] = [
         valueFormatter: (params) => displayTime(params.value as number),
         type: "number",
         headerName: "Czas trwania",
-        description: "Ta kolumna zawiera informacje na temat czasu trwania aktywności",
         align: "center",
         headerAlign: "center",
         flex: 1,
@@ -29,16 +31,14 @@ export const columns: GridColDef[] = [
     {
         field: "date",
         headerName: "Data aktywności",
-        description: "Ta kolumna zawiera informacje na temat daty aktywności",
         align: "center",
         headerAlign: "center",
-        flex: 2,
+        flex: 1,
     },
     {
-        flex: 1,
+        flex: 0.5,
         field: "delete",
         headerName: "Opcje",
-        description: "Ta kolumna zawiera opcje edycji i usuwania aktywności",
         headerAlign: "center",
         align: "center",
         sortable: false,
@@ -52,27 +52,24 @@ export const columns: GridColDef[] = [
     },
 ];
 
-export function ActivityTable() {
-    const userActivies = useAppSelector((state) => state.user.statistics?.activity);
-
+export function ActivitiesTable({ activities }: Props) {
     const dispatch = useAppDispatch();
 
     const addRows = (userActivies: Activity[]) => {
-        return userActivies!
-            .slice(0)
-            .reverse()
-            .map((activity) => {
-                return {
-                    type: activity.isMors ? "Mors" : "Zimny prysznic",
-                    date: displayDate(activity.date),
-                    duration: activity.duration,
-                    id: activity._id,
-                };
-            });
+        return userActivies!.slice(0).map((activity) => {
+            return {
+                type: activity.type ? "Mors" : "Zimny prysznic",
+                date: displayDate(activity.date),
+                duration: activity.duration,
+                activity: activity,
+                id: activity._id,
+            };
+        });
     };
-    const onCellClick = (e: { field: string; row: { id: string } }) => {
+
+    const onCellClick = (e: { field: string; row: { activity: Activity } }) => {
         if (e.field === "delete") {
-            dispatch(deleteActivity(e.row.id));
+            dispatch(deleteActivity(e.row.activity));
         }
     };
 
@@ -80,13 +77,11 @@ export function ActivityTable() {
         <div style={{ height: 400 }}>
             <DataGrid
                 onCellClick={onCellClick}
-                rows={addRows(userActivies!)}
+                rows={addRows(activities!)}
                 columns={columns}
-                // pageSize={5}
-                // rowsPerPageOptions={[5]}
+                autoPageSize={false}
                 disableColumnFilter={true}
                 disableColumnMenu={true}
-                // disableSelectionOnClick={true}
                 disableColumnSelector={true}
             />
         </div>

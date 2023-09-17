@@ -1,48 +1,51 @@
-
-import { ActivityTypes } from "components/user/create-activity/ActivityPicker";
 import { NavigateFunction } from "react-router-dom";
 import { AppThunk } from "store";
-import { Activity, Rank } from "store/statistics/statistics.slice";
-import { userActions } from "store/user/user.slice";
+import {
+    Activity,
+    ActivityTypes,
+    Rank,
+    statisticsActions,
+} from "store/statistics/statistics.slice";
 import { getFetch, postFetch } from "utils/fetches";
 
 export const createActivity =
-    (
-        activityType: ActivityTypes,
-        date: string,
-        duration: number,
-        navigate: NavigateFunction,
-    ): AppThunk =>
+    (type: ActivityTypes, date: string, duration: number, navigate: NavigateFunction): AppThunk =>
     (appDispatch) => {
         postFetch<{
             data: {
                 rank: Rank;
                 subRank: Rank;
-                timeColdShowers: number;
-                timeMorses: number;
-                activity: Activity;
+                activityId: string;
             };
-        }>({ activityType, date, duration }, "/user/activity/create").then(({ data }) => {
-            // appDispatch(userActions.newActivity(data));
-            // navigate(`/`, { replace: true });
+        }>({ type, date, duration }, "/user/activity/create").then(({ data }) => {
+            const { rank, subRank, activityId } = data;
+            const activity: Activity = { _id: activityId, type: type, date, duration };
+
+            appDispatch(statisticsActions.createActivity({ activity, rank, subRank }));
+
+            navigate(`/`, { replace: true });
         });
     };
 
 export const deleteActivity =
-    (activityID: string): AppThunk =>
+    (activity: Activity): AppThunk =>
     (appDispatch) => {
         postFetch<{
-            data: { rank: Rank; subRank: Rank; timeColdShowers: number; timeMorses: number };
-        }>({ activityID }, "/user/delete-activity").then(({ data }) => {
-            // appDispatch(userActions.deleteActivity({ ...data, activityID }));
+            data: {
+                rank: Rank;
+                subRank: Rank;
+            };
+        }>({ _id: activity._id }, "/user/activity/delete").then(({ data }) => {
+            appDispatch(statisticsActions.deleteActivity({ ...data, activity }));
         });
     };
 
 export const getAllActivity = (): AppThunk => (appDispatch) => {
-    getFetch<{ activity: Activity[] }>("/user/allActivity", {
+    getFetch<{ data: Activity[] }>("/user/activity/all", {
         customError: true,
-    }).then(({ activity }) => {
-        console.log(activity);
+    }).then(({ data }) => {
+        console.log(data);
+        appDispatch(statisticsActions.setActivities(data));
         // appDispatch(userActions.setAllActivity(activity));
     });
 };

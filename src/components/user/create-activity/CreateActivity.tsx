@@ -1,17 +1,18 @@
 import { Button, Container, Stack, Typography } from "@mui/material";
 import { MobileDateTimePicker } from "@mui/x-date-pickers";
 import { panelStandardSize } from "assets/theme";
+import { ActivityPicker } from "components/user/create-activity/ActivityPicker";
 import dayjs, { Dayjs } from "dayjs";
 import { useAppDispatch } from "hooks/redux";
 import useLocalStorageState from "hooks/useLocalStorageState";
 import { useStableNavigate } from "middleware/StableNavigateContextProvider";
 import { useState } from "react";
 import { createActivity } from "store/statistics/activity.actions";
-import { ActivityPicker, ActivityTypes } from "./ActivityPicker";
+import { ActivityTypes } from "store/statistics/statistics.slice";
 import { DurationPicker } from "./DurationPicker";
 
 export function CreateActivity() {
-    const [activityType, setActivityType] = useLocalStorageState<ActivityTypes>(
+    const [type, setType] = useLocalStorageState<ActivityTypes>(
         "activityType",
         ActivityTypes.ColdShower,
     );
@@ -33,19 +34,17 @@ export function CreateActivity() {
     const handleCreateActivity = () => {
         const totalDurationInSeconds = durationInMinutes * 60 + durationInSeconds;
 
-        dispatch(
-            createActivity(activityType, activityDate.toString(), totalDurationInSeconds, navigate),
-        );
+        dispatch(createActivity(type, activityDate.toString(), totalDurationInSeconds, navigate));
     };
 
     return (
         <Container component='main' sx={{ display: "flex", justifyContent: "center" }}>
-            <Stack mt={{ xs: 5, md: 10 }} alignItems='center' width={panelStandardSize}>
+            <Stack mt={{ xs: 3, md: 5 }} alignItems='center' width={panelStandardSize}>
                 <Typography variant='h3' textAlign='center'>
                     Dodaj Aktywność
                 </Typography>
 
-                <ActivityPicker activityType={activityType} setActivityType={setActivityType} />
+                <ActivityPicker activityType={type} setActivityType={setType} />
 
                 <DurationPicker
                     durationInMinutes={durationInMinutes}

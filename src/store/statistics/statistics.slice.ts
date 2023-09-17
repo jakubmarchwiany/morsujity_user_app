@@ -1,5 +1,12 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
+export enum ActivityTypes {
+    ColdShower,
+    WinterSwiming,
+}
+
+console.log(ActivityTypes);
+
 export type Rank = {
     N: number;
     name: string;
@@ -8,7 +15,7 @@ export type Rank = {
 
 export type Activity = {
     _id: string;
-    activityType: boolean;
+    type: ActivityTypes;
     date: string;
     duration: number;
 };
@@ -16,32 +23,21 @@ export type Activity = {
 export type StatisticsState = {
     rank: Rank | undefined;
     subRank: Rank | undefined;
-    timeColdShowers: number | undefined;
-    timeMorses: number | undefined;
     activities: Activity[] | undefined;
+    totalActivitiesTime: number[] | undefined;
 };
 
 const initialState: StatisticsState = {
     rank: undefined,
     subRank: undefined,
-    timeColdShowers: undefined,
-    timeMorses: undefined,
     activities: undefined,
+    totalActivitiesTime: undefined,
 };
 
-type newActivity = {
+type CreateActivity = {
     activity: Activity;
     rank: Rank;
     subRank: Rank;
-    timeColdShowers: number;
-    timeMorses: number;
-};
-type deleteActivity = {
-    activityID: string;
-    rank: Rank;
-    subRank: Rank;
-    timeColdShowers: number;
-    timeMorses: number;
 };
 
 const statisticsSlice = createSlice({
@@ -53,21 +49,34 @@ const statisticsSlice = createSlice({
                 ...action.payload,
             };
         },
-        newActivity(state, action: PayloadAction<newActivity>) {
-            const { activity, rank, subRank, timeColdShowers, timeMorses } = action.payload;
+        createActivity(state, action: PayloadAction<CreateActivity>) {
+            const { activity, rank, subRank } = action.payload;
+            console.log(activity, rank, subRank);
+
+            const totalActivitiesTime = [...state.totalActivitiesTime!];
+
+            totalActivitiesTime[activity.type] += activity.duration;
+
             return {
+                rank,
+                subRank,
                 activities: [...state.activities!, activity],
-                rank: rank,
-                subRank: subRank,
-                timeColdShowers: timeColdShowers,
-                timeMorses: timeMorses,
+                totalActivitiesTime: totalActivitiesTime,
             };
         },
-        deleteActivity(state, action: PayloadAction<deleteActivity>) {
-            const { activityID } = action.payload;
+        deleteActivity(state, action: PayloadAction<CreateActivity>) {
+            const { activity, rank, subRank } = action.payload;
+            console.log(activity, rank, subRank);
+
+            const totalActivitiesTime = [...state.totalActivitiesTime!];
+
+            totalActivitiesTime[activity.type] -= activity.duration;
+
             return {
-                ...action.payload,
-                activities: state.activities!.filter((a) => a._id !== activityID),
+                rank,
+                subRank,
+                activities: state.activities!.filter((a) => a._id !== activity._id),
+                totalActivitiesTime: totalActivitiesTime,
             };
         },
         setActivities(state, action: PayloadAction<Activity[]>) {
