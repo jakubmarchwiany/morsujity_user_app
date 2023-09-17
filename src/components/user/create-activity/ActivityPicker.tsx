@@ -1,11 +1,7 @@
 import { ToggleButton } from "@mui/material";
 import { MyToggleButtonGroup } from "components/my/MyToggleButtonGroup";
 import { Dispatch } from "react";
-
-export enum ActivityTypes {
-    ColdShower,
-    WinterSwiming,
-}
+import { ActivityTypes } from "store/statistics/statistics.slice";
 
 type Props = {
     activityType: ActivityTypes;
@@ -23,8 +19,8 @@ export function ActivityPicker({ activityType, setActivityType }: Props) {
             fullWidth
             sx={{ mt: 3 }}
         >
-            <ToggleButton value={ActivityTypes.ColdShower}>Mors</ToggleButton>
-            <ToggleButton value={ActivityTypes.WinterSwiming}>Zimny Prysznic</ToggleButton>
+            <ToggleButton value={ActivityTypes.WinterSwiming}>Mors</ToggleButton>
+            <ToggleButton value={ActivityTypes.ColdShower}>Zimny Prysznic</ToggleButton>
         </MyToggleButtonGroup>
     );
 }
