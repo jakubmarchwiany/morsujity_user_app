@@ -19,17 +19,13 @@ export const getUserData =
     (appDispatch) => {
         getFetch<{ data: UserData }>("/user/data", {
             customError: true,
-        })
-            .then(({ data }) => {
-                const { _id, image: imageUrl, pseudonym, statistics } = data;
+        }).then(({ data }) => {
+            const { _id, image: imageUrl, pseudonym, statistics } = data;
 
-                appDispatch(userActions.setUserData({ _id, imageUrl, pseudonym }));
-                appDispatch(statisticsActions.setStatistics(statistics));
-                setIsLogged(true);
-            })
-            .catch((e) => {
-                authorizationFail();
-            });
+            appDispatch(userActions.setUserData({ _id, imageUrl, pseudonym }));
+            appDispatch(statisticsActions.setStatistics(statistics));
+            setIsLogged(true);
+        });
     };
 
 export const updatePseudonym =
