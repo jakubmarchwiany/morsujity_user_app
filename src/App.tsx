@@ -10,6 +10,7 @@ import { Navigator } from "layouts/Navigator";
 import { NotFound } from "layouts/NotFound";
 import { Toaster } from "react-hot-toast";
 import { Route, Routes } from "react-router-dom";
+import { groupRoute } from "routes/group.route";
 import { mainRoute } from "routes/main.route";
 
 export function App() {
@@ -42,6 +43,7 @@ export function App() {
                         <Grid2 xs={20} md={12} lg={14} bgcolor={"background.paper"}>
                             <Routes>
                                 {mainRoute()}
+                                {groupRoute()}
                                 <Route path='*' element={<NotFound />} />
                             </Routes>
                         </Grid2>
@@ -65,7 +67,8 @@ export function App() {
                     style: {
                         background: themeMode.palette.background.default,
                         color: themeMode.palette.primary.contrastText,
-                        minWidth: "250px",
+                        // minWidth: "100vw",
+                        maxWidth: "100vw",
                     },
                 }}
             />

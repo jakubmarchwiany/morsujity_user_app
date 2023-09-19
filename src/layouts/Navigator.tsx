@@ -1,16 +1,17 @@
 import {
     AddTask,
     Book,
+    Create,
     Dashboard,
     ExpandLess,
     ExpandMore,
     Group,
-    GroupAdd,
     Groups,
     Info,
     Logout,
+    Search,
     Settings,
-    Storefront,
+    Storefront
 } from "@mui/icons-material";
 import { Avatar, Button, Collapse, Stack } from "@mui/material";
 import { MyLinkButton } from "components/my/MyLinkButton";
@@ -87,11 +88,19 @@ export function Navigator({ closeMenu }: NavigatorProps) {
                         closeMenu={closeMenu}
                     />
                     <MyLinkButton
-                        text='Szukaj Grupy'
-                        to={`/search`}
+                        text='Szukaj'
+                        to={`/group/search`}
                         isActive={location.pathname === `/search`}
                         size='small'
-                        Icon={GroupAdd}
+                        Icon={Search}
+                        closeMenu={closeMenu}
+                    />
+                    <MyLinkButton
+                        text='Stwórz'
+                        to={`/group/create`}
+                        isActive={location.pathname === `/group/create`}
+                        size='small'
+                        Icon={Create}
                         closeMenu={closeMenu}
                     />
                 </Stack>

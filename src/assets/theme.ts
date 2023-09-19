@@ -91,6 +91,7 @@ export const getDesignTokens = (mode: PaletteMode) => ({
             styleOverrides: {
                 tooltip: {
                     fontSize: "1rem",
+                    maxWidth: "50vw",
                 },
             },
         },

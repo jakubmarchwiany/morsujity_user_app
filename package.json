@@ -19,6 +19,7 @@
         "@emotion/react": "^11.11.1",
         "@emotion/styled": "^11.11.0",
         "@fontsource/montserrat": "^5.0.8",
+        "@mapbox/mapbox-gl-geocoder": "^5.0.1",
         "@mui/icons-material": "^5.14.8",
         "@mui/lab": "^5.0.0-alpha.143",
         "@mui/material": "^5.14.8",
@@ -32,6 +33,7 @@
         "formik": "^2.4.4",
         "immutability-helper": "^3.1.1",
         "js-cookie": "^3.0.5",
+        "mapbox-gl": "^2.15.0",
         "react": "^18.2.0",
         "react-cropper": "^2.3.3",
         "react-dom": "^18.2.0",
@@ -43,6 +45,8 @@
         "yup": "^1.2.0"
     },
     "devDependencies": {
+        "@types/mapbox__mapbox-gl-geocoder": "^4.7.4",
+        "@types/mapbox-gl": "^2.7.14",
         "@types/react": "^18.2.21",
         "@types/react-dom": "^18.2.7",
         "@types/react-redux": "^7.1.26",
