@@ -1,11 +1,9 @@
 import MapboxGeocoder from "@mapbox/mapbox-gl-geocoder";
 import "@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css";
-import { AcUnit } from "@mui/icons-material";
 import { Box } from "@mui/material";
 import mapboxgl, { Map, Marker } from "mapbox-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 import { Dispatch, useEffect, useRef, useState } from "react";
-import { createRoot } from "react-dom/client";
 import toast from "react-hot-toast";
 import { ENV } from "utils/validate_env";
 
@@ -69,13 +67,7 @@ export function CreateGroupMap({ setCoordinate }: Props) {
             event.preventDefault();
         });
 
-        const customMarker = document.createElement("div");
-        const root = createRoot(customMarker);
-        root.render(<AcUnit sx={{ fontSize: "2.5rem" }} />);
-
-        marker = new mapboxgl.Marker({ element: customMarker })
-            .setLngLat([lng, lat])
-            .addTo(map.current);
+        marker = new mapboxgl.Marker().setLngLat([lng, lat]).addTo(map.current);
     }, []);
 
     useEffect(() => {
