@@ -1,15 +1,14 @@
 import { NavigateFunction } from "react-router-dom";
 import { AppThunk } from "store";
-import {
-    Activity,
-    ActivityTypes,
-    Rank,
-    statisticsActions,
-} from "store/statistics/statistics.slice";
+import { Activity } from "store/statistics/activity.type";
+import { ActivityType } from "store/statistics/activity_type.type";
+import { Rank } from "store/statistics/rank.type";
+import { statisticsActions } from "store/statistics/statistics.slice";
+
 import { getFetch, postFetch } from "utils/fetches";
 
 export const createActivity =
-    (type: ActivityTypes, date: string, duration: number, navigate: NavigateFunction): AppThunk =>
+    (type: ActivityType, date: string, duration: number, navigate: NavigateFunction): AppThunk =>
     (appDispatch) => {
         postFetch<{
             data: {

@@ -4,7 +4,8 @@ import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import { displayDate, displayTime } from "components/user/statistics/display";
 import { useAppDispatch } from "hooks/redux";
 import { deleteActivity } from "store/statistics/activity.actions";
-import { Activity } from "store/statistics/statistics.slice";
+import { Activity } from "store/statistics/activity.type";
+
 
 type Props = {
     activities: Activity[];

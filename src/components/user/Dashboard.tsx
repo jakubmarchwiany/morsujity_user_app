@@ -2,11 +2,12 @@ import { Container, Stack, Typography } from "@mui/material";
 import Paper from "@mui/material/Paper";
 import { styled } from "@mui/material/styles";
 import Grid from "@mui/material/Unstable_Grid2";
+import { displayTime } from "components/user/statistics/display";
 import dayjs from "dayjs";
 import "dayjs/locale/pl";
 import relativeTime from "dayjs/plugin/relativeTime"; // import plugin
 import { useAppSelector } from "hooks/redux";
-import { displayTime } from "utils/useful";
+
 
 dayjs.extend(relativeTime);
 dayjs.locale("pl");
@@ -42,7 +43,7 @@ export function DashBoard() {
                         borderRadius={2}
                         key={activity._id}
                     >
-                        <Typography>{activity.isMors ? "mors" : "zimny prysznic"}</Typography>
+                        <Typography>{activity.type ? "mors" : "zimny prysznic"}</Typography>
                         <Typography>{displayTime(activity.duration)}</Typography>
                         <Typography>{dayjs(activity.date).from(dayjs())}</Typography>
                     </Stack>
@@ -63,7 +64,7 @@ export function DashBoard() {
                         <Typography variant='h5' mb={3}>
                             Ostatnie aktywności
                         </Typography>
-                        {statisics?.activity.length === 0 ? (
+                        {statisics.activities!.length === 0 ? (
                             <Typography>Brak akywności, na co czekasz :)</Typography>
                         ) : (
                             generateLastActivities()

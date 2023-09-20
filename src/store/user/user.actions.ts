@@ -3,7 +3,6 @@ import { StatisticsState, statisticsActions } from "store/statistics/statistics.
 import { dataURLtoFile } from "utils/dataURLToFile";
 import { getFetch, imageFetch, postFetch } from "utils/fetches";
 import { sleep } from "utils/sleep";
-import { authorizationFail } from "utils/useful";
 import { AppThunk } from "../index";
 import { userActions } from "./user.slice";
 

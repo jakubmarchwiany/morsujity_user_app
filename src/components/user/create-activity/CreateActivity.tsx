@@ -8,13 +8,13 @@ import useLocalStorageState from "hooks/useLocalStorageState";
 import { useStableNavigate } from "middleware/StableNavigateContextProvider";
 import { useState } from "react";
 import { createActivity } from "store/statistics/activity.actions";
-import { ActivityTypes } from "store/statistics/statistics.slice";
 import { DurationPicker } from "./DurationPicker";
+import { ActivityType } from "store/statistics/activity_type.type";
 
 export function CreateActivity() {
-    const [type, setType] = useLocalStorageState<ActivityTypes>(
+    const [type, setType] = useLocalStorageState<ActivityType>(
         "activityType",
-        ActivityTypes.ColdShower,
+        ActivityType.ColdShower,
     );
 
     const [durationInMinutes, setDurationInMinutes] = useLocalStorageState<number>(

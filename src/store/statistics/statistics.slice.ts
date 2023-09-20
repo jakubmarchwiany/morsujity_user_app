@@ -1,24 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-
-export enum ActivityTypes {
-    ColdShower,
-    WinterSwiming,
-}
-
-console.log(ActivityTypes);
-
-export type Rank = {
-    N: number;
-    name: string;
-    maxValue: number;
-};
-
-export type Activity = {
-    _id: string;
-    type: ActivityTypes;
-    date: string;
-    duration: number;
-};
+import { Activity } from "store/statistics/activity.type";
+import { Rank } from "store/statistics/rank.type";
 
 export type StatisticsState = {
     rank: Rank | undefined;

@@ -1,6 +1,8 @@
 import { Avatar, Divider, Tooltip, Typography } from "@mui/material";
 import { displayTime } from "components/user/statistics/display";
-import { ActivityTypes, Rank } from "store/statistics/statistics.slice";
+import { ActivityType } from "store/statistics/activity_type.type";
+import { Rank } from "store/statistics/rank.type";
+
 import { ENV } from "utils/validate_env";
 
 const { VITE_GOOGLE_BUCKET_URL } = ENV;
@@ -13,8 +15,8 @@ type Props = {
 
 export function RankPanel({ rank, subRank, totalActivitiesTime }: Props) {
     const totalTime =
-        totalActivitiesTime![ActivityTypes.WinterSwiming]! +
-        totalActivitiesTime![ActivityTypes.ColdShower];
+        totalActivitiesTime![ActivityType.WinterSwiming]! +
+        totalActivitiesTime![ActivityType.ColdShower];
 
     return (
         <>

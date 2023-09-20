@@ -1,11 +1,12 @@
 import { ToggleButton } from "@mui/material";
 import { MyToggleButtonGroup } from "components/my/MyToggleButtonGroup";
 import { Dispatch } from "react";
-import { ActivityTypes } from "store/statistics/statistics.slice";
+import { ActivityType } from "store/statistics/activity_type.type";
+
 
 type Props = {
-    activityType: ActivityTypes;
-    setActivityType: Dispatch<React.SetStateAction<ActivityTypes>>;
+    activityType: ActivityType;
+    setActivityType: Dispatch<React.SetStateAction<ActivityType>>;
 };
 
 export function ActivityPicker({ activityType, setActivityType }: Props) {
@@ -13,14 +14,14 @@ export function ActivityPicker({ activityType, setActivityType }: Props) {
         <MyToggleButtonGroup
             value={activityType}
             exclusive
-            onChange={(event, value: ActivityTypes) => {
+            onChange={(event, value: ActivityType) => {
                 if (value !== null) setActivityType(value);
             }}
             fullWidth
             sx={{ mt: 3 }}
         >
-            <ToggleButton value={ActivityTypes.WinterSwiming}>Mors</ToggleButton>
-            <ToggleButton value={ActivityTypes.ColdShower}>Zimny Prysznic</ToggleButton>
+            <ToggleButton value={ActivityType.WinterSwiming}>Mors</ToggleButton>
+            <ToggleButton value={ActivityType.ColdShower}>Zimny Prysznic</ToggleButton>
         </MyToggleButtonGroup>
     );
 }
