@@ -39,6 +39,9 @@ const userSlice = createSlice({
         updateImage(state, action: PayloadAction<string>) {
             state.imageUrl = action.payload;
         },
+        createGroup(state, action: PayloadAction<{ _id: string; name: string }>) {
+            state.groups = [...state.groups!, action.payload];
+        },
     },
 });
 const userActions = userSlice.actions;
