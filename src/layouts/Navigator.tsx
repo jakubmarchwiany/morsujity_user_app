@@ -11,7 +11,7 @@ import {
     Logout,
     Search,
     Settings,
-    Storefront
+    Storefront,
 } from "@mui/icons-material";
 import { Avatar, Button, Collapse, Stack } from "@mui/material";
 import { MyLinkButton } from "components/my/MyLinkButton";
@@ -29,6 +29,7 @@ export function Navigator({ closeMenu }: NavigatorProps) {
     const [isGroupsOpen, setIsGroupsOpen] = useState(true);
 
     const imageUrl = useAppSelector((state) => state.user.imageUrl);
+    const groups = useAppSelector((state) => state.user.groups);
     const location = useLocation();
 
     const dispatch = useAppDispatch();
@@ -37,6 +38,21 @@ export function Navigator({ closeMenu }: NavigatorProps) {
         dispatch(logout);
 
         if (closeMenu != undefined) closeMenu();
+    };
+
+    const generateUserGroups = () => {
+        return groups?.map((g) => {
+            return (
+                <MyLinkButton
+                    text={g.name}
+                    to={`/group/${g._id}`}
+                    isActive={location.pathname === `/group/${g._id}`}
+                    size='medium'
+                    Icon={Group}
+                    closeMenu={closeMenu}
+                />
+            );
+        });
     };
 
     return (
@@ -71,22 +87,7 @@ export function Navigator({ closeMenu }: NavigatorProps) {
             </Button>
             <Collapse in={isGroupsOpen} timeout='auto' unmountOnExit>
                 <Stack>
-                    <MyLinkButton
-                        text='Hipotermia'
-                        to={`/group/1`}
-                        isActive={location.pathname === `/group/1`}
-                        size='small'
-                        Icon={Group}
-                        closeMenu={closeMenu}
-                    />
-                    <MyLinkButton
-                        text='Chełmskie Morsy'
-                        to={`/group/2`}
-                        isActive={location.pathname === `/group/2`}
-                        size='small'
-                        Icon={Group}
-                        closeMenu={closeMenu}
-                    />
+                    {groups && generateUserGroups()}
                     <MyLinkButton
                         text='Szukaj'
                         to={`/group/search`}
