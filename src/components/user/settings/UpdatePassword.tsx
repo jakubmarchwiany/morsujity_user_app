@@ -8,7 +8,7 @@ import { object, ref, string } from "yup";
 const NEW_PASSWORD_FORM_STATE = {
     oldPassword: "",
     newPassword: "",
-    confirmNewPassword: "",
+    confirmNewPassword: ""
 };
 
 const NEW_PASSWORD_VALIDATION = object().shape({
@@ -23,10 +23,10 @@ const NEW_PASSWORD_VALIDATION = object().shape({
         .matches(/(?=.*[!@#$%^&*])/, "Musi zawierać znak specjalny (! @ # $ % ^ & *)"),
     confirmNewPassword: string()
         .required("Wymagane")
-        .oneOf([ref("newPassword")], "Hasła muszą być takie same"),
+        .oneOf([ref("newPassword")], "Hasła muszą być takie same")
 });
 
-export function UpdatePassword() {
+export function UpdatePassword(): JSX.Element {
     const dispatch = useAppDispatch();
 
     const formikNewPassword = useFormik({
@@ -34,39 +34,39 @@ export function UpdatePassword() {
         validationSchema: NEW_PASSWORD_VALIDATION,
         onSubmit: ({ oldPassword, newPassword }) => {
             dispatch(updatePassword(oldPassword, newPassword));
-        },
+        }
     });
     return (
         <Stack component={"form"} noValidate onSubmit={formikNewPassword.handleSubmit} mt={2}>
-            <Typography variant='h4'>Zmiana Hasła</Typography>
+            <Typography variant="h4">Zmiana Hasła</Typography>
 
             <MyTextField
-                type='password'
-                name='oldPassword'
-                label='Aktualne Hasło'
+                type="password"
+                name="oldPassword"
+                label="Aktualne Hasło"
                 formik={formikNewPassword}
                 sx={{ mt: 1 }}
             />
 
             <Stack direction={"row"} gap={0.2}>
                 <MyTextField
-                    type='password'
-                    name='newPassword'
-                    label='Nowe Hasło'
+                    type="password"
+                    name="newPassword"
+                    label="Nowe Hasło"
                     formik={formikNewPassword}
                 />
 
                 <MyTextField
-                    type='password'
-                    name='confirmNewPassword'
-                    label='Pot. Nowego Hasła'
+                    type="password"
+                    name="confirmNewPassword"
+                    label="Pot. Nowego Hasła"
                     formik={formikNewPassword}
                 />
             </Stack>
             <Button
-                type='submit'
+                type="submit"
                 fullWidth
-                variant='contained'
+                variant="contained"
                 disabled={!(formikNewPassword.isValid && formikNewPassword.dirty)}
             >
                 Zmień Hasło

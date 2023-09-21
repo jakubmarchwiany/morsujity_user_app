@@ -16,7 +16,7 @@ const initialState: UserState = {
     _id: undefined,
     pseudonym: undefined,
     imageUrl: undefined,
-    groups: undefined,
+    groups: undefined
 };
 
 type UserData = {
@@ -40,9 +40,9 @@ const userSlice = createSlice({
             state.imageUrl = action.payload;
         },
         createGroup(state, action: PayloadAction<{ _id: string; name: string }>) {
-            state.groups = [...state.groups!, action.payload];
-        },
-    },
+            if (state.groups !== undefined) state.groups = [...state.groups, action.payload];
+        }
+    }
 });
 const userActions = userSlice.actions;
 const userSliceReducers = userSlice.reducer;

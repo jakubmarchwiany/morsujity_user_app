@@ -11,20 +11,20 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Navigator } from "./Navigator";
 
-interface NavbarProps {
+type NavbarProps = {
     switchMode: () => void;
-}
+};
 
-export function Navbar({ switchMode }: NavbarProps) {
+export function Navbar({ switchMode }: NavbarProps): JSX.Element {
     const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
     const open = Boolean(anchorEl);
 
     const theme = useTheme<Theme>();
 
-    const handleClick = (event: React.MouseEvent<HTMLElement>) => {
+    const handleClick = (event: React.MouseEvent<HTMLElement>): void => {
         setAnchorEl(event.currentTarget);
     };
-    const handleCloseMenu = () => {
+    const handleCloseMenu = (): void => {
         setAnchorEl(null);
     };
 
@@ -33,29 +33,29 @@ export function Navbar({ switchMode }: NavbarProps) {
     return (
         <AppBar
             elevation={0}
-            position='static'
+            position="static"
             sx={{
                 bgcolor: "primary.main",
-                top: "auto",
+                top: "auto"
             }}
         >
             <Toolbar sx={{ justifyContent: "space-between", alignContent: "center", my: 0 }}>
-                <Stack direction='row' alignItems='center'>
+                <Stack direction="row" alignItems="center">
                     <AcUnitIcon
-                        fontSize='large'
+                        fontSize="large"
                         sx={{
                             mr: 2,
-                            color: "#fff",
+                            color: "#fff"
                         }}
                     />
 
-                    <Link to='/' style={{ textDecoration: "none" }}>
+                    <Link to="/" style={{ textDecoration: "none" }}>
                         <MuiLink
-                            component='p'
-                            variant='h6'
-                            underline='hover'
+                            component="p"
+                            variant="h6"
+                            underline="hover"
                             sx={{
-                                color: "#fff",
+                                color: "#fff"
                             }}
                         >
                             Morsujity
@@ -68,12 +68,12 @@ export function Navbar({ switchMode }: NavbarProps) {
                     </IconButton>
                     {isSmallScreen && (
                         <>
-                            <Tooltip title='Nawigator'>
+                            <Tooltip title="Nawigator">
                                 <IconButton
-                                    id='demo-positioned-button'
+                                    id="demo-positioned-button"
                                     aria-expanded={open ? "true" : undefined}
                                     aria-controls={open ? "demo-positioned-menu" : undefined}
-                                    aria-haspopup='true'
+                                    aria-haspopup="true"
                                     onClick={handleClick}
                                     sx={{ color: "white" }}
                                 >
@@ -81,18 +81,18 @@ export function Navbar({ switchMode }: NavbarProps) {
                                 </IconButton>
                             </Tooltip>
                             <Menu
-                                id='demo-positioned-menu'
-                                aria-labelledby='demo-positioned-button'
+                                id="demo-positioned-menu"
+                                aria-labelledby="demo-positioned-button"
                                 anchorEl={anchorEl}
                                 open={open}
                                 onClose={handleCloseMenu}
                                 anchorOrigin={{
                                     vertical: "top",
-                                    horizontal: "left",
+                                    horizontal: "left"
                                 }}
                                 transformOrigin={{
                                     vertical: "top",
-                                    horizontal: "left",
+                                    horizontal: "left"
                                 }}
                             >
                                 <Navigator closeMenu={handleCloseMenu} />

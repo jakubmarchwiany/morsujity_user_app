@@ -6,21 +6,22 @@ import { MyTextField } from "components/my/MyTextField";
 import { useFormik } from "formik";
 import { useState } from "react";
 import { loginIn } from "store/user/auth.actions";
+import { ENV } from "utils/validate_env";
 import { object, string } from "yup";
 
 const LOGIN_FORM_STATE = {
     email: "",
-    password: "",
+    password: ""
 };
 
 const LOGIN_VALIDATION = object().shape({
     email: string().required("Wymagane").email("Niepoprawny adres email"),
-    password: string().required("Wymagane"),
+    password: string().required("Wymagane")
 });
 
-const { VITE_DOMAIN_URL: DOMAIN_URL } = import.meta.env;
+const { VITE_DOMAIN_URL: DOMAIN_URL } = ENV;
 
-export function Login() {
+export function Login(): JSX.Element {
     const [isLoading, setIsLoading] = useState(false);
     const [rememberMe, setRememberMe] = useState(false);
 
@@ -30,7 +31,7 @@ export function Login() {
         onSubmit: ({ email, password }, { resetForm }) => {
             setIsLoading(true);
             loginIn(setIsLoading, email, password, rememberMe);
-        },
+        }
     });
 
     return (
@@ -40,41 +41,41 @@ export function Login() {
                     bgcolor: "primary.main",
                     width: "5rem",
                     height: "5rem",
-                    color: "white",
+                    color: "white"
                 }}
             >
-                <LockOpenOutlined fontSize='large' />
+                <LockOpenOutlined fontSize="large" />
             </Avatar>
 
-            <Typography variant='h4' color='white' mt={1}>
+            <Typography variant="h4" color="white" mt={1}>
                 Zaloguj się
             </Typography>
             <Box component={"form"} noValidate onSubmit={formikLogin.handleSubmit} mt={2}>
                 <MyTextField
-                    name='email'
-                    label='Email'
+                    name="email"
+                    label="Email"
                     sx={{
                         input: {
-                            color: "white",
-                        },
+                            color: "white"
+                        }
                     }}
                     formik={formikLogin}
                 />
                 <MyTextField
-                    name='password'
-                    label='Hasło'
-                    type='password'
+                    name="password"
+                    label="Hasło"
+                    type="password"
                     sx={{
                         input: {
-                            color: "white",
-                        },
+                            color: "white"
+                        }
                     }}
                     formik={formikLogin}
                 />
                 <LoadingButton
                     loading={isLoading}
-                    type='submit'
-                    variant='contained'
+                    type="submit"
+                    variant="contained"
                     disabled={!(formikLogin.isValid && formikLogin.dirty)}
                     fullWidth
                 >
@@ -84,18 +85,20 @@ export function Login() {
                     control={
                         <Checkbox
                             value={rememberMe}
-                            onChange={(e) => setRememberMe(e.target.checked)}
+                            onChange={(e) => {
+                                setRememberMe(e.target.checked);
+                            }}
                         />
                     }
-                    label='Nie wylogowuj mnie'
+                    label="Nie wylogowuj mnie"
                     sx={{ color: "white" }}
                 />
                 <br />
-                <Link href={DOMAIN_URL + "/auth/reset-password"} target='_blank'>
+                <Link href={DOMAIN_URL + "/auth/reset-password"} target="_blank">
                     Nie pamiętasz hasła?
                 </Link>
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <Link href={DOMAIN_URL + "/register"} target='_blank'>
+                <Link href={DOMAIN_URL + "/register"} target="_blank">
                     Nie masz konta?
                 </Link>
             </Box>

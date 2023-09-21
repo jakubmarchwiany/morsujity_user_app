@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-floating-promises */
 import Cookies from "js-cookie";
 import { getFetch, postFetch } from "utils/fetches";
 import { sleep } from "utils/sleep";
@@ -6,16 +7,16 @@ import { ENV } from "utils/validate_env";
 const { isProd } = ENV;
 
 export const loginIn = (
-    setIsLoading: Function,
+    setIsLoading: (arg0: boolean) => void,
     email: string,
     password: string,
-    rememberMe: boolean,
-) => {
+    rememberMe: boolean
+): void => {
     postFetch<{
         message: string;
         data: { expires: number; domain: string; token: string };
     }>({ email, password }, "/auth/login", {
-        customError: true,
+        customError: true
     })
         .then(async ({ data }) => {
             const { domain, expires, token } = data;
@@ -24,7 +25,7 @@ export const loginIn = (
             Cookies.set("authorization", token, {
                 expires: rememberMe ? expires / 24 / 60 / 60 : undefined,
                 path: "/",
-                domain: domain,
+                domain
             });
             await sleep(1000);
             window.location.reload();
@@ -34,14 +35,14 @@ export const loginIn = (
         });
 };
 
-export const logout = () => {
+export const logout = (): void => {
     getFetch<never>("/auth/logout").then(async () => {
         await sleep(1000);
         deleteCookieAndRedirect();
     });
 };
 
-const deleteCookieAndRedirect = async () => {
+const deleteCookieAndRedirect = (): void => {
     console.log(isProd);
     if (isProd) {
         Cookies.remove("authorization");

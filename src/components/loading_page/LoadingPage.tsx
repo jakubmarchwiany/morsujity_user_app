@@ -1,3 +1,4 @@
+/* eslint-disable multiline-ternary */
 import { Box, CircularProgress, Container } from "@mui/material";
 import { Login } from "./Login";
 
@@ -5,17 +6,17 @@ type Props = {
     isLogged: boolean | undefined;
 };
 
-export function LoadingPage({ isLogged }: Props) {
+export function LoadingPage({ isLogged }: Props): JSX.Element {
     return (
         <Container
-            component='main'
+            component="main"
             maxWidth={false}
             sx={{
                 display: "flex",
                 justifyContent: "center",
                 alignItems: "center",
                 height: "100vh",
-                backgroundColor: "#424242",
+                backgroundColor: "#424242"
             }}
         >
             {isLogged === undefined ? (

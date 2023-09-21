@@ -5,20 +5,20 @@ import toast from "react-hot-toast";
 
 export enum ThemeMode {
     LIGHT = "light",
-    DARK = "dark",
+    DARK = "dark"
 }
 
 export function useStateThemeMode(): [Theme, () => void] {
     const [themeMode, setThemeMode] = useState<PaletteMode>(ThemeMode.LIGHT);
 
-    const switchMode = () => {
+    const switchMode = (): void => {
         const newThemeMode = themeMode === ThemeMode.LIGHT ? ThemeMode.DARK : ThemeMode.LIGHT;
 
         setThemeMode(newThemeMode);
         localStorage.setItem("themeMode", JSON.stringify(newThemeMode));
 
         toast(newThemeMode === ThemeMode.LIGHT ? "Zapalam światło" : "Gasze światło", {
-            icon: newThemeMode === ThemeMode.LIGHT ? "🌅" : "🌇",
+            icon: newThemeMode === ThemeMode.LIGHT ? "🌅" : "🌇"
         });
     };
 
@@ -26,7 +26,7 @@ export function useStateThemeMode(): [Theme, () => void] {
     useEffect(() => {
         const themeModeLocal: string | null = localStorage.getItem("themeMode");
 
-        if (themeModeLocal !== null && (themeModeLocal === ThemeMode.LIGHT || ThemeMode.DARK)) {
+        if (themeModeLocal !== null && themeModeLocal in ThemeMode) {
             setThemeMode(JSON.parse(themeModeLocal) as ThemeMode);
         } else {
             setThemeMode(prefersDarkMode ? "dark" : "light");

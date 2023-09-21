@@ -6,35 +6,35 @@ import { useState } from "react";
 import toast from "react-hot-toast";
 import { setUserImageToDef } from "store/user/user.actions";
 
-export function UpdateImage() {
+export function UpdateImage(): JSX.Element {
     const userImage = useAppSelector((state) => state.user.imageUrl);
     const [isImageSelectorOpen, SetIsImageSelectorOpen] = useState(false);
 
     const dispatch = useAppDispatch();
 
-    const handleSetUserImageToDef = () => {
+    const handleSetUserImageToDef = (): void => {
         dispatch(setUserImageToDef());
     };
 
     return (
         <>
-            <Typography variant='h4'>Zmiana Profilowego</Typography>
-            <Grid2 container columns={20} justifyContent='center'>
+            <Typography variant="h4">Zmiana Profilowego</Typography>
+            <Grid2 container columns={20} justifyContent="center">
                 <Grid2 xs={20} xl={16} style={{ justifyContent: "center", display: "flex" }}>
                     <Avatar
                         sx={{ my: 2, width: "50%", height: "auto" }}
-                        alt='Remy Sharp'
+                        alt="Remy Sharp"
                         src={userImage}
-                        variant='rounded'
+                        variant="rounded"
                     />
                 </Grid2>
 
                 <Grid2 xs={20} xl={16}>
-                    <ButtonGroup variant='contained' aria-label='outlined button group' fullWidth>
+                    <ButtonGroup variant="contained" aria-label="outlined button group" fullWidth>
                         <Button
-                            type='button'
-                            variant='contained'
-                            color='error'
+                            type="button"
+                            variant="contained"
+                            color="error"
                             onClick={() => toast.error("Kliknij dwukrotnie by usunać nawyk")}
                             onDoubleClick={handleSetUserImageToDef}
                             disabled={userImage?.includes("def.webp")}
@@ -43,8 +43,8 @@ export function UpdateImage() {
                         </Button>
 
                         <Button
-                            type='button'
-                            variant='contained'
+                            type="button"
+                            variant="contained"
                             onClick={() => {
                                 SetIsImageSelectorOpen((prev) => !prev);
                             }}

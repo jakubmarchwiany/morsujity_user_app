@@ -8,22 +8,22 @@ import useLocalStorageState from "hooks/useLocalStorageState";
 import { useStableNavigate } from "middleware/StableNavigateContextProvider";
 import { useState } from "react";
 import { createActivity } from "store/statistics/activity.actions";
-import { DurationPicker } from "./DurationPicker";
 import { ActivityType } from "store/statistics/activity_type.type";
+import { DurationPicker } from "./DurationPicker";
 
-export function CreateActivity() {
+export function CreateActivity(): JSX.Element {
     const [type, setType] = useLocalStorageState<ActivityType>(
         "activityType",
-        ActivityType.ColdShower,
+        ActivityType.ColdShower
     );
 
     const [durationInMinutes, setDurationInMinutes] = useLocalStorageState<number>(
         "durationInMinutes",
-        5,
+        5
     );
     const [durationInSeconds, setDurationInSeconds] = useLocalStorageState<number>(
         "durationInSeconds",
-        0,
+        0
     );
 
     const [activityDate, setActivityDate] = useState<Dayjs>(dayjs().startOf("day"));
@@ -31,16 +31,16 @@ export function CreateActivity() {
     const dispatch = useAppDispatch();
     const navigate = useStableNavigate();
 
-    const handleCreateActivity = () => {
+    const handleCreateActivity = (): void => {
         const totalDurationInSeconds = durationInMinutes * 60 + durationInSeconds;
 
         dispatch(createActivity(type, activityDate.toString(), totalDurationInSeconds, navigate));
     };
 
     return (
-        <Container component='main' sx={{ display: "flex", justifyContent: "center" }}>
-            <Stack mt={{ xs: 3, md: 5 }} alignItems='center' width={panelStandardSize}>
-                <Typography variant='h3' textAlign='center'>
+        <Container component="main" sx={{ display: "flex", justifyContent: "center" }}>
+            <Stack mt={{ xs: 3, md: 5 }} alignItems="center" width={panelStandardSize}>
+                <Typography variant="h3" textAlign="center">
                     Dodaj Aktywność
                 </Typography>
 
@@ -53,17 +53,19 @@ export function CreateActivity() {
                     setDurationInSeconds={setDurationInSeconds}
                 />
 
-                <Typography variant='h4' mt={2} textAlign='center'>
+                <Typography variant="h4" mt={2} textAlign="center">
                     Data
                 </Typography>
                 <MobileDateTimePicker
                     defaultValue={activityDate}
-                    onChange={(newValue) => newValue && setActivityDate(newValue)}
+                    onChange={(newValue) => {
+                        newValue !== null && setActivityDate(newValue);
+                    }}
                     ampm={false}
                     sx={{ width: "165px", mt: 1 }}
                 />
 
-                <Button variant='contained' sx={{ mt: 2 }} onClick={handleCreateActivity} fullWidth>
+                <Button variant="contained" sx={{ mt: 2 }} onClick={handleCreateActivity} fullWidth>
                     Dodaj
                 </Button>
             </Stack>

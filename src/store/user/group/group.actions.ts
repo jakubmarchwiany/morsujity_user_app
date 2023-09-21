@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-floating-promises */
 import { NavigateFunction } from "react-router-dom";
 import { AppThunk } from "store";
 import { GroupType } from "store/user/group/group_type.type";
@@ -10,14 +11,14 @@ export const createGroup =
         name: string,
         description: string,
         coordinates: [number, number],
-        navigate: NavigateFunction,
+        navigate: NavigateFunction
     ): AppThunk =>
     (appDispatch) => {
         postFetch<{ data: { _id: string; name: string } }>(
             { type, name, description, coordinates },
-            "/groups/create",
+            "/groups/create"
         ).then(({ data }) => {
             appDispatch(userActions.createGroup(data));
-            navigate(`/`, { replace: true });
+            navigate("/", { replace: true });
         });
     };

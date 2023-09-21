@@ -8,7 +8,7 @@ type Props = {
     isActive?: boolean;
     size?: "small" | "medium" | "large";
     textColor?: string;
-    Icon?: OverridableComponent<SvgIconTypeMap<{}, "svg">> & {
+    Icon?: OverridableComponent<SvgIconTypeMap<unknown, "svg">> & {
         muiName: string;
     };
     fullWidth?: boolean;
@@ -23,13 +23,13 @@ export function MyLinkButton({
     textColor = "secondary.contrastText",
     Icon,
     fullWidth = true,
-    closeMenu,
-}: Props) {
+    closeMenu
+}: Props): JSX.Element {
     return (
         <Link to={to} style={{ textDecoration: "none" }}>
             <Button
                 size={size}
-                startIcon={Icon && <Icon />}
+                startIcon={Icon !== undefined && <Icon />}
                 disabled={isActive}
                 sx={{ color: textColor }}
                 fullWidth={fullWidth}

@@ -7,8 +7,8 @@ import { userSliceReducers } from "store/user/user.slice";
 const store = configureStore({
     reducer: {
         user: userSliceReducers,
-        statistics: statisticsSliceReducers,
-    },
+        statistics: statisticsSliceReducers
+    }
 });
 type RootState = ReturnType<typeof store.getState>;
 type AppDispatch = typeof store.dispatch;

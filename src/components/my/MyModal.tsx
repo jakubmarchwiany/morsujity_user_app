@@ -2,7 +2,7 @@ import { Box, Modal, ModalProps, styled } from "@mui/material";
 
 const StyledModal = styled(Modal)<ModalProps>({
     display: "flex",
-    justifyContent: "center",
+    justifyContent: "center"
 });
 
 type MyModalPropsType = {
@@ -22,13 +22,13 @@ export const MyModal = ({
     children,
     top = 1,
     p = 0,
-    borderRadius = 0,
+    borderRadius = 0
 }: // xs = 80,
 // sm = 70,
 // md = 45,
 // lg = 35,
 // xl = 30,
-MyModalPropsType) => (
+MyModalPropsType): JSX.Element => (
     <StyledModal open={open} onClose={onClose} sx={{ overflow: "scroll" }}>
         <Box
             sx={{
@@ -36,7 +36,7 @@ MyModalPropsType) => (
                 bgcolor: "background.paper",
                 position: "absolute" as "absolute",
                 top: `${top}%`,
-                p: { p },
+                p: { p }
             }}
             borderRadius={borderRadius}
         >

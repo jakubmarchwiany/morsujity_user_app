@@ -13,7 +13,7 @@ mapboxgl.accessToken = VITE_MAPBOX_TOKEN;
 const INITIAL_STATE = {
     longitude: 19.222628,
     latitude: 52.214174,
-    zoom: 5,
+    zoom: 5
 };
 
 let marker: null | Marker;
@@ -22,7 +22,7 @@ type Props = {
     setCoordinate: Dispatch<React.SetStateAction<[number, number] | undefined>>;
 };
 
-export function CreateGroupMap({ setCoordinate }: Props) {
+export function CreateGroupMap({ setCoordinate }: Props): JSX.Element {
     const [lng, setLng] = useState(INITIAL_STATE.longitude);
     const [lat, setLat] = useState(INITIAL_STATE.latitude);
 
@@ -30,30 +30,32 @@ export function CreateGroupMap({ setCoordinate }: Props) {
     const map = useRef<null | Map>(null);
 
     useEffect(() => {
-        if (map.current) return;
+        if (map.current === null || mapContainer.current === null) return;
 
         map.current = new mapboxgl.Map({
-            container: mapContainer.current!,
+            container: mapContainer.current,
             style: "mapbox://styles/kvbik/clmqlvvri027u01qx275uetd0",
             center: [lng, lat],
-            zoom: INITIAL_STATE.zoom,
+            zoom: INITIAL_STATE.zoom
         });
 
         const geocoder = new MapboxGeocoder({
             accessToken: mapboxgl.accessToken,
-            mapboxgl: mapboxgl,
-            marker: false,
+            mapboxgl,
+            marker: false
         });
         map.current.addControl(geocoder, "top-left");
 
         const navigation = new mapboxgl.NavigationControl({});
         map.current.addControl(navigation, "top-left");
 
-        map.current.on("move", (event) => {
-            const lngCenter = parseFloat(map.current!.getCenter().lng.toFixed(4));
-            const latCenter = parseFloat(map.current!.getCenter().lat.toFixed(4));
-            setLng(lngCenter);
-            setLat(latCenter);
+        map.current.on("move", () => {
+            if (map.current !== null) {
+                const lngCenter = parseFloat(map.current.getCenter().lng.toFixed(4));
+                const latCenter = parseFloat(map.current.getCenter().lat.toFixed(4));
+                setLng(lngCenter);
+                setLat(latCenter);
+            }
         });
 
         map.current.on("wheel", (event) => {
@@ -78,7 +80,7 @@ export function CreateGroupMap({ setCoordinate }: Props) {
         <Box>
             <div
                 ref={mapContainer}
-                className='map-container'
+                className="map-container"
                 style={{ minHeight: "40vh", width: "100%" }}
             />
         </Box>

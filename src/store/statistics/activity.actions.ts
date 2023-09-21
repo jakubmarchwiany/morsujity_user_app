@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-floating-promises */
 import { NavigateFunction } from "react-router-dom";
 import { AppThunk } from "store";
 import { Activity } from "store/statistics/activity.type";
@@ -18,11 +19,11 @@ export const createActivity =
             };
         }>({ type, date, duration }, "/user/activity/create").then(({ data }) => {
             const { rank, subRank, activityId } = data;
-            const activity: Activity = { _id: activityId, type: type, date, duration };
+            const activity: Activity = { _id: activityId, type, date, duration };
 
             appDispatch(statisticsActions.createActivity({ activity, rank, subRank }));
 
-            navigate(`/`, { replace: true });
+            navigate("/", { replace: true });
         });
     };
 
@@ -41,7 +42,7 @@ export const deleteActivity =
 
 export const getAllActivity = (): AppThunk => (appDispatch) => {
     getFetch<{ data: Activity[] }>("/user/activity/all", {
-        customError: true,
+        customError: true
     }).then(({ data }) => {
         console.log(data);
         appDispatch(statisticsActions.setActivities(data));

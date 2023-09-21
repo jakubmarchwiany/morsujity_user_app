@@ -1,6 +1,6 @@
+/* eslint-disable @typescript-eslint/no-floating-promises */
 import Cookies from "js-cookie";
 import { StatisticsState, statisticsActions } from "store/statistics/statistics.slice";
-import { dataURLtoFile } from "utils/dataURLToFile";
 import { getFetch, imageFetch, postFetch } from "utils/fetches";
 import { sleep } from "utils/sleep";
 import { AppThunk } from "../index";
@@ -15,10 +15,10 @@ type UserData = {
 };
 
 export const getUserData =
-    (setIsLogged: Function): AppThunk =>
+    (setIsLogged: (arg0: boolean) => void): AppThunk =>
     (appDispatch) => {
         getFetch<{ data: UserData }>("/user/data", {
-            customError: true,
+            customError: true
         }).then(({ data }) => {
             const { _id, image: imageUrl, pseudonym, statistics, groups } = data;
 
@@ -34,14 +34,14 @@ export const updatePseudonym =
         postFetch<{ pseudonym: string }>({ pseudonym }, "/user/settings/update-pseudonym").then(
             () => {
                 appDispatch(userActions.updatePseudonym(pseudonym));
-            },
+            }
         );
     };
 
 export const updatePassword =
     (oldPassword: string, newPassword: string): AppThunk =>
     () => {
-        postFetch<never>({ oldPassword, newPassword }, "/auth/password/change").then(async () => {
+        postFetch<never>({ oldPassword, newPassword }, "/auth/password/update").then(async () => {
             await sleep(1000);
             Cookies.remove("authorization");
             location.reload();
@@ -49,12 +49,9 @@ export const updatePassword =
     };
 
 export const updateUserImage =
-    (base64EncodedImage: string): AppThunk =>
+    (formData: FormData): AppThunk =>
     (appDispatch) => {
-        const data = new FormData();
-        data.append("userImage", dataURLtoFile(base64EncodedImage, "userImage.png"));
-
-        imageFetch<{ image: string }>(data, "/user/settings/update-image").then(({ image }) => {
+        imageFetch<{ image: string }>(formData, "/user/settings/update-image").then(({ image }) => {
             appDispatch(userActions.updateImage(image));
         });
     };

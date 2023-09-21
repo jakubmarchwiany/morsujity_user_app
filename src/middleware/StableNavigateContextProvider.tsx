@@ -7,7 +7,7 @@ type Props = {
     children: JSX.Element;
 };
 
-const StableNavigateContextProvider = ({ children }: Props) => {
+const StableNavigateContextProvider = ({ children }: Props): JSX.Element => {
     const navigate = useNavigate();
     const navigateRef = useRef(navigate);
 
@@ -20,9 +20,10 @@ const StableNavigateContextProvider = ({ children }: Props) => {
 
 const useStableNavigate = (): NavigateFunction => {
     const navigateRef = useContext(StableNavigateContext);
-    if (navigateRef!.current == null) throw new Error("StableNavigate context is not initialized");
 
-    return navigateRef!.current;
+    if (navigateRef !== null && navigateRef !== null) return navigateRef.current;
+
+    throw new Error("StableNavigate context is not initialized");
 };
 
 export { StableNavigateContext, StableNavigateContextProvider, useStableNavigate };

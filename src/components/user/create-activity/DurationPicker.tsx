@@ -3,7 +3,7 @@ import {
     minutesMarks,
     minutesValueText,
     secundsMarks,
-    secundsValueText,
+    secundsValueText
 } from "components/user/create-activity/duration-marks";
 import { Dispatch } from "react";
 
@@ -18,35 +18,39 @@ export function DurationPicker({
     durationInMinutes,
     durationInSeconds,
     setDurationInMinutes,
-    setDurationInSeconds,
-}: Props) {
+    setDurationInSeconds
+}: Props): JSX.Element {
     return (
         <>
-            <Typography variant='h4' textAlign='center' mt={2}>
+            <Typography variant="h4" textAlign="center" mt={2}>
                 Czas trwania
             </Typography>
             <Slider
                 min={0}
                 max={60}
-                name='durationInMin'
+                name="durationInMin"
                 value={durationInMinutes}
-                onChange={(event, newValue) => setDurationInMinutes(newValue as number)}
-                aria-label='Default'
-                valueLabelDisplay='auto'
+                onChange={(event, newValue) => {
+                    setDurationInMinutes(newValue as number);
+                }}
+                aria-label="Default"
+                valueLabelDisplay="auto"
                 getAriaValueText={minutesValueText}
                 valueLabelFormat={minutesValueText}
                 marks={minutesMarks}
                 sx={{ width: "90%", mt: 1 }}
             />
             <Slider
-                size='small'
+                size="small"
                 defaultValue={0}
                 min={0}
                 max={59}
                 value={durationInSeconds}
-                onChange={(event, newValue) => setDurationInSeconds(newValue as number)}
-                aria-label='Small'
-                valueLabelDisplay='auto'
+                onChange={(event, newValue) => {
+                    setDurationInSeconds(newValue as number);
+                }}
+                aria-label="Small"
+                valueLabelDisplay="auto"
                 getAriaValueText={secundsValueText}
                 valueLabelFormat={secundsValueText}
                 marks={secundsMarks}

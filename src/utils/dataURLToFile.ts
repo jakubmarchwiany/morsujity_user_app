@@ -1,16 +1,37 @@
-/* eslint-disable @typescript-eslint/prefer-regexp-exec */
-/* eslint-disable prefer-const */
+export function dataURLtoFile(dataUrl: string, filename: string): File | null {
+    // Split the data URL into two parts: metadata and data
+    const parts = dataUrl.split("base64,");
 
-export function dataURLtoFile(dataUrl: string, filename: string) {
-    let arr = dataUrl.split(","),
-        mime = arr[0].match(/:(.*?);/)![1],
-        bstr = atob(arr[1]),
-        n = bstr.length,
-        u8arr = new Uint8Array(n);
-
-    while (n--) {
-        u8arr[n] = bstr.charCodeAt(n);
+    if (parts.length !== 2) {
+        // Invalid data URL format
+        return null;
     }
 
-    return new File([u8arr], filename, { type: mime });
+    const [metadata, data] = parts;
+
+    // Extract the MIME type from the metadata
+    console.log(metadata);
+    const mimeMatch = metadata.match(/:(.*?);/);
+
+    if (mimeMatch ===/* eslint-disable @typescript-eslint/no-floating-promises */ null) {
+        // Invalid MIME type
+        return null;
+    }
+
+    const mimeType = mimeMatch[1];
+
+    // Convert the base64 data to a Uint8Array
+    const byteString = atob(data);
+    const dataArray = new Uint8Array(byteString.length);
+    for (let i = 0; i < byteString.length; i++) {
+        dataArray[i] = byteString.charCodeAt(i);
+    }
+
+    // Create a Blob from the Uint8Array data
+    const blob = new Blob([dataArray], { type: mimeType });
+
+    // Create a File from the Blob
+    const file = new File([blob], filename, { type: mimeType });
+
+    return file;
 }

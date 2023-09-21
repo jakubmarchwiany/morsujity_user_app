@@ -1,62 +1,48 @@
 {
+    "root": true,
     "env": {
         "browser": true,
         "es2021": true
     },
-    "extends": [
-        "react-app",
-        "eslint:recommended",
-        "plugin:react/recommended",
-        "plugin:@typescript-eslint/recommended",
-        "prettier"
-    ],
-    "overrides": [],
-    "parser": "@typescript-eslint/parser",
+    "extends": ["standard-with-typescript", "plugin:react/recommended", "plugin:react/jsx-runtime"],
     "parserOptions": {
         "ecmaVersion": "latest",
-        "sourceType": "module",
-        "project": ["./tsconfig.json"]
+        "sourceType": "module"
     },
-    "plugins": ["react", "@typescript-eslint", "react-hooks", "prettier"],
+    "plugins": ["react"],
     "rules": {
-        "react/react-in-jsx-scope": "off",
-        "@typescript-eslint/adjacent-overload-signatures": "error",
-        "@typescript-eslint/await-thenable": "error",
-        "@typescript-eslint/ban-ts-comment": "error",
-        "@typescript-eslint/ban-types": "error",
-        "@typescript-eslint/no-empty-interface": "error",
-        "@typescript-eslint/no-explicit-any": "error",
-        "@typescript-eslint/no-extra-non-null-assertion": "error",
-        "@typescript-eslint/no-floating-promises": "error",
-        "@typescript-eslint/no-for-in-array": "error",
-        "@typescript-eslint/no-inferrable-types": "error",
-        "@typescript-eslint/no-misused-new": "error",
-        "@typescript-eslint/no-misused-promises": "error",
-        "@typescript-eslint/no-namespace": "error",
-        "@typescript-eslint/no-non-null-asserted-optional-chain": "error",
-        "@typescript-eslint/no-non-null-assertion": "off",
-        "@typescript-eslint/no-this-alias": "error",
-        "@typescript-eslint/no-unnecessary-type-assertion": "error",
-        "@typescript-eslint/no-unnecessary-type-constraint": "error",
-        "@typescript-eslint/no-unsafe-argument": "error",
-        "@typescript-eslint/no-unsafe-assignment": "error",
-        "@typescript-eslint/no-unsafe-call": "error",
-        "@typescript-eslint/no-unsafe-member-access": "error",
-        "@typescript-eslint/no-unsafe-return": "error",
-        "@typescript-eslint/no-var-requires": "error",
-        "@typescript-eslint/prefer-as-const": "error",
-        "@typescript-eslint/prefer-namespace-keyword": "error",
-        "@typescript-eslint/restrict-plus-operands": "error",
-        "@typescript-eslint/restrict-template-expressions": "error",
-        "@typescript-eslint/triple-slash-reference": "error",
-        "@typescript-eslint/unbound-method": "error"
+        "@typescript-eslint/quotes": [2, "double"],
+        "@typescript-eslint/semi": [2, "always"],
+        "@typescript-eslint/indent": [0, 4],
+        "@typescript-eslint/space-before-function-paren": [
+            2,
+            {
+                "anonymous": "never",
+                "named": "never",
+                "asyncArrow": "always"
+            }
+        ],
+        "@typescript-eslint/consistent-type-imports": 0,
+        "@typescript-eslint/consistent-type-exports": 0,
+        "@typescript-eslint/consistent-type-definitions": [2, "type"],
+        "@typescript-eslint/member-delimiter-style": [
+            2,
+            {
+                "multiline": {
+                    "delimiter": "semi",
+                    "requireLast": true
+                },
+                "singleline": {
+                    "delimiter": "semi",
+                    "requireLast": false
+                }
+            }
+        ],
+        "multiline-ternary": 0
     },
     "settings": {
         "react": {
             "version": "detect"
-        },
-        "import/resolver": {
-            "typescript": {}
         }
     }
 }

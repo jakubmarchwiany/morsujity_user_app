@@ -8,7 +8,7 @@ type Props = {
     setType: Dispatch<React.SetStateAction<GroupType>>;
 };
 
-export function GroupTypePicker({ type, setType }: Props) {
+export function GroupTypePicker({ type, setType }: Props): JSX.Element {
     return (
         <MyToggleButtonGroup
             value={type}
@@ -18,7 +18,7 @@ export function GroupTypePicker({ type, setType }: Props) {
             }}
             fullWidth
             sx={{
-                mt: 3,
+                mt: 3
             }}
         >
             <ToggleButton value={GroupType.PUBLIC}>
@@ -30,7 +30,7 @@ export function GroupTypePicker({ type, setType }: Props) {
                             Wszyscy mogą dołączyć.
                         </div>
                     }
-                    placement='top'
+                    placement="top"
                 >
                     <span>Publiczna</span>
                 </Tooltip>
@@ -44,7 +44,7 @@ export function GroupTypePicker({ type, setType }: Props) {
                             Tylko osoby przyjęte mogą dołaczyć.
                         </div>
                     }
-                    placement='top'
+                    placement="top"
                 >
                     <span>Publiczna+</span>
                 </Tooltip>
@@ -58,7 +58,7 @@ export function GroupTypePicker({ type, setType }: Props) {
                             Tylko osoby zaproszone mogą dołączyć.
                         </div>
                     }
-                    placement='top'
+                    placement="top"
                 >
                     <span>Prywatna</span>
                 </Tooltip>

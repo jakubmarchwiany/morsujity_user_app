@@ -3,9 +3,9 @@ import IconButton from "@mui/material/IconButton";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import { displayDate, displayTime } from "components/user/statistics/display";
 import { useAppDispatch } from "hooks/redux";
+import toast from "react-hot-toast";
 import { deleteActivity } from "store/statistics/activity.actions";
 import { Activity } from "store/statistics/activity.type";
-
 
 type Props = {
     activities: Activity[];
@@ -18,7 +18,7 @@ export const columns: GridColDef[] = [
         headerName: "Rodzaj",
         align: "center",
         headerAlign: "center",
-        flex: 1,
+        flex: 1
     },
     {
         field: "duration",
@@ -27,14 +27,14 @@ export const columns: GridColDef[] = [
         headerName: "Czas trwania",
         align: "center",
         headerAlign: "center",
-        flex: 1,
+        flex: 1
     },
     {
         field: "date",
         headerName: "Data aktywności",
         align: "center",
         headerAlign: "center",
-        flex: 1,
+        flex: 1
     },
     {
         flex: 0.5,
@@ -43,32 +43,38 @@ export const columns: GridColDef[] = [
         headerAlign: "center",
         align: "center",
         sortable: false,
-        renderCell: (params) => {
+        renderCell: () => {
             return (
-                <IconButton aria-label='delete'>
+                <IconButton aria-label="delete">
                     <Delete />
                 </IconButton>
             );
-        },
-    },
+        }
+    }
 ];
 
-export function ActivitiesTable({ activities }: Props) {
+export function ActivitiesTable({ activities }: Props): JSX.Element {
     const dispatch = useAppDispatch();
 
-    const addRows = (userActivies: Activity[]) => {
-        return userActivies!.slice(0).map((activity) => {
+    const addActivities = (userActivies: Activity[]): any[] => {
+        return userActivies.map((activity) => {
             return {
-                type: activity.type ? "Mors" : "Zimny prysznic",
+                type: activity.type === 0 ? "Mors" : "Zimny prysznic",
                 date: displayDate(activity.date),
                 duration: activity.duration,
-                activity: activity,
-                id: activity._id,
+                activity,
+                id: activity._id
             };
         });
     };
 
-    const onCellClick = (e: { field: string; row: { activity: Activity } }) => {
+    const onCellClick = (e: { field: string; row: { activity: Activity } }): void => {
+        if (e.field === "delete") {
+            toast.error("Kliknij dwukrotnie by usunać nawyk");
+        }
+    };
+
+    const onCellDoubleClick = (e: { field: string; row: { activity: Activity } }): void => {
         if (e.field === "delete") {
             dispatch(deleteActivity(e.row.activity));
         }
@@ -78,7 +84,8 @@ export function ActivitiesTable({ activities }: Props) {
         <div style={{ height: 400 }}>
             <DataGrid
                 onCellClick={onCellClick}
-                rows={addRows(activities!)}
+                onCellDoubleClick={onCellDoubleClick}
+                rows={addActivities(activities)}
                 columns={columns}
                 autoPageSize={false}
                 disableColumnFilter={true}

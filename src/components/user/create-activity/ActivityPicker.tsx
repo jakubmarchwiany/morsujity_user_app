@@ -3,13 +3,12 @@ import { MyToggleButtonGroup } from "components/my/MyToggleButtonGroup";
 import { Dispatch } from "react";
 import { ActivityType } from "store/statistics/activity_type.type";
 
-
 type Props = {
     activityType: ActivityType;
     setActivityType: Dispatch<React.SetStateAction<ActivityType>>;
 };
 
-export function ActivityPicker({ activityType, setActivityType }: Props) {
+export function ActivityPicker({ activityType, setActivityType }: Props): JSX.Element {
     return (
         <MyToggleButtonGroup
             value={activityType}

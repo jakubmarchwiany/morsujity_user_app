@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/indent */
 import { ToggleButtonGroup, ToggleButtonProps } from "@mui/material";
 import { lighten, styled } from "@mui/material/styles";
 
@@ -6,19 +7,19 @@ export const MyToggleButtonGroup = styled(ToggleButtonGroup)<ToggleButtonProps>(
         ? {
               "& .MuiToggleButton-root.Mui-selected": {
                   color: "white",
-                  backgroundColor: lighten(theme.palette.primary.main, 0.3),
+                  backgroundColor: lighten(theme.palette.primary.main, 0.3)
               },
               "& .MuiToggleButton-root.Mui-selected:hover": {
-                  backgroundColor: theme.palette.primary.main,
-              },
+                  backgroundColor: theme.palette.primary.main
+              }
           }
         : {
               "& .MuiToggleButton-root.Mui-selected": {
                   color: "white",
-                  backgroundColor: theme.palette.primary.main,
+                  backgroundColor: theme.palette.primary.main
               },
               "& .MuiToggleButton-root.Mui-selected:hover": {
-                  backgroundColor: lighten(theme.palette.primary.main, 0.1),
-              },
-          }),
+                  backgroundColor: lighten(theme.palette.primary.main, 0.1)
+              }
+          })
 }));

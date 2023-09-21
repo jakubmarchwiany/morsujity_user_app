@@ -2,25 +2,27 @@ import { Button, Modal, Stack } from "@mui/material";
 import { useAppDispatch } from "hooks/redux";
 import { Dispatch, useState } from "react";
 import { Cropper } from "react-cropper";
+import toast from "react-hot-toast";
 import { updateUserImage } from "store/user/user.actions";
+import { dataURLtoFile } from "utils/dataURLToFile";
 
 type Props = {
     setIsOpen: Dispatch<React.SetStateAction<boolean>>;
 };
 
-export function ImageSelector({ setIsOpen }: Props) {
+export function ImageSelector({ setIsOpen }: Props): JSX.Element {
     const [image, setImage] = useState(undefined);
     const [cropData, setCropData] = useState(undefined);
     const [cropper, setCropper] = useState<any>();
 
     const dispatch = useAppDispatch();
 
-    const onChange = (e: any) => {
+    const onChange = (e: any): void => {
         e.preventDefault();
         let files;
-        if (e.dataTransfer) {
+        if (e.dataTransfer !== undefined) {
             files = e.dataTransfer.files;
-        } else if (e.target) {
+        } else if (e.target !== undefined) {
             files = e.target.files;
         }
         const reader = new FileReader();
@@ -30,23 +32,34 @@ export function ImageSelector({ setIsOpen }: Props) {
         reader.readAsDataURL(files[0]);
     };
 
-    const getCropData = () => {
+    const getCropData = (): void => {
         if (typeof cropper !== "undefined") {
             setCropData(cropper.getCroppedCanvas().toDataURL());
         }
     };
 
-    const handleCloseChangeImage = () => {
+    const handleCloseChangeImage = (): void => {
         setIsOpen(false);
         setImage(undefined);
         setCropData(undefined);
     };
 
-    const handleChangeImage = () => {
+    const handleChangeImage = (): void => {
+        if (cropData !== undefined) {
+            const file = dataURLtoFile(cropData, "userImage.png");
+
+            if (file !== null) {
+                const data = new FormData();
+                data.append("userImage", file);
+                dispatch(updateUserImage(data));
+            } else {
+                toast.error("Nie poprawny format zdjęcia");
+            }
+        }
+
         setIsOpen(false);
         setImage(undefined);
         setCropData(undefined);
-        dispatch(updateUserImage(cropData!));
     };
 
     return (
@@ -56,7 +69,7 @@ export function ImageSelector({ setIsOpen }: Props) {
             sx={{
                 overflow: "scroll",
                 paddingBottom: "10%",
-                mb: "5%",
+                mb: "5%"
             }}
         >
             <Stack
@@ -68,21 +81,21 @@ export function ImageSelector({ setIsOpen }: Props) {
                     left: "50%",
                     transform: "translate(-50%, 0%)",
                     // width: panelStandardSize,
-                    boxShadow: 10,
+                    boxShadow: 10
                 }}
             >
-                <Button variant='contained' component='label'>
+                <Button variant="contained" component="label">
                     Wybierz zdjęcie
-                    <input hidden accept='image/*' type='file' onChange={onChange} />
+                    <input hidden accept="image/*" type="file" onChange={onChange} />
                 </Button>
 
-                {image && (
+                {image !== undefined && (
                     <>
                         <Cropper
                             style={{
                                 height: "auto",
                                 width: "50vh",
-                                alignSelf: "center",
+                                alignSelf: "center"
                             }}
                             aspectRatio={1}
                             src={image}
@@ -96,23 +109,23 @@ export function ImageSelector({ setIsOpen }: Props) {
                             }}
                             guides={true}
                         />
-                        <Button type='button' variant='contained' onClick={getCropData}>
+                        <Button type="button" variant="contained" onClick={getCropData}>
                             Wytnij
                         </Button>
                     </>
                 )}
 
-                {cropData && (
+                {cropData !== undefined && (
                     <>
                         <img
                             src={cropData}
                             style={{
                                 maxHeight: "40vh",
                                 maxWidth: "40vh",
-                                alignSelf: "center",
+                                alignSelf: "center"
                             }}
                         />
-                        <Button type='button' variant='contained' onClick={handleChangeImage}>
+                        <Button type="button" variant="contained" onClick={handleChangeImage}>
                             Ustaw
                         </Button>
                     </>

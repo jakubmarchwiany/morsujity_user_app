@@ -13,7 +13,7 @@ const initialState: StatisticsState = {
     rank: undefined,
     subRank: undefined,
     activities: undefined,
-    totalActivitiesTime: undefined,
+    totalActivitiesTime: undefined
 };
 
 type CreateActivity = {
@@ -28,43 +28,45 @@ const statisticsSlice = createSlice({
     reducers: {
         setStatistics(state, action: PayloadAction<StatisticsState>) {
             return {
-                ...action.payload,
+                ...action.payload
             };
         },
         createActivity(state, action: PayloadAction<CreateActivity>) {
             const { activity, rank, subRank } = action.payload;
-            console.log(activity, rank, subRank);
 
-            const totalActivitiesTime = [...state.totalActivitiesTime!];
+            if (state.totalActivitiesTime !== undefined && state.activities !== undefined) {
+                const totalActivitiesTime = [...state.totalActivitiesTime];
 
-            totalActivitiesTime[activity.type] += activity.duration;
+                totalActivitiesTime[activity.type] += activity.duration;
 
-            return {
-                rank,
-                subRank,
-                activities: [...state.activities!, activity],
-                totalActivitiesTime: totalActivitiesTime,
-            };
+                return {
+                    rank,
+                    subRank,
+                    activities: [...state.activities, activity],
+                    totalActivitiesTime
+                };
+            }
         },
         deleteActivity(state, action: PayloadAction<CreateActivity>) {
             const { activity, rank, subRank } = action.payload;
-            console.log(activity, rank, subRank);
 
-            const totalActivitiesTime = [...state.totalActivitiesTime!];
+            if (state.totalActivitiesTime !== undefined && state.activities !== undefined) {
+                const totalActivitiesTime = [...state.totalActivitiesTime];
 
-            totalActivitiesTime[activity.type] -= activity.duration;
+                totalActivitiesTime[activity.type] -= activity.duration;
 
-            return {
-                rank,
-                subRank,
-                activities: state.activities!.filter((a) => a._id !== activity._id),
-                totalActivitiesTime: totalActivitiesTime,
-            };
+                return {
+                    rank,
+                    subRank,
+                    activities: state.activities.filter((a) => a._id !== activity._id),
+                    totalActivitiesTime
+                };
+            }
         },
         setActivities(state, action: PayloadAction<Activity[]>) {
             state.activities = action.payload;
-        },
-    },
+        }
+    }
 });
 const statisticsActions = statisticsSlice.actions;
 const statisticsSliceReducers = statisticsSlice.reducer;

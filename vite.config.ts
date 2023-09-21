@@ -6,7 +6,7 @@ import tsconfigPaths from "vite-tsconfig-paths";
 export default defineConfig({
     server: {
         port: 4000,
-        host: true,
+        host: true
     },
     build: {
         outDir: "./build",
@@ -16,9 +16,9 @@ export default defineConfig({
                     if (id.includes("node_modules")) {
                         return id.toString().split("node_modules/")[1].split("/")[0].toString();
                     }
-                },
-            },
-        },
+                }
+            }
+        }
     },
-    plugins: [react(), tsconfigPaths()],
+    plugins: [react(), tsconfigPaths()]
 });
