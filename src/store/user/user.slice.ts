@@ -1,21 +1,29 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
+export type Group = {
+    _id: string;
+    name: string;
+};
+
 type UserState = {
     _id: string | undefined;
     pseudonym: string | undefined;
     imageUrl: string | undefined;
+    groups: Group[] | undefined;
 };
 
 const initialState: UserState = {
     _id: undefined,
     pseudonym: undefined,
     imageUrl: undefined,
+    groups: undefined,
 };
 
 type UserData = {
     _id: string;
     pseudonym: string;
     imageUrl: string;
+    groups: Group[];
 };
 
 const userSlice = createSlice({

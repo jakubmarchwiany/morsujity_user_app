@@ -4,13 +4,14 @@ import { dataURLtoFile } from "utils/dataURLToFile";
 import { getFetch, imageFetch, postFetch } from "utils/fetches";
 import { sleep } from "utils/sleep";
 import { AppThunk } from "../index";
-import { userActions } from "./user.slice";
+import { Group, userActions } from "./user.slice";
 
 type UserData = {
     _id: string;
     pseudonym: string;
     image: string;
     statistics: StatisticsState;
+    groups: Group[];
 };
 
 export const getUserData =
@@ -19,9 +20,9 @@ export const getUserData =
         getFetch<{ data: UserData }>("/user/data", {
             customError: true,
         }).then(({ data }) => {
-            const { _id, image: imageUrl, pseudonym, statistics } = data;
+            const { _id, image: imageUrl, pseudonym, statistics, groups } = data;
 
-            appDispatch(userActions.setUserData({ _id, imageUrl, pseudonym }));
+            appDispatch(userActions.setUserData({ _id, imageUrl, pseudonym, groups }));
             appDispatch(statisticsActions.setStatistics(statistics));
             setIsLogged(true);
         });

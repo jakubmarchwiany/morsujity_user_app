@@ -7,8 +7,8 @@ import { useFormik } from "formik";
 import { useAppDispatch } from "hooks/redux";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { GroupType } from "store/groups/group_type.type";
-import { createGroup } from "store/groups/groups.actions";
+import { createGroup } from "store/user/group/group.actions";
+import { GroupType } from "store/user/group/group_type.type";
 import { object, string } from "yup";
 
 const GROUP_FORM_STATE = {

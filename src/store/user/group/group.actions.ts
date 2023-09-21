@@ -1,6 +1,6 @@
 import { NavigateFunction } from "react-router-dom";
 import { AppThunk } from "store";
-import { GroupType } from "store/groups/group_type.type";
+import { GroupType } from "store/user/group/group_type.type";
 import { postFetch } from "utils/fetches";
 
 export const createGroup =

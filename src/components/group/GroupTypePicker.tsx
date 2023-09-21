@@ -1,8 +1,7 @@
 import { ToggleButton, Tooltip } from "@mui/material";
 import { MyToggleButtonGroup } from "components/my/MyToggleButtonGroup";
 import React, { Dispatch } from "react";
-import { GroupType } from "store/groups/group_type.type";
-
+import { GroupType } from "store/user/group/group_type.type";
 
 type Props = {
     type: GroupType;
