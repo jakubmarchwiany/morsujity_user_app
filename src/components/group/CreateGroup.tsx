@@ -1,11 +1,15 @@
 import { Button, Container, Stack, Typography } from "@mui/material";
 import { panelStandardSize } from "assets/theme";
 import { CreateGroupMap } from "components/group/CreateGroupMap";
+import { GroupTypePicker } from "components/group/GroupTypePicker";
 import { MyTextField } from "components/my/MyTextField";
 import { useFormik } from "formik";
+import { useAppDispatch } from "hooks/redux";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { GroupType } from "store/groups/group_type.type";
+import { createGroup } from "store/groups/groups.actions";
 import { object, string } from "yup";
-import { GroupTypePicker, GroupTypes } from "./GroupTypePicker";
 
 const GROUP_FORM_STATE = {
     name: "",
@@ -25,15 +29,16 @@ const GROUP_VALIDATION = object().shape({
 
 export function CreateGroup() {
     const [coordinate, setCoordinate] = useState<[number, number] | undefined>(undefined);
-    const [type, setType] = useState<GroupTypes>(GroupTypes.PUBLIC);
-
-    console.log(coordinate, type);
+    const [type, setType] = useState<GroupType>(GroupType.PUBLIC);
+    console.log(coordinate);
+    const dispatch = useAppDispatch();
+    const navigate = useNavigate();
 
     const formikGroup = useFormik({
         initialValues: GROUP_FORM_STATE,
         validationSchema: GROUP_VALIDATION,
-        onSubmit: ({ name }, { resetForm }) => {
-            resetForm();
+        onSubmit: ({ name, description }, { resetForm }) => {
+            dispatch(createGroup(type, name, description, coordinate!, navigate));
         },
     });
 

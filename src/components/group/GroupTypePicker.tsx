@@ -1,16 +1,12 @@
 import { ToggleButton, Tooltip } from "@mui/material";
 import { MyToggleButtonGroup } from "components/my/MyToggleButtonGroup";
 import React, { Dispatch } from "react";
+import { GroupType } from "store/groups/group_type.type";
 
-export enum GroupTypes {
-    PUBLIC,
-    PUBLIC_WITH_INVITE,
-    PRIVATE,
-}
 
 type Props = {
-    type: GroupTypes;
-    setType: Dispatch<React.SetStateAction<GroupTypes>>;
+    type: GroupType;
+    setType: Dispatch<React.SetStateAction<GroupType>>;
 };
 
 export function GroupTypePicker({ type, setType }: Props) {
@@ -18,7 +14,7 @@ export function GroupTypePicker({ type, setType }: Props) {
         <MyToggleButtonGroup
             value={type}
             exclusive
-            onChange={(event, value: GroupTypes) => {
+            onChange={(event, value: GroupType) => {
                 if (value !== null) setType(value);
             }}
             fullWidth
@@ -26,7 +22,7 @@ export function GroupTypePicker({ type, setType }: Props) {
                 mt: 3,
             }}
         >
-            <ToggleButton value={GroupTypes.PUBLIC}>
+            <ToggleButton value={GroupType.PUBLIC}>
                 <Tooltip
                     title={
                         <div>
@@ -40,7 +36,7 @@ export function GroupTypePicker({ type, setType }: Props) {
                     <span>Publiczna</span>
                 </Tooltip>
             </ToggleButton>
-            <ToggleButton value={GroupTypes.PUBLIC_WITH_INVITE}>
+            <ToggleButton value={GroupType.PUBLIC_WITH_INVITE}>
                 <Tooltip
                     title={
                         <div>
@@ -54,7 +50,7 @@ export function GroupTypePicker({ type, setType }: Props) {
                     <span>Publiczna+</span>
                 </Tooltip>
             </ToggleButton>
-            <ToggleButton value={GroupTypes.PRIVATE}>
+            <ToggleButton value={GroupType.PRIVATE}>
                 <Tooltip
                     title={
                         <div>

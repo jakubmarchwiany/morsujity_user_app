@@ -54,7 +54,6 @@ export function CreateGroupMap({ setCoordinate }: Props) {
             const latCenter = parseFloat(map.current!.getCenter().lat.toFixed(4));
             setLng(lngCenter);
             setLat(latCenter);
-            setCoordinate([lng, lat]);
         });
 
         map.current.on("wheel", (event) => {
@@ -72,6 +71,7 @@ export function CreateGroupMap({ setCoordinate }: Props) {
 
     useEffect(() => {
         marker?.setLngLat([lng, lat]);
+        setCoordinate([lng, lat]);
     }, [lng, lat]);
 
     return (
